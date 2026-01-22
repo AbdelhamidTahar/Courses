@@ -1,0 +1,11 @@
+int ReadeNumber(string Message)
+{
+    int Number = 0;  // Variable to store the user's input, initialized to 0.
+
+        cout << Message << endl;
+        // Read the number entered by the user.
+        cin >> Number;
+
+
+    return Number;  // Return the valid positive number.
+}

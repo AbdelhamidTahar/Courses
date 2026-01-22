@@ -1,0 +1,5 @@
+void CopyArrayInReverseOrder(int arrSource[100], int arrDestination[100], int arrLength)
+{
+    for (int i = 0; i < arrLength; i++)
+        arrDestination[i] = arrSource[arrLength - 1 - i];
+}

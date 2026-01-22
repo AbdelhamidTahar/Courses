@@ -1,0 +1,10 @@
+void InputUserNumbersInArray(int arr[100], int& arrLength)
+{
+    bool AddMore = true;
+    do
+    {
+        AddArrayElement(ReadNumber(), arr, arrLength);
+        cout << "\nDo you want to add more numbers? [0]:No,[1]:yes? ";
+        cin >> AddMore;
+    } while (AddMore);
+}

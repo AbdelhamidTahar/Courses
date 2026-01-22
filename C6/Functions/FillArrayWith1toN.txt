@@ -1,0 +1,5 @@
+void FillArrayWith1toN(int arr[100], int arrLength)
+{
+    for (int i = 0; i < arrLength; i++)
+        arr[i] = i + 1;
+}

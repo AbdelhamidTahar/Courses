@@ -1,0 +1,13 @@
+void ReadArray(int arr[100], int& arrLength)
+{
+    cout << "\nEnter number of elements:\n";
+    cin >> arrLength;
+
+    cout << "\nEnter array elements: \n";
+    for (int i = 0; i < arrLength; i++)
+    {
+        cout << "Element [" << i + 1 << "] : ";
+        cin >> arr[i];
+    }
+    cout << endl;
+}
