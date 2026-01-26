@@ -9,15 +9,17 @@ int main()
 	cout << "the Address of Number is: " << &Number << endl;
 
 	int* PointerOfNumber = &Number;
-	cout << "the Value Of Pointer Of Number Is: " << PointerOfNumber << endl;
+	cout << "\nthe Value Of Pointer Of Number Is: " << PointerOfNumber << endl;
 	cout << "the Value Of Derefrencitg Pointer Of Number is: " << *PointerOfNumber << endl;
 
 	*PointerOfNumber = 60;
-	cout << "the Value Of Derefrencitg Pointer Of Number After Modifial is: " << *PointerOfNumber << endl;
+	cout << "\nthe Value Of Derefrencitg Pointer Of Number After Modifial is: " << *PointerOfNumber << endl;
+	cout << "the Value of Number is: " << Number << endl;
 
 	*PointerOfNumber = *PointerOfNumber + 10;
-	cout << "the Value Of Derefrencitg Pointer Of Number After Modifial is: " << *PointerOfNumber << endl;
+	cout << "\nthe Value Of Derefrencitg Pointer Of Number After Modifial is: " << *PointerOfNumber << endl;
 	cout << "the Value of Number is: " << Number << endl;
+	
 
 
 }
