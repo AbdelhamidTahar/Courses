@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Lesson #37 - Common Mistakes with Pointers/Lesson #37 - Common Mistakes with Pointers.vcxproj" />
+</Solution>
