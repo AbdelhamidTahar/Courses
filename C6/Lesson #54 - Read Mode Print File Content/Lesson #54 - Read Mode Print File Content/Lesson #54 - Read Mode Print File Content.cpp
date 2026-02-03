@@ -3,6 +3,20 @@
 #include <fstream>
 using namespace std;
 
+
+void CreatFill(const string& FileName)
+{
+    fstream File;
+
+    do
+    {
+
+        File.open(FileName + ".text", ios::out | ios::app);
+      
+    } while (!File.is_open());
+    File.close();
+   
+}
 void FillFileConntent(const string &FileName)
 {
     fstream File;
@@ -42,6 +56,7 @@ int main()
 {
 
     string FileName = "TestFile";
+    CreatFill(FileName);
     FillFileConntent(FileName);
     ReadFileConntent(FileName);
 }
