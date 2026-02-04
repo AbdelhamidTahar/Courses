@@ -21,13 +21,13 @@ void LoadDataFromFileToVector(const string& FileName, vector<string>& vDataFile)
 	File.close();
 }
 
-void SaveVectorToFile(const string& FileName, vector<string>& const vDate)
+void SaveVectorToFile(const string& FileName, const vector<string>&  vDate)
 {
 	fstream MyFile;
 	MyFile.open(FileName, ios::out);
 	if (MyFile.is_open())
 	{
-		for (string& Line : vDate)
+		for ( const string& Line : vDate)
 		{
 			if (Line != "")
 			{
