@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Lesson #57 - Delete Record From File/Lesson #57 - Delete Record From File.vcxproj" />
+</Solution>
