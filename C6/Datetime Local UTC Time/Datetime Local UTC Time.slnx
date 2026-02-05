@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Datetime Local UTC Time/Datetime Local UTC Time.vcxproj" Id="a5101286-7905-4c8a-bf8c-61fccc54b021" />
+</Solution>
