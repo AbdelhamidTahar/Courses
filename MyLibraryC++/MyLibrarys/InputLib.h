@@ -9,7 +9,7 @@ using namespace std;
 namespace Validate
 {
 
-    bool IsInputError();
+    bool IsInputNumberError();
 
 }
 namespace User_Input
@@ -22,7 +22,7 @@ namespace User_Input
 }
 
 
-bool Validate::IsInputError()
+bool Validate::IsInputNumberError()
 {
     bool InputError = false;
 
@@ -58,7 +58,7 @@ int User_Input::ReadPositiveNumber(string Message)
         // Read the number entered by the user.
         cin >> Number;
 
-        InputError = Validate::IsInputError();
+        InputError = Validate::IsInputNumberError();
 
     } while ((Number <= 0) || (InputError == true));  // Continue prompting if the number is not positive.
 
@@ -76,7 +76,7 @@ int User_Input::ReadNumber(string Message)
         cout << Message << endl;
         // Read the number entered by the user.
         cin >> Number;
-        InputError = Validate::IsInputError();
+        InputError = Validate::IsInputNumberError();
 
 
     } while (InputError == true);

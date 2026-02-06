@@ -13,7 +13,7 @@ namespace MathematicalOperations
 
     int SumNumbersThatHaveNoRemainderFrom1toN(int Number);
     int ReverseNumber(int Number);
-    void Swap((int& A, int& B));
+    void Swap(int& A, int& B);
 
 
 
@@ -22,7 +22,7 @@ namespace MathematicalOperations
 }
 namespace Lengths
 {
-    short Lengths::LengthOfNumber(int Number);
+    short LengthOfNumber(int Number);
 }
 namespace CheckNumber
 {
@@ -152,7 +152,7 @@ short Lengths::LengthOfNumber(int Number)
 
 
 
-enPrimNotPrime CheckNumber::CheckPrime(int Number)
+CheckNumber::enPrimNotPrime CheckNumber::CheckPrime(int Number)
 {
     int M = int(round(Number / 2));
 
@@ -160,7 +160,7 @@ enPrimNotPrime CheckNumber::CheckPrime(int Number)
     {
         if (Number % Counter == 0)
         {
-            return enPrimNotPrime::NotPrime;
+            return CheckNumber::enPrimNotPrime::NotPrime;
         }
     }
 
@@ -233,7 +233,7 @@ void Digits::PrintAllDigitsFrequencey(int Number)
     for (int i = 0; i < 10; i++)
     {
         short DigitFrequency = 0;
-        DigitFrequency = CountDigitFrequency(i, Number);
+        DigitFrequency = Digits::CountDigitFrequency(i, Number);
 
         if (DigitFrequency > 0)
         {
@@ -293,7 +293,7 @@ void OutPut::PrintPrimeNumbersInRange(int From, int To)
 
 void OutPut::PrintPrimeNumbersFrom1ToN(int Number)
 {
-    PrintPrimeNumbersFromNToN(1, Number);
+    OutPut::PrintPrimeNumbersInRange(1, Number);
 }
 
 void OutPut::PrintPerfectNumbersInRange(int From, int To)
@@ -309,7 +309,7 @@ void OutPut::PrintPerfectNumbersInRange(int From, int To)
 
 void OutPut::PrintPerfectNumbersFrom1ToN(int Number)
 {
-    PrintPerfectNumbersFromNToN(1, Number);
+    OutPut::PrintPerfectNumbersInRange(1, Number);
 }
 
 

@@ -19,10 +19,7 @@ namespace ScreenEffect
 }
 namespace SoundEffect
 {
-    void Ring()
-    {
-        cout << "\a";
-    }
+    void Ring();
 }
 
 

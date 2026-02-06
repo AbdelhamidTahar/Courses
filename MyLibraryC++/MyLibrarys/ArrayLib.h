@@ -12,10 +12,10 @@
 
 namespace OperationsOnTheArray
 {
-
+    
     int SumArray(int arr[100], int arrLength);
 
-    FindNumberPositionInArray(int Number, int arr[100], int arrLength);
+    short FindNumberPositionInArray(int Number, int arr[100], int arrLength);
 
     float ArrayAverage(int arr[100], int arrLength);
 
@@ -49,7 +49,7 @@ namespace OperationsOnTheArray
 
     void CopyDistinctNumbersToArray(int arrSource[100], int arrDestination[100], int SourceLength, int& DestinationLength);
 
-    ShuffleArray(int arr[100], int arrLength);
+    void ShuffleArray(int arr[100], int arrLength);
 
 }
 namespace ChickArray
@@ -96,9 +96,9 @@ int OperationsOnTheArray::SumArray(int arr[100], int arrLength)
 
 short OperationsOnTheArray::FindNumberPositionInArray(int Number, int arr[100], int arrLength)
 {
-    for (int i = 0; i < arrLength; i++)
+    for (int i = 0; i < arrLength/2; i++)
     {
-        if (arr[i] == Number)
+        if (arr[i] == Number )
             return i;
     }
     return -1;
