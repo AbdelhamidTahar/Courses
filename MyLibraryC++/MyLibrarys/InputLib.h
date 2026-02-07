@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <limits>
+#include <cmath>
 using namespace std;
 
 
@@ -10,6 +11,9 @@ namespace Validate
 {
 
     bool IsInputNumberError();
+    bool IsStringHasDigits(const string& Text);
+    bool IsStringHaspunct(const string& Text);
+    bool IsStringHasDigitOrPunct(const string& Text);
 
 }
 namespace User_Input
@@ -83,4 +87,37 @@ int User_Input::ReadNumber(string Message)
 
 
     return Number;  // Return the valid positive number.
+}
+
+bool Validate::IsStringHasDigits(const string& Text)
+{
+    unsigned int LengthOfText = Text.length();
+    for (int i = 0; i < ceil(LengthOfText) / 2; i++)
+    {
+
+        if (isdigit(Text[i]) || isdigit(Text[LengthOfText - i - 1]))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Validate::IsStringHaspunct(const string& Text)
+{
+    unsigned int LengthOfText = Text.length();
+    for (int i = 0; i < ceil(LengthOfText) / 2; i++)
+    {
+
+        if (ispunct(Text[i]) || ispunct(Text[LengthOfText - i - 1]))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Validate::IsStringHasDigitOrPunct(const string& Text)
+{
+    return (IsStringHasDigits(Text) || IsStringHaspunct(Text));
 }
