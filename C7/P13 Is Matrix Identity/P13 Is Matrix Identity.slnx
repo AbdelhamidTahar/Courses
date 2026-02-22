@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P13 Is Matrix Identity/P13 Is Matrix Identity.vcxproj" />
+</Solution>
