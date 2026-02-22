@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdio>
+#include <cmath>
 //#include <iomanip>
 #include "GenerateLib.h"
 
