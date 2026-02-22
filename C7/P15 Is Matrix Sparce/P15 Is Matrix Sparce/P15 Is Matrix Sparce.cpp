@@ -50,7 +50,7 @@ short CountNumberInMatrix(int Matrix[3][3], int Number, short Rows, short Cols)
 
 bool IsMatrixSparce(int Matrix[3][3], short Rows, short Cols)
 {
-	short HalfMatrixSize = (Rows * Cols)/2;
+	short HalfMatrixSize = ceil((Rows * Cols)/2);
 
 	return (CountNumberInMatrix(Matrix, 0, Rows, Cols) > HalfMatrixSize);
 	

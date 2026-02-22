@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="P15 Is Matrix Sparce/P15 Is Matrix Sparce.vcxproj" />
+  <Project Path="P15 Is Matrix Sparce/P15 Is Matrix Sparce.vcxproj" Id="de9da492-5c3d-4a42-867a-48352d66c842" />
 </Solution>
