@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P12 Are Matrices Typical/P12 Are Matrices Typical.vcxproj" />
+</Solution>
