@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P15 Is Matrix Sparce/P15 Is Matrix Sparce.vcxproj" />
+</Solution>
