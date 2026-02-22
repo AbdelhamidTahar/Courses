@@ -65,14 +65,12 @@ int main()
 	cout << "\nMatrix2:\n";
 	PrintMatrix(Matrix2, 3, 3);
 
+
 	if (AreEqualMatrices(Matrix1, Matrix2, 3, 3))
-	{
-		cout << "\nYes: Matrices Are Equal \n";
-	}
-	else
-	{
-		cout << "\nNo: Matrices Are Not Equal \n";
-	}
+		cout << "\nYES: both martices are equal.";
+	else 
+		cout << "\nNo: martices are NOT equal."; 
+	
 
 
 	
