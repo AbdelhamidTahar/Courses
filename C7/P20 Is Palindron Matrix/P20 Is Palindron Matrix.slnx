@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P20 Is Palindron Matrix/P20 Is Palindron Matrix.vcxproj" />
+</Solution>
