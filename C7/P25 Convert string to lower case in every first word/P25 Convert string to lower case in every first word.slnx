@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P25 Convert string to lower case in every first word/P25 Convert string to lower case in every first word.vcxproj" />
+</Solution>
