@@ -5,7 +5,7 @@
 using namespace std;
 
 
-namespace OperationsOnTheArray
+namespace OperationsOnTheString
 {
     void PrintFirstLetterOfEachWord(string S);
     string UpperFirstLetterOfEachWord(string S);
@@ -13,7 +13,7 @@ namespace OperationsOnTheArray
 
 
 }
-void OperationsOnTheArray::PrintFirstLetterOfEachWord(string S)
+void OperationsOnTheString::PrintFirstLetterOfEachWord(string S)
 {
     bool isFirstLetter = true;
 
@@ -29,7 +29,7 @@ void OperationsOnTheArray::PrintFirstLetterOfEachWord(string S)
         isFirstLetter = S[i] == ' ' ? true : false;
     }
 }
-string OperationsOnTheArray::UpperFirstLetterOfEachWord(string S)
+string OperationsOnTheString::UpperFirstLetterOfEachWord(string S)
 {
     bool isFirstLetter = true;
 
@@ -44,7 +44,7 @@ string OperationsOnTheArray::UpperFirstLetterOfEachWord(string S)
 
     return S;
 }
-string OperationsOnTheArray::LowerFirstLetterOfEachWord(string S)
+string OperationsOnTheString::LowerFirstLetterOfEachWord(string S)
 {
     bool isFirstLetter = true;
 
