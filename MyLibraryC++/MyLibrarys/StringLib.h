@@ -67,7 +67,7 @@ string OperationsOnTheString::UpperAllString(string S)
     {
         Text[i] = toupper(Text[i]);
     }
-    return Text;
+    return S;
 }
 
 string OperationsOnTheString::LowerAllString(string S)
@@ -76,5 +76,5 @@ string OperationsOnTheString::LowerAllString(string S)
     {
         Text[i] = tolower(Text[i]);
     }
-    return Text;
+    return S;
 }
