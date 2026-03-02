@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P26 to upper and lower all strings/P26 to upper and lower all strings.vcxproj" />
+</Solution>

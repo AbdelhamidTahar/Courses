@@ -10,7 +10,8 @@ namespace OperationsOnTheString
     void PrintFirstLetterOfEachWord(string S);
     string UpperFirstLetterOfEachWord(string S);
     string LowerFirstLetterOfEachWord(string S);
-
+    string UpperAllString(string S);
+    string LowerAllString(string S);
 
 }
 void OperationsOnTheString::PrintFirstLetterOfEachWord(string S)
@@ -58,4 +59,22 @@ string OperationsOnTheString::LowerFirstLetterOfEachWord(string S)
     }
 
     return S;
+}
+
+string OperationsOnTheString::UpperAllString(string S)
+{
+    for (short i = 0; i < Text.length(); i++)
+    {
+        Text[i] = toupper(Text[i]);
+    }
+    return Text;
+}
+
+string OperationsOnTheString::LowerAllString(string S)
+{
+    for (short i = 0; i < Text.length(); i++)
+    {
+        Text[i] = tolower(Text[i]);
+    }
+    return Text;
 }
