@@ -5,7 +5,7 @@
 using namespace std;
 
 
-namespace OperationsOnTheString
+namespace OperationsOnString
 {
     void PrintFirstLetterOfEachWord(string S);
     string UpperFirstLetterOfEachWord(string S);
@@ -14,7 +14,16 @@ namespace OperationsOnTheString
     string LowerAllString(string S);
 
 }
-void OperationsOnTheString::PrintFirstLetterOfEachWord(string S)
+
+namespace OperationsOnChar
+{
+    char InvertLetterCase(char Char);
+}
+
+
+
+
+void OperationsOnString::PrintFirstLetterOfEachWord(string S)
 {
     bool isFirstLetter = true;
 
@@ -30,7 +39,8 @@ void OperationsOnTheString::PrintFirstLetterOfEachWord(string S)
         isFirstLetter = S[i] == ' ' ? true : false;
     }
 }
-string OperationsOnTheString::UpperFirstLetterOfEachWord(string S)
+
+string OperationsOnString::UpperFirstLetterOfEachWord(string S)
 {
     bool isFirstLetter = true;
 
@@ -45,7 +55,8 @@ string OperationsOnTheString::UpperFirstLetterOfEachWord(string S)
 
     return S;
 }
-string OperationsOnTheString::LowerFirstLetterOfEachWord(string S)
+
+string OperationsOnString::LowerFirstLetterOfEachWord(string S)
 {
     bool isFirstLetter = true;
 
@@ -61,20 +72,25 @@ string OperationsOnTheString::LowerFirstLetterOfEachWord(string S)
     return S;
 }
 
-string OperationsOnTheString::UpperAllString(string S)
+string OperationsOnString::UpperAllString(string S)
 {
-    for (short i = 0; i < Text.length(); i++)
+    for (short i = 0; i < S.length(); i++)
     {
-        Text[i] = toupper(Text[i]);
+        S[i] = toupper(S[i]);
     }
     return S;
 }
 
-string OperationsOnTheString::LowerAllString(string S)
+string OperationsOnString::LowerAllString(string S)
 {
-    for (short i = 0; i < Text.length(); i++)
+    for (short i = 0; i < S.length(); i++)
     {
-        Text[i] = tolower(Text[i]);
+        S[i] = tolower(S[i]);
     }
     return S;
+}
+
+char OperationsOnChar::InvertLetterCase(char Char)
+{
+    return isupper(Char) ? tolower(Char) : toupper(Char);
 }

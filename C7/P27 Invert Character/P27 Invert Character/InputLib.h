@@ -26,9 +26,6 @@ namespace UserInput
 
     string ReadString();
 
-    char ReadChar();
-
-
 }
 
 
@@ -55,13 +52,6 @@ bool Validate::IsInputNumberError()
 
 }
 
-char UserInput::ReadChar()
-{
-    cout << "Please Enter Your Char: \n";
-    char Character;
-    cin >> Character;
-    return Character;
-}
 
 int UserInput::ReadPositiveNumber(string Message)
 {
