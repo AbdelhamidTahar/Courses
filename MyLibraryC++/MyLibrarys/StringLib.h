@@ -12,6 +12,7 @@ namespace OperationsOnString
     string LowerFirstLetterOfEachWord(string S);
     string UpperAllString(string S);
     string LowerAllString(string S);
+    string InvertAllStringLettersCase(string S);
 
 }
 
@@ -20,6 +21,14 @@ namespace OperationsOnChar
     char InvertLetterCase(char Char);
 }
 
+string OperationsOnString::InvertAllStringLettersCase(string S)
+{
+    for (short i = 0; i < S.length(); i++)
+    {
+        S[i] = OperationsOnChar::InvertLetterCase(S[i]);
+    }
+    return S;
+}
 
 
 
