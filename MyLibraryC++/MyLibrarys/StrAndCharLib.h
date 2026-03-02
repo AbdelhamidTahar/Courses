@@ -5,6 +5,7 @@
 using namespace std;
 
 
+
 namespace OperationsOnString
 {
     void PrintFirstLetterOfEachWord(string S);

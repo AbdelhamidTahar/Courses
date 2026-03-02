@@ -28,7 +28,6 @@ namespace UserInput
 
     char ReadChar();
 
-
 }
 
 
