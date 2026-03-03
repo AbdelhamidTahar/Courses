@@ -21,7 +21,8 @@ namespace OperationsOnString
     short CountSmallLetters(const string& S);
     //CountDigit
     //CountSymbol
-    short CountLetter(const string& S, const char& Character);
+    short CountLetter(const string& S, const char& Letter);
+   
 
 }
 
@@ -30,12 +31,12 @@ namespace OperationsOnChar
     char InvertLetterCase(char Char);
 }
 
-short OperationsOnString::CountLetter(const string& S, const char& Character)
+short OperationsOnString::CountLetter(const string& S, const char& Letter)
 {
     short Count = 0;
     for (short i = 0; i < S.length(); i++)
     {
-        if (S[i] == Character)
+        if (S[i] == Letter)
         {
             Count++;
         }
