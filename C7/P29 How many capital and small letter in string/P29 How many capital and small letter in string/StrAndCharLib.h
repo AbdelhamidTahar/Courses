@@ -16,7 +16,7 @@ namespace OperationsOnString
     string UpperAllString(string S);
     string LowerAllString(string S);
     string InvertAllStringLettersCase(string S);
-    short CountLetters(const string& S, enWhatToCount WhatToCount = enWhatToCount::All);
+    short CountLetters(const string& S,  enWhatToCount WhatToCount = enWhatToCount::All);
     short CountCapitalLetters(const string& S);
     short CountSmallLetters(const string& S);
 }
@@ -26,7 +26,7 @@ namespace OperationsOnChar
     char InvertLetterCase(char Char);
 }
 
-short OperationsOnString::CountLetters(const string& S, enWhatToCount WhatToCount)
+short OperationsOnString::CountLetters(const string& S,enWhatToCount WhatToCount)
 {
     short Count = 0;
 

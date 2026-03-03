@@ -23,5 +23,8 @@
     <ClInclude Include="InputLib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StrAndCharLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
