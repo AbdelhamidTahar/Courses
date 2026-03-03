@@ -19,12 +19,30 @@ namespace OperationsOnString
     short CountLetters(const string& S, enWhatToCount WhatToCount = enWhatToCount::All);
     short CountCapitalLetters(const string& S);
     short CountSmallLetters(const string& S);
+    //CountDigit
+    //CountSymbol
+    short CountLetter(const string& S, const char& Character);
+
 }
 
 namespace OperationsOnChar
 {
     char InvertLetterCase(char Char);
 }
+
+short OperationsOnString::CountLetter(const string& S, const char& Character)
+{
+    short Count = 0;
+    for (short i = 0; i < S.length(); i++)
+    {
+        if (S[i] == Character)
+        {
+            Count++;
+        }
+    }
+    return Count;
+}
+
 
 short OperationsOnString::CountLetters(const string& S, enWhatToCount WhatToCount)
 {
