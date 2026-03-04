@@ -29,8 +29,6 @@ namespace OperationsOnString
 namespace OperationsOnChar
 {
     char InvertLetterCase(char Char);
-    bool IsVowel(char Letter);
-
 }
 
 short OperationsOnString::CountLetter(const string& S, const char& Letter, bool MatchCase)
@@ -191,11 +189,4 @@ string OperationsOnString::LowerAllString(string S)
 char OperationsOnChar::InvertLetterCase(char Char)
 {
     return isupper(Char) ? tolower(Char) : toupper(Char);
-}
-
-bool OperationsOnChar::IsVowel(char Letter)
-{
-
-    Letter = tolower(Letter);
-    return (Letter == 'a' || Letter == 'e' || Letter == 'i' || Letter == 'o' || Letter == 'u');
 }
