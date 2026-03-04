@@ -22,7 +22,8 @@ namespace OperationsOnString
     //CountDigit
     //CountSymbol
     short CountLetter(const string& S, const char& Letter, bool MatchCase = true);
-    
+    short CountVowels(const string& S);
+
 
 }
 
@@ -32,6 +33,18 @@ namespace OperationsOnChar
     bool IsVowel(char Letter);
 
 }
+
+short OperationsOnString::CountVowels(const string& S)
+{
+    short Count = 0;
+    for (short i = 0; i < S.length(); i++)
+    {
+        if (OperationsOnChar::IsVowel(S[i]))
+            Count++;
+    }
+    return Count;
+}
+
 
 short OperationsOnString::CountLetter(const string& S, const char& Letter, bool MatchCase)
 {
