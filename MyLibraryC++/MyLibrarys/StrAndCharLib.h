@@ -23,6 +23,7 @@ namespace OperationsOnString
     //CountSymbol
     short CountLetter(const string& S, const char& Letter, bool MatchCase = true);
     short CountVowels(const string& S);
+    void PrintVowels(const string& S);
 
 
 }
@@ -31,6 +32,17 @@ namespace OperationsOnChar
 {
     char InvertLetterCase(char Char);
     bool IsVowel(char Letter);
+
+}
+
+void OperationsOnString::PrintVowels(const string& S)
+{
+    cout << "\nVowels in string are: ";
+    for (short i = 0; i < S.length(); i++)
+    {
+        if (OperationsOnChar::IsVowel(S[i]))
+            cout << S[i] << "    ";
+    }
 
 }
 
