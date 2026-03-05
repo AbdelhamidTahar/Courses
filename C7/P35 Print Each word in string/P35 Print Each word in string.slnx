@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P35 Print Each word in string/P35 Print Each word in string.vcxproj" Id="9256d36c-1d1c-4b46-9d5b-15e7ee5a13d3" />
+</Solution>
