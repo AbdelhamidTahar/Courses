@@ -23,6 +23,7 @@ namespace OperationsOnString
     //CountSymbol
     short CountLetter(const string& S, const char& Letter, bool MatchCase = true);
     short CountVowels(const string& S);
+    void  PrintEachWordInString(string S);
 
 
 }
@@ -131,6 +132,28 @@ string OperationsOnString::InvertAllStringLettersCase(string S)
     }
     return S;
 }
+
+void OperationsOnString::PrintEachWordInString(string S)
+{
+    string delim = " ";
+    cout << "\nYour string wrords are: \n\n";
+    short pos = 0;
+    string sWord;
+    while ((pos = S.find(delim)) != std::string::npos)
+    {
+        sWord = S.substr(0, pos);
+        if (sWord != "")
+            cout << sWord << endl;
+        S = S.erase(0, pos + 1);
+    }
+    if (S != "")
+    {
+        cout << S << endl;
+    }
+
+
+}
+
 
 
 
