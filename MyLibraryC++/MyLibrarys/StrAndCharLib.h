@@ -25,7 +25,7 @@ namespace OperationsOnString
     short CountVowels(const string& S);
     void  PrintEachWordInString(string S);
     short CountWords(string S1);
-
+    vector<string>SplitString(string S, string Delim);
 
 }
 
@@ -179,6 +179,28 @@ short OperationsOnString::CountWords(string S1)
     return Counter;
 }
 
+vector<string>OperationsOnString::SplitString(string S, string Delim)
+{
+    vector<string> vString;
+    short pos = 0;
+    string sWord; // define a string variable
+    // use find() function to get the position of the delimiters
+    while ((pos = S.find(Delim)) != std::string::npos)
+    {
+        sWord = S.substr(0, pos); // store the word
+        if (sWord != "")
+        {
+            vString.push_back(sWord);
+        }
+        S.erase(0, pos + Delim.length()); /* erase() until
+        positon and move to next word. */
+    }
+    if (S != "")
+    {
+        vString.push_back(S); // it adds last word of the string.
+    }
+    return vString;
+}
 
 
 void OperationsOnString::PrintFirstLetterOfEachWord(string S)
