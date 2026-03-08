@@ -26,6 +26,9 @@ namespace OperationsOnString
     void  PrintEachWordInString(string S);
     short CountWords(string S1);
     vector<string>SplitString(string S, string Delim);
+    string TrimLeft(string S);
+    string TrimRigth(string S);
+    string Trim(string S);
 
 }
 
@@ -34,6 +37,37 @@ namespace OperationsOnChar
     char InvertLetterCase(char Char);
     bool IsVowel(char Letter);
 
+}
+
+string OperationsOnString:: TrimLeft(string S)
+{
+
+    for (short i = 0; i < S.length(); i++)
+    {
+        if (S[i] != ' ')
+        {
+            return S.substr(i, S.length() - i);
+        }
+    }
+    return "";
+}
+
+string OperationsOnString::TrimRigth(string S)
+{
+    for (short i = S.length() - 1; i >= 0; i--)
+    {
+        if (S[i] != ' ')
+        {
+            return S.substr(0, i + 1);
+        }
+    }
+    return"";
+}
+
+string OperationsOnString::Trim(string S)
+{
+
+    return TrimRigth(TrimLeft(S));
 }
 
 short OperationsOnString::CountVowels(const string& S)
