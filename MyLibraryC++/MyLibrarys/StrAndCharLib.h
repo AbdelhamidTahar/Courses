@@ -23,7 +23,8 @@ namespace OperationsOnString
     //CountSymbol
     short CountLetter(const string& S, const char& Letter, bool MatchCase = true);
     short CountVowels(const string& S);
-    void PrintVowels(const string& S);
+    void  PrintEachWordInString(string S);
+    short CountWords(string S1);
 
 
 }
@@ -32,17 +33,6 @@ namespace OperationsOnChar
 {
     char InvertLetterCase(char Char);
     bool IsVowel(char Letter);
-
-}
-
-void OperationsOnString::PrintVowels(const string& S)
-{
-    cout << "\nVowels in string are: ";
-    for (short i = 0; i < S.length(); i++)
-    {
-        if (OperationsOnChar::IsVowel(S[i]))
-            cout << S[i] << "    ";
-    }
 
 }
 
@@ -142,6 +132,51 @@ string OperationsOnString::InvertAllStringLettersCase(string S)
         S[i] = OperationsOnChar::InvertLetterCase(S[i]);
     }
     return S;
+}
+
+void OperationsOnString::PrintEachWordInString(string S)
+{
+    string delim = " ";
+    cout << "\nYour string wrords are: \n\n";
+    short pos = 0;
+    string sWord;
+    while ((pos = S.find(delim)) != std::string::npos)
+    {
+        sWord = S.substr(0, pos);
+        if (sWord != "")
+            cout << sWord << endl;
+        S = S.erase(0, pos + 1);
+    }
+    if (S != "")
+    {
+        cout << S << endl;
+    }
+
+
+}
+
+short OperationsOnString::CountWords(string S1)
+{
+    string delim = " "; // delimiter
+    short Counter = 0;
+    short pos = 0;
+    string sWord; // define a string variable
+    // use find() function to get the position of the delimiters
+    while ((pos = S1.find(delim)) != std::string::npos)
+    {
+        sWord = S1.substr(0, pos); // store the word
+        if (sWord != "")
+        {
+            Counter++;
+        }
+        //erase() until positon and move to next word.
+        S1.erase(0, pos + delim.length());
+    }
+    if (S1 != "")
+    {
+        Counter++; // it counts the last word of the string.
+    }
+    return Counter;
 }
 
 
