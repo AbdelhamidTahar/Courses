@@ -30,6 +30,10 @@ namespace OperationsOnString
     string TrimRigth(string S);
     string Trim(string S);
     string JoinString(vector<string>vString, string Delim);
+    string ReverseWordsInString(string S)
+
+
+
 
 
 }
@@ -250,6 +254,22 @@ vector<string>OperationsOnString::SplitString(string S, string Delim)
     }
     return vString;
 }
+
+string OperationsOnString::ReverseWordsInString(string S)
+{
+    vector<string> vWords = SplitString(S, " ");
+    string S2 = "";
+    vector<string>::iterator iter = vWords.end();
+
+    while (iter != vWords.begin())
+    {
+        --iter;
+        S2 += *iter + " ";
+    }
+      S2=S2.substr(0, S2.length() - 1);
+      return S2;
+}
+
 
 
 void OperationsOnString::PrintFirstLetterOfEachWord(string S)
