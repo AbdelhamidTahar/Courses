@@ -29,6 +29,8 @@ namespace OperationsOnString
     string TrimLeft(string S);
     string TrimRigth(string S);
     string Trim(string S);
+    string JoinString(vector<string>vString, string Delim);
+
 
 }
 
@@ -38,6 +40,19 @@ namespace OperationsOnChar
     bool IsVowel(char Letter);
 
 }
+
+string OperationsOnString::JoinString(vector<string>vString, string Delim)
+{
+    string S1 = "";
+
+    for (string& Elemnet : vString)
+    {
+        S1 = S1 + Elemnet + Delim;
+    }
+    return S1.substr(0, S1.length() - Delim.length());
+
+}
+
 
 string OperationsOnString:: TrimLeft(string S)
 {

@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P39 Join vector of string with separator/P39 Join vector of string with separator.vcxproj" />
+</Solution>
