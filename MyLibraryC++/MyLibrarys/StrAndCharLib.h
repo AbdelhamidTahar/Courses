@@ -33,8 +33,10 @@ namespace OperationsOnString
     string ReverseWordsInString(string S);
     string ReplaceWordInStringUsingBuiltInFunction(string S1, string
         StringToReplace, string sRepalceTo);
-    vector<string> ChangWord(vector<string>vString, string Word, string WordToReplace);
-    string ReplaceWordInString(string S1, string Delim, string Word, string WordToReplace);
+    vector<string> ChangWord(vector<string>vString, string Word, string WordToReplace, bool Sensitive = true);
+    string ReplaceWordInString(string S1, string Delim, string Word, string WordToReplace, bool Sensitive = true);
+    string ReplaceWordInStringUsingSplit
+    (string S1, string StringToReplace, string sRepalceTo, bool MatchCase = true);
 
 }
 
@@ -45,27 +47,59 @@ namespace OperationsOnChar
 
 }
 
+string OperationsOnString::ReplaceWordInStringUsingSplit
+(string S1, string StringToReplace, string sRepalceTo, bool MatchCase = true)
+{
+    vector<string> vString = SplitString(S1, " ");
 
+    for (string& s : vString)
+    {
+        if (MatchCase)
+        {
+            if (s == StringToReplace)
+            {
+                s = sRepalceTo;
+            }
+        }
+        else
+        {
+            if (LowerAllString(s) == LowerAllString(StringToReplace))
+            {
+                s = sRepalceTo;
+            }
+        }
+    }
 
+    return OperationsOnString::JoinString(vString, " ");
+}
 
-string OperationsOnString::ReplaceWordInString(string S1, string Delim, string Word, string WordToReplace)
+string OperationsOnString::ReplaceWordInString(string S1, string Delim, string Word, string WordToReplace, bool Sensitive )
 {
     vector<string>vS;
-    vS = OperationsOnString::SplitString(S1, Delim);
-    vS = OperationsOnString::ChangWord(vS, Word, WordToReplace);
+    vS = SplitString(S1, Delim);
+    vS = ChangWord(vS, Word, WordToReplace, Sensitive);
 
     return JoinString(vS, Delim);
 }
 
-vector<string> OperationsOnString::ChangWord(vector<string>vString, string Word, string WordToReplace)
+vector<string> OperationsOnString::ChangWord(vector<string>vString, string Word, string WordToReplace, bool Sensitive )
 {
 
     vector<string>::iterator iter = vString.end();
 
+    string TempString = "";
     while (iter != vString.begin())
     {
         --iter;
-        if (*iter == Word)
+        TempString = *iter;
+
+        if (Sensitive == false)
+        {
+            Word = LowerAllString(Word);
+            TempString = LowerAllString(TempString);
+        }
+
+        if (TempString == Word)
         {
             *iter = WordToReplace;
         }
