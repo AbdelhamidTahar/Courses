@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<string>
+#include<vector>
 #include<cctype>
 using namespace std;
 
@@ -85,23 +86,21 @@ string OperationsOnString::ReplaceWordInString(string S1, string Delim, string W
 vector<string> OperationsOnString::ChangWord(vector<string>vString, string Word, string WordToReplace, bool Sensitive )
 {
 
-    vector<string>::iterator iter = vString.end();
-
-    string TempString = "";
-    while (iter != vString.begin())
+    for (string& Element : vString)
     {
-        --iter;
-        TempString = *iter;
-
-        if (Sensitive == false)
+        if (Sensitive)
         {
-            Word = LowerAllString(Word);
-            TempString = LowerAllString(TempString);
+            if (Element == Word)
+            {
+                Element = WordToReplace;
+            }
         }
-
-        if (TempString == Word)
+        else
         {
-            *iter = WordToReplace;
+            if (OperationsOnString::LowerAllString(Element) == OperationsOnString::LowerAllString(Word))
+            {
+                Element = WordToReplace;
+            }
         }
     }
 
