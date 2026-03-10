@@ -30,11 +30,11 @@ namespace OperationsOnString
     string TrimRigth(string S);
     string Trim(string S);
     string JoinString(vector<string>vString, string Delim);
-    string ReverseWordsInString(string S)
-
-
-
-
+    string ReverseWordsInString(string S);
+    string ReplaceWordInStringUsingBuiltInFunction(string S1, string
+        StringToReplace, string sRepalceTo);
+    vector<string> ChangWord(vector<string>vString, string Word, string WordToReplace);
+    string ReplaceWordInString(string S1, string Delim, string Word, string WordToReplace);
 
 }
 
@@ -42,6 +42,51 @@ namespace OperationsOnChar
 {
     char InvertLetterCase(char Char);
     bool IsVowel(char Letter);
+
+}
+
+
+
+
+string OperationsOnString::ReplaceWordInString(string S1, string Delim, string Word, string WordToReplace)
+{
+    vector<string>vS;
+    vS = OperationsOnString::SplitString(S1, Delim);
+    vS = OperationsOnString::ChangWord(vS, Word, WordToReplace);
+
+    return JoinString(vS, Delim);
+}
+
+vector<string> OperationsOnString::ChangWord(vector<string>vString, string Word, string WordToReplace)
+{
+
+    vector<string>::iterator iter = vString.end();
+
+    while (iter != vString.begin())
+    {
+        --iter;
+        if (*iter == Word)
+        {
+            *iter = WordToReplace;
+        }
+    }
+
+
+    return vString;
+}
+
+string OperationsOnString::ReplaceWordInStringUsingBuiltInFunction(string S1, string
+    StringToReplace, string sRepalceTo)
+{
+    short pos = S1.find(StringToReplace);
+
+    while (pos != std::string::npos)
+    {
+        S1 = S1.replace(pos, StringToReplace.length(), sRepalceTo);
+        pos = S1.find(StringToReplace);
+    }
+
+    return S1;
 
 }
 
