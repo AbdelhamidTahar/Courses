@@ -105,6 +105,7 @@ string UserInput::ReadString()
 {
     cout << "Please Enter Your String: \n";
     string Text;
+    cin.ignore();
     getline(cin, Text);
     return Text;
 }
