@@ -38,6 +38,7 @@ namespace OperationsOnString
     string ReplaceWordInString(string S1, string Delim, string Word, string WordToReplace, bool Sensitive = true);
     string ReplaceWordInStringUsingSplit
     (string S1, string StringToReplace, string sRepalceTo, bool MatchCase = true);
+    string RemovePunctuationsFromString(string S);
 
 }
 
@@ -47,6 +48,21 @@ namespace OperationsOnChar
     bool IsVowel(char Letter);
 
 }
+
+string OperationsOnString::RemovePunctuationsFromString(string S)
+{
+    string S2 = "";
+
+    for (short i = 0; i < S.length(); i++)
+    {
+        if (!ispunct(S[i]))
+        {
+            S2 += S[i];
+        }
+    }
+    return S2;
+}
+
 
 string OperationsOnString::ReplaceWordInStringUsingSplit
 (string S1, string StringToReplace, string sRepalceTo, bool MatchCase = true)
