@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P48 Read Cilent File And print Data/P48 Read Cilent File And print Data.vcxproj" />
+</Solution>
