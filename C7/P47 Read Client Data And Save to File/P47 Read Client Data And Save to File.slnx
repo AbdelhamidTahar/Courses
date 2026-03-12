@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P47 Read Client Data And Save to File/P47 Read Client Data And Save to File.vcxproj" />
+</Solution>
