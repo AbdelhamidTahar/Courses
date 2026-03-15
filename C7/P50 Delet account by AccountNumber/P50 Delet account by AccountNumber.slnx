@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P50 Delet account by AccountNumber/P50 Delet account by AccountNumber.vcxproj" />
+</Solution>
