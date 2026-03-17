@@ -16,7 +16,7 @@ struct sClient
     string PinCode;
     string Name;
     string Phone;
-    double AccountBalance = 0;
+    double AccountBalance =0;
     bool MarkForDelete = false;
 
 };
@@ -46,7 +46,7 @@ vector<string>SplitString(string S, const string& Delim)
     return vString;
 }
 
-string ReadString(string Message)
+string ReadString(const string &Message)
 {
     string AccountNumber = "";
     cout << Message;
@@ -59,7 +59,7 @@ string ReadString(string Message)
 
 //***************** Load Data From File To Vector *****************************
 
-sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
+sClient ConvertLinetoRecord(const string &Line,const string &Seperator = "#//#")
 {
     sClient Client;
     vector<string> vClientData;
@@ -73,7 +73,7 @@ sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
     return Client;
 }
 
-vector <sClient> LoadCleintsDataFromFile(string FileName)
+vector <sClient> LoadCleintsDataFromFile(const string &FileName)
 {
     vector <sClient> vClients;
     fstream MyFile;
@@ -139,13 +139,13 @@ eBankingOperation ReadBankingOperation()
     cout << "Choose what do you want to do? [1 to 6]? ";
     cin >> ChooseNumber;
 
-    return (eBankingOperation) ChooseNumber;
+    return (eBankingOperation)ChooseNumber;
 }
 
 
 
 //***************** ( 1 ) Print Clients List *****************************
-void PrintHeaderClienList(vector <sClient>& vClients)
+void PrintHeaderClienList(const vector <sClient>& vClients)
 {
     cout << "\n\t\t\t\t\tClient List (" << vClients.size() << ")Client(s).";
     cout <<
@@ -161,7 +161,7 @@ void PrintHeaderClienList(vector <sClient>& vClients)
     cout << "_________________________________________\n" << endl;
 }
 
-void PrintClientRecord(sClient &Client)
+void PrintClientRecord(const sClient& Client)
 {
     cout << "| " << setw(15) << left << Client.AccountNumber;
     cout << "| " << setw(10) << left << Client.PinCode;
@@ -170,9 +170,9 @@ void PrintClientRecord(sClient &Client)
     cout << "| " << setw(12) << left << Client.AccountBalance;
 }
 
-void PrintClientsRecordsList(vector <sClient>& vClients)
+void PrintClientsRecordsList(const vector <sClient>& vClients)
 {
-    for (sClient Client : vClients)
+    for (const sClient &Client : vClients)
     {
         PrintClientRecord(Client);
         cout << endl;
@@ -186,7 +186,7 @@ void PrintfooterClienList()
     cout << "_________________________________________\n" << endl;
 }
 
-void PrintAllClientsData(vector <sClient> &vClients)
+void PrintAllClientsData(const vector <sClient>& vClients)
 {
     PrintHeaderClienList(vClients);
     PrintClientsRecordsList(vClients);
@@ -205,7 +205,7 @@ void PrintHeaderAddClientScreen()
     cout << "---------------------------------------\n";
 }
 
-string ConvertRecordToLine(sClient Client, string Seperator = "#//#")
+string ConvertRecordToLine(const sClient &Client,const string &Seperator = "#//#")
 {
     string stClientRecord = "";
     stClientRecord += Client.AccountNumber + Seperator;
@@ -216,7 +216,7 @@ string ConvertRecordToLine(sClient Client, string Seperator = "#//#")
     return stClientRecord;
 }
 
-void AddDataLineToFile(string FileName, string stDataLine)
+void AddDataLineToFile(const string &FileName,const string &stDataLine)
 {
     fstream MyFile;
 
@@ -250,7 +250,7 @@ sClient ReadNewClient()
     return Client;
 }
 
-void AddClient(string AccuntNumber)
+void AddClient(const string &AccuntNumber)
 {
 
     sClient Client;
@@ -260,9 +260,9 @@ void AddClient(string AccuntNumber)
 
 }
 
-bool FindClientByAccountNumber(string AccountNumber, vector<sClient> vClients, sClient& Client)
+bool FindClientByAccountNumber(const string &AccountNumber,const vector<sClient> &vClients, sClient& Client)
 {
-    for (sClient C : vClients)
+    for (const sClient &C : vClients)
     {
         if (C.AccountNumber == AccountNumber)
         {
@@ -273,7 +273,7 @@ bool FindClientByAccountNumber(string AccountNumber, vector<sClient> vClients, s
     return false;
 }
 
-void AddClients( vector <sClient>&vClients  )
+void AddClients(vector <sClient>& vClients)
 {
     sClient Client;
     string AccountNumber;
@@ -325,7 +325,7 @@ void PrintClientCard(sClient Client)
     cout << "\n--------------------------------------\n";
 }
 
-bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <sClient>& vClients)
+bool MarkClientForDeleteByAccountNumber(const string &AccountNumber, vector <sClient>& vClients)
 {
     for (sClient& C : vClients)
     {
@@ -338,14 +338,14 @@ bool MarkClientForDeleteByAccountNumber(string AccountNumber, vector <sClient>& 
     return false;
 }
 
-vector <sClient> SaveCleintsDataToFile(string FileName, vector<sClient> vClients)
+vector <sClient> SaveCleintsDataToFile(const string &FileName,const vector<sClient> &vClients)
 {
     fstream MyFile;
     MyFile.open(FileName, ios::out);//overwrite
     string DataLine;
     if (MyFile.is_open())
     {
-        for (sClient C : vClients)
+        for (const sClient &C : vClients)
         {
             if (C.MarkForDelete == false)
             {
@@ -359,7 +359,7 @@ vector <sClient> SaveCleintsDataToFile(string FileName, vector<sClient> vClients
     return vClients;
 }
 
-bool DeleteClientByAccountNumber(string AccountNumber, vector<sClient>& vClients)
+bool DeleteClientByAccountNumber(const string &AccountNumber, vector<sClient>& vClients)
 {
     sClient Client;
     char Answer = 'n';
@@ -399,7 +399,7 @@ void PrintHeaderUpdateClientScreen()
     cout << "---------------------------------------\n";
 }
 
-sClient ChangeClientRecord(string AccountNumber)
+sClient ChangeClientRecord(const string &AccountNumber)
 {
     sClient Client;
     Client.AccountNumber = AccountNumber;
@@ -414,7 +414,7 @@ sClient ChangeClientRecord(string AccountNumber)
     return Client;
 }
 
-bool UpdateClientByAccountNumber(string AccountNumber, vector<sClient>& vClients)
+bool UpdateClientByAccountNumber(const string &AccountNumber, vector<sClient>& vClients)
 {
     sClient Client;
     char Answer = 'n';
@@ -440,7 +440,7 @@ bool UpdateClientByAccountNumber(string AccountNumber, vector<sClient>& vClients
     }
     else
     {
-        cout << "\nClient with Account Number (" << AccountNumber<< ") is Not Found!";
+        cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
         return false;
     }
 }
@@ -536,7 +536,7 @@ int main()
             AccountNumber = ReadString("Enter Accunt Number? ");
             if (FindClientByAccountNumber(AccountNumber, vClients, Client))
             {
-                
+
                 PrintClientCard(Client);
                 cout << "\n\n\nPress any key to go back to Main Menue ...";
                 system("pause>0");
@@ -548,7 +548,7 @@ int main()
                 system("pause>0");
             }
 
-            
+
 
             break;
         }
@@ -560,13 +560,13 @@ int main()
             break;
         }
 
-        
+
         }
 
     } while ((Operation < 1 || Operation > 6) || isExit == false);
 
     system("pause>0");
-        return 0;
-    }
+    return 0;
+}
 
 

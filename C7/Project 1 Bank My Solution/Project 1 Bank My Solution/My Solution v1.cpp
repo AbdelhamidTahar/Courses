@@ -139,7 +139,7 @@ eBankingOperation ReadBankingOperation()
     cout << "Choose what do you want to do? [1 to 6]? ";
     cin >> ChooseNumber;
 
-    return (eBankingOperation) ChooseNumber;
+    return (eBankingOperation)ChooseNumber;
 }
 
 
@@ -161,7 +161,7 @@ void PrintHeaderClienList(vector <sClient>& vClients)
     cout << "_________________________________________\n" << endl;
 }
 
-void PrintClientRecord(sClient &Client)
+void PrintClientRecord(sClient& Client)
 {
     cout << "| " << setw(15) << left << Client.AccountNumber;
     cout << "| " << setw(10) << left << Client.PinCode;
@@ -186,7 +186,7 @@ void PrintfooterClienList()
     cout << "_________________________________________\n" << endl;
 }
 
-void PrintAllClientsData(vector <sClient> &vClients)
+void PrintAllClientsData(vector <sClient>& vClients)
 {
     PrintHeaderClienList(vClients);
     PrintClientsRecordsList(vClients);
@@ -273,7 +273,7 @@ bool FindClientByAccountNumber(string AccountNumber, vector<sClient> vClients, s
     return false;
 }
 
-void AddClients( vector <sClient>&vClients  )
+void AddClients(vector <sClient>& vClients)
 {
     sClient Client;
     string AccountNumber;
@@ -440,7 +440,7 @@ bool UpdateClientByAccountNumber(string AccountNumber, vector<sClient>& vClients
     }
     else
     {
-        cout << "\nClient with Account Number (" << AccountNumber<< ") is Not Found!";
+        cout << "\nClient with Account Number (" << AccountNumber << ") is Not Found!";
         return false;
     }
 }
@@ -536,7 +536,7 @@ int main()
             AccountNumber = ReadString("Enter Accunt Number? ");
             if (FindClientByAccountNumber(AccountNumber, vClients, Client))
             {
-                
+
                 PrintClientCard(Client);
                 cout << "\n\n\nPress any key to go back to Main Menue ...";
                 system("pause>0");
@@ -548,7 +548,7 @@ int main()
                 system("pause>0");
             }
 
-            
+
 
             break;
         }
@@ -560,13 +560,13 @@ int main()
             break;
         }
 
-        
+
         }
 
     } while ((Operation < 1 || Operation > 6) || isExit == false);
 
     system("pause>0");
-        return 0;
-    }
+    return 0;
+}
 
 
