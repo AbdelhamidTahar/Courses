@@ -181,14 +181,12 @@ void ShowAllClientsScreen()
         cout << "\t\t\t\tNo Clients Available In the System!";
     else
 
-    {
         for (sClient Client : vClients)
         {
 
             PrintClientRecordLine(Client);
             cout << endl;
         }
-    }
 
     cout << "\n_______________________________________________________";
     cout << "_________________________________________\n" << endl;
