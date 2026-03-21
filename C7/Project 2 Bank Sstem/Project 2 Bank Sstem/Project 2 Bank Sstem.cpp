@@ -766,7 +766,7 @@ void PerfromMainMenueOption(enMainMenueOptions MainMenueOption)
     case enMainMenueOptions::eTransactions:
         system("cls");
         Transactions();
-        GoBackToMainMenue();
+        
         break;
 
     case enMainMenueOptions::eExit:
