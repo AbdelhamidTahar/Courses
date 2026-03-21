@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Project 2 Bank Sstem/Project 2 Bank Sstem.vcxproj" />
+</Solution>
