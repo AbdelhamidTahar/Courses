@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Project 2 Bank Sstem/Project 2 Bank Sstem.vcxproj" />
+  <Project Path="Project 2 Bank Sstem/Project 2 Bank Sstem.vcxproj" Id="1e1bec1c-6c00-4a49-89f6-a32d954f0528" />
 </Solution>
