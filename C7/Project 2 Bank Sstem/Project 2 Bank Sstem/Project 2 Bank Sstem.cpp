@@ -664,10 +664,15 @@ void ShowTotalBalancesScreen()
 
 }
 
-enum enTransactionsMenueOptions { eDeposit = 1, eWithdraw = 2, eShowTotalBalance = 3, eShowMainMenue = 4 };
-
-enum enMainMenueOptions { eListClients = 1, eAddNewClient = 2, eDeleteClient = 3, eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenue = 6, eExit = 7 };
-
+enum enTransactionsMenueOptions {
+    eDeposit = 1, eWithdraw = 2,
+    eShowTotalBalance = 3, eShowMainMenue = 4
+};
+enum enMainMenueOptions
+{
+    eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
+    eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenue = 6, eExit = 7
+};
 void GoBackToMainMenue()
 {
     cout << "\n\nPress any key to go back to Main Menue...";
