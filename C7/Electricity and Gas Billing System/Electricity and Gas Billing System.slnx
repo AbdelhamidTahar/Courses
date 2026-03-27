@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Electricity and Gas Billing System/Electricity and Gas Billing System.vcxproj" Id="0404fa49-2910-4c3b-8b42-4d89bb54ad1f" />
+</Solution>
