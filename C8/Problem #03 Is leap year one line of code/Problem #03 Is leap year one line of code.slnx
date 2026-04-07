@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Problem #03 Is leap year one line of code/Problem #03 Is leap year one line of code.vcxproj" />
+</Solution>
