@@ -52,10 +52,10 @@ int NumberOfSecondsInMonth(short Year,short Month)
 void PrintCertainMonth(short Year,short Month)
 {
 	cout << "\n\n";
-	cout << "Number Of Days    in Year [" << Month << "] is " << NumberOfDaysInMonth   (Year,Month) << endl;
-	cout << "Number Of Hours   in Year [" << Month << "] is " << NumberOfHoursInMonth  (Year,Month) << endl;
-	cout << "Number Of Minutes in Year [" << Month << "] is " << NumberOfMinutesInMonth(Year,Month) << endl;
-	cout << "Number Of Seconds in Year [" << Month << "] is " << NumberOfSecondsInMonth(Year,Month) << endl;
+	cout << "Number Of Days    in Month [" << Month << "] is " << NumberOfDaysInMonth   (Year,Month) << endl;
+	cout << "Number Of Hours   in Month [" << Month << "] is " << NumberOfHoursInMonth  (Year,Month) << endl;
+	cout << "Number Of Minutes in Month [" << Month << "] is " << NumberOfMinutesInMonth(Year,Month) << endl;
+	cout << "Number Of Seconds in Month [" << Month << "] is " << NumberOfSecondsInMonth(Year,Month) << endl;
 }
 
 int main()
