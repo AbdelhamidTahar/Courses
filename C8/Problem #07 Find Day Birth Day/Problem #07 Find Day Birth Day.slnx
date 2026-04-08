@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Problem #07 Find Day Birth Day/Problem #07 Find Day Birth Day.vcxproj" />
+</Solution>
