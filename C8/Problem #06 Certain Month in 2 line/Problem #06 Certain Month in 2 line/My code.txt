@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+short ReadYear()
+{
+	short Year;
+	cout << "\nPlease enter a year to check? ";
+	cin >> Year;
+	return Year;
+}
+
+short ReadMonth()
+{
+	short Month;
+	cout << "\nPlease enter a Month to check? ";
+	cin >> Month;
+	return Month;
+}
+
+bool isLeapYear(short Year)
+{
+	return (Year % 4 == 0 && Year % 100 != 0) || (Year % 400 == 0);
+}
+
+short NumberOfDaysInMonth(short Month, short Year)
+{
+	if (Month < 1 || Month>12)
+		return 0;
+	short DaysInMonth[12] = { 31,isLeapYear(Year) ? 29 : 28 ,31,30,31,30,31,31,30,31,30,31 };
+	return DaysInMonth[Month - 1];
+}
+
+
+
+void PrintCertainMonth(short Month, short Year)
+{
+	cout << "\n\n";
+	cout << "Number Of Days    in Month [" << Month << "] is " << NumberOfDaysInMonth(Month, Year) << endl;
+
+}
+
+int main()
+{
+	short Year = ReadYear();
+	short Month = ReadMonth();
+	PrintCertainMonth(Month, Year);
+	system("pause>0");
+
+
+	return 0;
+}
