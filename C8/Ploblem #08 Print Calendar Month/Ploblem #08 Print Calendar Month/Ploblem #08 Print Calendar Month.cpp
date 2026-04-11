@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 bool isLeapYear(short Year)
 {
 	// if year is divisible by 4 AND not divisible by 100
