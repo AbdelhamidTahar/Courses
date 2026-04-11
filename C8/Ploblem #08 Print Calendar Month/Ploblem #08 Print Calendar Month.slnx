@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Ploblem #08 Print Calendar Month/Ploblem #08 Print Calendar Month.vcxproj" />
+</Solution>
