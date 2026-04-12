@@ -41,15 +41,12 @@ short ReadDay()
 	return Day;
 }
 
-short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month,short Year)
+short NumberOfDaysFromBeginingOfTheYear(short Day, short Month, short Year)
 {
-	short TotalDays = 0;
-	for (int i = 1; i <= Month - 1; i++)
-	{
-		TotalDays += NumberOfDaysInAMonth(i, Year);
-	}
-	TotalDays += Day;
-	return TotalDays;
+	short SumNemberOfDays = 0;
+	for (short i = 1; i <= Month; i++)
+		SumNemberOfDays += NumberOfDaysInAMonth(i, Year);
+	return SumNemberOfDays - (NumberOfDaysInAMonth(Month, Year) - Day);
 }
 
 int main()
@@ -60,8 +57,8 @@ int main()
 	Month = ReadMonth();
 	Year = ReadYear();
 	cout << "\nNumber Of Days From Begining Of The Year is " <<
-		NumberOfDaysFromTheBeginingOfTheYear(Day, Month, Year);
-	
+		NumberOfDaysFromBeginingOfTheYear(Day, Month, Year);
+
 	system("pause>0");
 	return 0;
 }
