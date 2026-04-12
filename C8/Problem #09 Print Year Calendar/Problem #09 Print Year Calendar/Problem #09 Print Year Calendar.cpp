@@ -32,8 +32,7 @@ short NumberOfDaysInAMonth(short Month, short Year)
 	if (Month < 1 || Month>12)
 		return 0;
 	int days[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
-	return (Month == 2) ? (isLeapYear(Year) ? 29 : 28) :
-		days[Month - 1];
+	return (Month == 2) ? (isLeapYear(Year) ? 29 : 28) :days[Month - 1];
 }
 
 string MonthShortName(short MonthNumber)
@@ -56,11 +55,11 @@ void PrintMonthCalendar(short Month, short Year)
 	printf("\n _______________%s_______________\n\n",
 		MonthShortName(Month).c_str());
 	// Print the columns
-	printf("  Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");
+	printf(" Sun Mon Tue Wed Thu Fri Sat\n");
 	// Print appropriate spaces
 	int i;
 	for (i = 0; i < current; i++)
-		printf("     ");
+		printf(" ");
 	for (int j = 1; j <= NumberOfDays; j++)
 	{
 		printf("%5d", j);
@@ -73,13 +72,23 @@ void PrintMonthCalendar(short Month, short Year)
 	printf("\n _________________________________\n");
 }
 
-short ReadMonth()
+void PrintYearCalendar(short Year)
 {
-	short Month;
-	cout << "\nPlease enter a Month? ";
-	cin >> Month;
-	return Month;
+
+
+	for (short i = 1; i <= 12; i++)
+	{
+		PrintMonthCalendar(i, Year);
+	}
 }
+
+//short ReadMonth()
+//{
+//	short Month;
+//	cout << "\nPlease enter a Month? ";
+//	cin >> Month;
+//	return Month;
+//}
 
 short ReadYear()
 {
@@ -92,8 +101,8 @@ short ReadYear()
 int main()
 {
 	short Year = ReadYear();
-	short Month = ReadMonth();
-	PrintMonthCalendar(Month, Year);
+	//short Month = ReadMonth();
+	PrintYearCalendar(Year);
 	system("pause>0");
 	return 0;
 }
