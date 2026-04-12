@@ -55,11 +55,11 @@ void PrintMonthCalendar(short Month, short Year)
 	printf("\n _______________%s_______________\n\n",
 		MonthShortName(Month).c_str());
 	// Print the columns
-	printf(" Sun Mon Tue Wed Thu Fri Sat\n");
+	printf("  Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");
 	// Print appropriate spaces
 	int i;
 	for (i = 0; i < current; i++)
-		printf(" ");
+		printf("     ");
 	for (int j = 1; j <= NumberOfDays; j++)
 	{
 		printf("%5d", j);
