@@ -53,9 +53,9 @@ short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
 	return TotalDays;
 }
 
-short NumberOfMonthInTotalDays(short TotalDays, short Year)
+string ConvertTotalDaysToDat(short TotalDays, short Year)
 {
-
+	short Day = TotalDays;
 	short NumberdayInMonth;
 	short Month = 0;
 
@@ -63,9 +63,9 @@ short NumberOfMonthInTotalDays(short TotalDays, short Year)
 	{
 		NumberdayInMonth = NumberOfDaysInAMonth(i, Year);
 
-		if ((TotalDays -= NumberdayInMonth) >= 0)
+		if (Day - NumberdayInMonth >= 0)
 		{
-
+			Day -= NumberdayInMonth;
 			Month += 1;
 		}
 		else
@@ -74,20 +74,8 @@ short NumberOfMonthInTotalDays(short TotalDays, short Year)
 			break;
 		}
 	}
-	return Month;
+	return to_string(Day) + "/" + to_string(Month) + "/" + to_string(Year);
 }
-
-short NumberOfDayInMonthTotalDays(short TotalDays, short Month, short Year)
-{
-
-	for (short i = 1; i <= Month - 1; i++)
-	{
-		TotalDays -= NumberOfDaysInAMonth(i, Year);
-	}
-
-	return TotalDays;
-}
-
 
 int main()
 {
@@ -98,16 +86,7 @@ int main()
 	Year = ReadYear();
 	TotalDays = NumberOfDaysFromTheBeginingOfTheYear(Day, Month, Year);
 	cout << "\nNumber Of Days From Begining Of The Year is " << TotalDays << endl;
-
-	short ConvertDaysToMonth = NumberOfMonthInTotalDays(TotalDays, Year);
-	short ConvertDaysToDay = NumberOfDayInMonthTotalDays(TotalDays, ConvertDaysToMonth, Year);
-
-	cout << "Date For[" << TotalDays << "] is : "
-		<< ConvertDaysToDay
-		<< "/" << ConvertDaysToMonth
-		<< "/" << Year;
-
-
+	cout << ConvertTotalDaysToDat(TotalDays, Year);
 
 	system("pause>0");
 	return 0;
