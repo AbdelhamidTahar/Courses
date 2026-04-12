@@ -53,62 +53,50 @@ short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
 	return TotalDays;
 }
 
-short NumberOfMonthInTotalDays(short TotalDays, short Year)
+struct sDate
 {
+	short Year;
+	short Month;
+	short Day;
+};
 
-	short NumberdayInMonth;
-	short Month = 0;
-
-	for (short i = 1; i <= 12; i++)
+sDate GetDateFromDayOrderInYear(short DateOrderInYear, short Year)
+{
+	sDate Date;
+	short RemainingDays = DateOrderInYear;
+	short MonthDays = 0;
+	Date.Year = Year;
+	Date.Month = 1;
+	while (true)
 	{
-		NumberdayInMonth = NumberOfDaysInAMonth(i, Year);
-
-		if ((TotalDays -= NumberdayInMonth) >= 0)
+		MonthDays = NumberOfDaysInAMonth(Date.Month, Year);
+		if (RemainingDays > MonthDays)
 		{
-
-			Month += 1;
+			RemainingDays -= MonthDays;
+			Date.Month++;
 		}
 		else
 		{
-			Month += 1;
+			Date.Day = RemainingDays;
 			break;
 		}
 	}
-	return Month;
+	return Date;
 }
-
-short NumberOfDayInMonthTotalDays(short TotalDays, short Month, short Year)
-{
-
-	for (short i = 1; i <= Month - 1; i++)
-	{
-		TotalDays -= NumberOfDaysInAMonth(i, Year);
-	}
-
-	return TotalDays;
-}
-
 
 int main()
 {
-	short Year, Month, Day, TotalDays;
-
-	Day = ReadDay();
-	Month = ReadMonth();
-	Year = ReadYear();
-	TotalDays = NumberOfDaysFromTheBeginingOfTheYear(Day, Month, Year);
-	cout << "\nNumber Of Days From Begining Of The Year is " << TotalDays << endl;
-
-	short ConvertDaysToMonth = NumberOfMonthInTotalDays(TotalDays, Year);
-	short ConvertDaysToDay = NumberOfDayInMonthTotalDays(TotalDays, ConvertDaysToMonth, Year);
-
-	cout << "Date For[" << TotalDays << "] is : "
-		<< ConvertDaysToDay
-		<< "/" << ConvertDaysToMonth
-		<< "/" << Year;
-
-
-
+	short Day = ReadDay();
+	short Month = ReadMonth();
+	short Year = ReadYear();
+	short DaysOrderInYear =
+		NumberOfDaysFromTheBeginingOfTheYear(Day, Month, Year);
+	cout << "\nNumber of Days from the begining of the year is "
+		<< DaysOrderInYear << "\n\n";
+	sDate Date;
+	Date = GetDateFromDayOrderInYear(DaysOrderInYear, Year);
+	cout << "Date for [" << DaysOrderInYear << "] is: ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
 	system("pause>0");
 	return 0;
 }
