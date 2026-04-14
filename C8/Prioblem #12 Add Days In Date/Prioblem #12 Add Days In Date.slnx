@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Prioblem #12 Add Days In Date/Prioblem #12 Add Days In Date.vcxproj" />
+</Solution>
