@@ -1,12 +1,15 @@
 #include <iostream>
-#include <string>
 using namespace std;
+
+struct sDate
+{
+	short Year;
+	short Month;
+	short Day;
+};
 
 bool isLeapYear(short Year)
 {
-	// if year is divisible by 4 AND not divisible by 100
-	// OR if year is divisible by 400
-	// then it is a leap year
 	return (Year % 4 == 0 && Year % 100 != 0) || (Year % 400 == 0);
 }
 
@@ -18,20 +21,42 @@ short NumberOfDaysInAMonth(short Month, short Year)
 	return (Month == 2) ? (isLeapYear(Year) ? 29 : 28) : days[Month - 1];
 }
 
-short ReadYear()
+short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month,short Year)
 {
-	short Year;
-	cout << "\nPlease enter a year? ";
-	cin >> Year;
-	return Year;
+	short TotalDays = 0;
+	for (int i = 1; i <= Month - 1; i++)
+	{
+		TotalDays += NumberOfDaysInAMonth(i, Year);
+	}
+	TotalDays += Day;
+	return TotalDays;
 }
 
-short ReadMonth()
+sDate DateAddDays(short Days, sDate Date)
 {
-	short Month;
-	cout << "\nPlease enter a Month? ";
-	cin >> Month;
-	return Month;
+	short RemainingDays = Days + NumberOfDaysFromTheBeginingOfTheYear(Date.Day, Date.Month,Date.Year);
+	short MonthDays = 0;
+	Date.Month = 1;
+	while (true)
+	{
+		MonthDays = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		if (RemainingDays > MonthDays)
+		{
+			RemainingDays -= MonthDays;
+			Date.Month++;
+			if (Date.Month > 12)
+			{
+				Date.Month = 1;
+				Date.Year++;
+			}
+		}
+		else
+		{
+			Date.Day = RemainingDays;
+			break;
+		}
+	}
+	return Date;
 }
 
 short ReadDay()
@@ -42,60 +67,46 @@ short ReadDay()
 	return Day;
 }
 
+short ReadMonth()
+{
+	short Month;
+	cout << "\nPlease enter a Month? ";
+	cin >> Month;
+	return Month;
+}
 
-struct sDate
+short ReadYear()
 {
 	short Year;
-	short Month;
-	short Day;
-};
+	cout << "\nPlease enter a Year? ";
+	cin >> Year;
+	return Year;
+}
 
-
-sDate AddDaysToDAte(short AddDays, sDate Date)
+sDate ReadFullDate()
 {
-	short MaxDaysInMonth = NumberOfDaysInAMonth(Date.Month, Date.Year);
-	for (int i = 1; i <= AddDays; i++)
-	{
-		if (Date.Day != MaxDaysInMonth)
-		{
-			Date.Day++;
-		}
-		else
-		{
-			if (Date.Month == 12)
-			{
-				Date.Year++;
-				Date.Month = 1;
-				Date.Day = 1;
-				MaxDaysInMonth = NumberOfDaysInAMonth(Date.Month, Date.Year);
-			}
-			else
-			{
-				Date.Month++;
-				MaxDaysInMonth = NumberOfDaysInAMonth(Date.Month, Date.Year);
-				Date.Day = 1;
-			}
-		}
-		
-	}
+	sDate Date;
+	Date.Day = ReadDay();
+	Date.Month = ReadMonth();
+	Date.Year = ReadYear();
 	return Date;
+}
+
+short ReadDaysToAdd()
+{
+	short Days;
+	cout << "\nHow many days to add? ";
+	cin >> Days;
+	return Days;
 }
 
 int main()
 {
-	sDate Date;
-
-	 Date.Day = ReadDay();
-	 Date.Month = ReadMonth();
-	 Date.Year = ReadYear();
-   	 short AddDays ;
-	 cout << "\nHow Many Days To Add? ";
-	 cin >> AddDays;
-	 Date = AddDaysToDAte(AddDays, Date);
-	 cout << "Date After Adding [" << AddDays << "] days is : " << Date.Day << '/' << Date.Month << '/' << Date.Year;
-
-	
-
+	sDate Date = ReadFullDate();
+	short Days = ReadDaysToAdd();
+	Date = DateAddDays(Days, Date);
+	cout << "\nDate after adding [" << Days << "] days is: ";
+	cout << Date.Day << "/" << Date.Month << "/" << Date.Year;
 	system("pause>0");
 	return 0;
 }
