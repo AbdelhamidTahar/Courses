@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Problem #16 IncreaseDateByOneDay/Problem #16 IncreaseDateByOneDay.vcxproj" />
+</Solution>
