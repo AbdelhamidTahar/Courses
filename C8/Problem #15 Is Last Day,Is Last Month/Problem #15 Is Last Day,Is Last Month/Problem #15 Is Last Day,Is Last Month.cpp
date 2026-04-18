@@ -58,12 +58,12 @@ stDate ReadFullDate()
 	return Date;
 }
 
-bool IsDayLastdayInMonth(stDate Date)
+bool IsLastDayInMonth(stDate Date)
 {
 	return Date.Day == NumberOfDaysInAMonth(Date.Month, Date.Year);
 }
 
-bool IsMonthLastMonthInYear(short Month)
+bool IsLastMonthInYear(short Month)
 {
 	return Month == 12;
 }
@@ -75,13 +75,13 @@ int main()
 	stDate Date1;
 	Date1 = ReadFullDate();
 
-	if (IsDayLastdayInMonth(Date1))
+	if (IsLastDayInMonth(Date1))
 		cout << "\nYes, Day Is Last Day In Month\n";
 	else
 		cout << "\nNo, Day Is  Not Last Day In Month\n";
 
 
-	if (IsMonthLastMonthInYear(Date1.Month))
+	if (IsLastMonthInYear(Date1.Month))
 		cout << "\nYes, Month Is Last Month In Year\n";
 	else
 		cout << "\nNo, Month Is  Not Last Month In Year\n";
