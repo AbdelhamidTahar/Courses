@@ -115,7 +115,7 @@ int CalculateAgeInDays(stDate DateOfBirth)
 
 		while (DateOfBirth.Year <= CurrentDate.Year - 1)
 		{
-			AgeInDays += isLeapYear(DateOfBirth.Year ) ? 366 : 365;
+			AgeInDays += isLeapYear(DateOfBirth.Year) ? 366 : 365;
 			DateOfBirth.Year++;
 		}
 
