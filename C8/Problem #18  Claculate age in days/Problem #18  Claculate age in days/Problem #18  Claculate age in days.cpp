@@ -1,74 +1,7 @@
-#pragma warning(disable:4996)
+#pragma warning(disable : 4996)
 #include <iostream>
-#include <ctime>
+#include <string>
 using namespace std;
-
-struct stDate
-{
-	short Year;
-	short Month;
-	short Day;
-};
-
-short ReadDay()
-{
-	short Day;
-	cout << "\nPlease enter a Day? ";
-	cin >> Day;
-	return Day;
-}
-
-short ReadMonth()
-{
-	short Month;
-	cout << "\nPlease enter a Month? ";
-	cin >> Month;
-	return Month;
-}
-
-short ReadYear()
-{
-	short Year;
-	cout << "\nPlease enter a year? ";
-	cin >> Year;
-	return Year;
-}
-
-stDate ReadFullDate()
-{
-	stDate Date;
-	Date.Day = ReadDay();
-	Date.Month = ReadMonth();
-	Date.Year = ReadYear();
-	return Date;
-}
-
-stDate GetCurrentDate()
-{
-	stDate CurrentDate;
-
-	time_t TimeInSeconds;
-	TimeInSeconds = time(0);
-
-	tm* pstrLocalTime;
-	pstrLocalTime = localtime(&TimeInSeconds);
-
-	CurrentDate.Day = pstrLocalTime->tm_mday;
-	CurrentDate.Month = pstrLocalTime->tm_mon + 1;
-	CurrentDate.Year = pstrLocalTime->tm_year + 1900;
-
-	return CurrentDate;
-}
-
-bool IsDate1AfterDate2(stDate Date1, stDate Date2)
-{
-	return (Date1.Year > Date2.Year) ? true : ((Date1.Year == Date2.Year) ? ((Date1.Month > Date2.Month) ? true : ((Date1.Month == Date2.Month) ? Date1.Day > Date2.Day : false)) : false);
-}
-
-bool IsDate1EqualDate2(stDate Date1, stDate Date2)
-{
-	return ((Date1.Year == Date2.Year) && (Date1.Month == Date2.Month) && (Date1.Day == Date2.Day));
-}
 
 bool isLeapYear(short Year)
 {
@@ -86,6 +19,30 @@ short NumberOfDaysInAMonth(short Month, short Year)
 	return (Month == 2) ? (isLeapYear(Year) ? 29 : 28) : days[Month - 1];
 }
 
+short ReadYear()
+{
+	short Year;
+	cout << "\nPlease enter a year? ";
+	cin >> Year;
+	return Year;
+}
+
+short ReadMonth()
+{
+	short Month;
+	cout << "\nPlease enter a Month? ";
+	cin >> Month;
+	return Month;
+}
+
+short ReadDay()
+{
+	short Day;
+	cout << "\nPlease enter a Day? ";
+	cin >> Day;
+	return Day;
+}
+
 short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
 {
 	short TotalDays = 0;
@@ -97,50 +54,112 @@ short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
 	return TotalDays;
 }
 
-int CalculateAgeInDays(stDate DateOfBirth)
+struct stDate
 {
-	stDate CurrentDate = GetCurrentDate();
-	if (IsDate1AfterDate2(DateOfBirth, CurrentDate))
+	short Year;
+	short Month;
+	short Day;
+};
+
+stDate ReadFullDate()
+{
+	stDate Date;
+	Date.Day = ReadDay();
+	Date.Month = ReadMonth();
+	Date.Year = ReadYear();
+	return Date;
+}
+
+bool IsLastDayInMonth(stDate Date)
+{
+	return Date.Day == NumberOfDaysInAMonth(Date.Month, Date.Year);
+}
+
+bool IsLastMonthInYear(short Month)
+{
+	return Month == 12;
+}
+
+stDate IncreaseDateByOneDay(stDate Date)
+{
+	if (IsLastDayInMonth(Date))
+	{
+		if (IsLastMonthInYear(Date.Month))
+		{
+			Date.Month = 1;
+			Date.Day = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
+	}
+	else
+	{
+		Date.Day++;
+	}
+	return Date;
+}
+
+bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
+{
+
+	return (Date1.Year < Date2.Year) ? true : ((Date1.Year ==
+		Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month ==
+			Date2.Month ? Date1.Day < Date2.Day : false)) : false);
+};
+
+bool IsDate1AfterDate2(stDate Date1, stDate Date2)
+{
+	return (Date1.Year > Date2.Year) ? true : ((Date1.Year == Date2.Year) ? ((Date1.Month > Date2.Month) ? true : ((Date1.Month == Date2.Month) ? Date1.Day > Date2.Day : false)) : false);
+}
+
+bool IsDate1EqualDate2(stDate Date1, stDate Date2)
+{
+	return ((Date1.Year == Date2.Year) && (Date1.Month == Date2.Month) && (Date1.Day == Date2.Day));
+}
+
+stDate GetSystemDate()
+{
+	stDate Date;
+	time_t t = time(0);
+	tm* now = localtime(&t);
+	Date.Year = now->tm_year + 1900;
+	Date.Month = now->tm_mon + 1;
+	Date.Day = now->tm_mday;
+	return Date;
+}
+
+int GetDifferenceInDays(stDate Date1, stDate Date2, bool IncludeEndDay = false)
+{
+	if (IsDate1AfterDate2(Date1, Date2))
 		return -1;
-	else if (IsDate1EqualDate2(DateOfBirth, CurrentDate))
+	else if (IsDate1EqualDate2(Date1, Date2))
 		return 0;
 	else
 	{
-
-		short DifferenceBetweenTwoYears = CurrentDate.Year - DateOfBirth.Year;
-
-		int AgeInDays = 0;
-		AgeInDays += isLeapYear(DateOfBirth.Year) ? 366 : 365;
-		DateOfBirth.Year++;
-
-		while (DateOfBirth.Year <= CurrentDate.Year - 1)
+		int Days = 0;
+		while (IsDate1BeforeDate2(Date1, Date2))
 		{
-			AgeInDays += isLeapYear(DateOfBirth.Year ) ? 366 : 365;
-			DateOfBirth.Year++;
+			Days++;
+			Date1 = IncreaseDateByOneDay(Date1);
 		}
-
-
-		short NumberOfDaysFromBeginingThisYear = NumberOfDaysFromTheBeginingOfTheYear
-		(CurrentDate.Day, CurrentDate.Month, CurrentDate.Year);
-
-		short NumberOfDaysFromBeginingBirthYear = NumberOfDaysFromTheBeginingOfTheYear
-		(DateOfBirth.Day, DateOfBirth.Month, DateOfBirth.Year);
-
-		AgeInDays += NumberOfDaysFromBeginingThisYear;
-		AgeInDays -= NumberOfDaysFromBeginingBirthYear;
-
-		return AgeInDays;
-
-
+		return IncludeEndDay ? ++Days : Days;
 	}
 }
 
+
+
 int main()
 {
-	stDate DateOfBirth;
-	DateOfBirth = ReadFullDate();
+	stDate Date1, Date2;
+	Date1 = ReadFullDate();
+	Date2 = GetSystemDate();
 
-	printf("Your Age is : %d Day(s).\n", CalculateAgeInDays(DateOfBirth));
+	printf("Difference is : %d  Day(s).\n", GetDifferenceInDays(Date1, Date2));
+	printf("Difference (Including End Day) is : %d  Day(s).\n", GetDifferenceInDays(Date1, Date2, true));
 
 	return 0;
 }
