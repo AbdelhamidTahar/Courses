@@ -127,7 +127,7 @@ stDate IncreaseDateByOneDay(stDate Date)
 	return Date;
 }
 
-int CalculateAgeInDays(stDate DateOfBirth, bool IncludeEndDay = false)
+int CalculateAgeInDays(stDate DateOfBirth, bool IsInclusive = false)
 {
 	stDate CurrentDate = GetCurrentDate();
 	if (IsDate1AfterDate2(DateOfBirth, CurrentDate))
@@ -142,7 +142,7 @@ int CalculateAgeInDays(stDate DateOfBirth, bool IncludeEndDay = false)
 			AgeInDays++;
 			DateOfBirth = IncreaseDateByOneDay(DateOfBirth);
 		}
-		return (IncludeEndDay) ? ++AgeInDays : AgeInDays;
+		return (IsInclusive) ? ++AgeInDays : AgeInDays;
 	}
 }
 

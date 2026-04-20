@@ -97,7 +97,7 @@ short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
 	return TotalDays;
 }
 
-int CalculateAgeInDays(stDate DateOfBirth, bool IncludeEndDay = false)
+int CalculateAgeInDays(stDate DateOfBirth, bool IsInclusive = false)
 {
 	stDate CurrentDate = GetCurrentDate();
 	if (IsDate1AfterDate2(DateOfBirth, CurrentDate))
@@ -128,7 +128,7 @@ int CalculateAgeInDays(stDate DateOfBirth, bool IncludeEndDay = false)
 		AgeInDays += NumberOfDaysFromBeginingThisYear;
 		AgeInDays -= NumberOfDaysFromBeginingBirthYear;
 
-		return (IncludeEndDay)? ++AgeInDays: AgeInDays;
+		return (IsInclusive)? ++AgeInDays: AgeInDays;
 
 
 	}
