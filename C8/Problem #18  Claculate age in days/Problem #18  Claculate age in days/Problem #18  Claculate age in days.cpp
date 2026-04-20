@@ -158,8 +158,7 @@ int main()
 	Date1 = ReadFullDate();
 	Date2 = GetSystemDate();
 
-	printf("Difference is : %d  Day(s).\n", GetDifferenceInDays(Date1, Date2));
-	printf("Difference (Including End Day) is : %d  Day(s).\n", GetDifferenceInDays(Date1, Date2, true));
+	printf("Your Age is : %d  Day(s).\n", GetDifferenceInDays(Date1, Date2, true));
 
 	return 0;
 }

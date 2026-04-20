@@ -18,5 +18,14 @@
     <ClCompile Include="Problem #18  Claculate age in days.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="My Code V1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="My Code v3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="My Code V2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
