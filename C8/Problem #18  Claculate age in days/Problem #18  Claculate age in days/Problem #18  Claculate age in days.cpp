@@ -70,14 +70,6 @@ bool IsDate1EqualDate2(stDate Date1, stDate Date2)
 	return ((Date1.Year == Date2.Year) && (Date1.Month == Date2.Month) && (Date1.Day == Date2.Day));
 }
 
-bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
-{
-
-	return (Date1.Year < Date2.Year) ? true : ((Date1.Year ==
-		Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month ==
-			Date2.Month ? Date1.Day < Date2.Day : false)) : false);
-};
-
 bool isLeapYear(short Year)
 {
 	// if year is divisible by 4 AND not divisible by 100
@@ -92,39 +84,6 @@ short NumberOfDaysInAMonth(short Month, short Year)
 		return 0;
 	int days[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 	return (Month == 2) ? (isLeapYear(Year) ? 29 : 28) : days[Month - 1];
-}
-
-bool IsLastDayInMonth(stDate Date)
-{
-	return Date.Day == NumberOfDaysInAMonth(Date.Month, Date.Year);
-}
-
-bool IsLastMonthInYear(short Month)
-{
-	return Month == 12;
-}
-
-stDate IncreaseDateByOneDay(stDate Date)
-{
-	if (IsLastDayInMonth(Date))
-	{
-		if (IsLastMonthInYear(Date.Month))
-		{
-			Date.Month = 1;
-			Date.Day = 1;
-			Date.Year++;
-		}
-		else
-		{
-			Date.Day = 1;
-			Date.Month++;
-		}
-	}
-	else
-	{
-		Date.Day++;
-	}
-	return Date;
 }
 
 short NumberOfDaysFromTheBeginingOfTheYear(short Day, short Month, short Year)
