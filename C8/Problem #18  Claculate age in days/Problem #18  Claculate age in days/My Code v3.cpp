@@ -109,9 +109,11 @@ int CalculateAgeInDays(stDate DateOfBirth, bool IncludeEndDay = false)
 
 		short DifferenceBetweenTwoYears = CurrentDate.Year - DateOfBirth.Year;
 
-		int AgeInDays = 0;
-		AgeInDays += isLeapYear(DateOfBirth.Year) ? 366 : 365;
-		DateOfBirth.Year++;
+		if (DifferenceBetweenTwoYears != 0)
+		{
+			AgeInDays += isLeapYear(DateOfBirth.Year) ? 366 : 365;
+			DateOfBirth.Year++;
+		}
 
 		while (DateOfBirth.Year <= CurrentDate.Year - 1)
 		{
