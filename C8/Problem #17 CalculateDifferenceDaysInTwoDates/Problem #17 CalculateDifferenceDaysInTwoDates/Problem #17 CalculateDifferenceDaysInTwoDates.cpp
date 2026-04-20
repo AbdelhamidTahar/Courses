@@ -60,15 +60,6 @@ struct stDate
 	short Day;
 };
 
-int CalculateDifferenceDaysIntwoDates(stDate Date1, stDate Date2, bool IncludingEndDays = false)
-{
-	short DaysInDate1 = NumberOfDaysFromTheBeginingOfTheYear(Date1.Day, Date1.Month, Date1.Year);
-	short DaysInDate2 = NumberOfDaysFromTheBeginingOfTheYear(Date2.Day, Date2.Month, Date2.Year);
-	
-	return (DaysInDate1 < DaysInDate2) ? ((IncludingEndDays == false) ? DaysInDate2 - DaysInDate1 : DaysInDate2 + 1 - DaysInDate1) : -1;
-
-}
-
 stDate ReadFullDate()
 {
 	stDate Date;
@@ -78,6 +69,61 @@ stDate ReadFullDate()
 	return Date;
 }
 
+bool IsLastDayInMonth(stDate Date)
+{
+	return Date.Day == NumberOfDaysInAMonth(Date.Month, Date.Year);
+}
+
+bool IsLastMonthInYear(short Month)
+{
+	return Month == 12;
+}
+
+stDate IncreaseDateByOneDay(stDate Date)
+{
+	if (IsLastDayInMonth(Date))
+	{
+		if (IsLastMonthInYear(Date.Month))
+		{
+			Date.Month = 1;
+			Date.Day = 1;
+			Date.Year++;
+		}
+		else
+		{
+			Date.Day = 1;
+			Date.Month++;
+		}
+	}
+	else
+	{
+		Date.Day++;
+	}
+	return Date;
+}
+
+bool IsDate1BeforeDate2(stDate Date1, stDate Date2)
+{
+
+	return (Date1.Year < Date2.Year) ? true : ((Date1.Year ==
+		Date2.Year) ? (Date1.Month < Date2.Month ? true : (Date1.Month ==
+			Date2.Month ? Date1.Day < Date2.Day : false)) : false);
+};
+
+
+int GetDifferenceInDays(stDate Date1, stDate Date2, bool
+	IncludeEndDay = false)
+{
+	int Days = 0;
+	while (IsDate1BeforeDate2(Date1, Date2))
+	{
+		Days++;
+		Date1 = IncreaseDateByOneDay(Date1);
+	}
+	return IncludeEndDay ? ++Days : Days;
+}
+
+
 
 int main()
 {
@@ -85,8 +131,8 @@ int main()
 	Date1 = ReadFullDate();
 	Date2 = ReadFullDate();
 
-	printf("Difference is : %d  Day(s).\n", CalculateDifferenceDaysIntwoDates(Date1,Date2));
-	printf("Difference (Including End Day) is : %d  Day(s).\n", CalculateDifferenceDaysIntwoDates(Date1, Date2,true));
+	printf("Difference is : %d  Day(s).\n", GetDifferenceInDays(Date1,Date2));
+	printf("Difference (Including End Day) is : %d  Day(s).\n", GetDifferenceInDays(Date1, Date2,true));
 
 	return 0;
 }
