@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{e705c788-64ea-496f-b216-930325e2222a}</ProjectGuid>
-    <RootNamespace>Problem20to32</RootNamespace>
+    <ProjectGuid>{ab349720-6afb-4b19-a18f-c8effb0faa19}</ProjectGuid>
+    <RootNamespace>Problem20ToProblem32</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Problem #20 to #32.cpp" />
+    <ClCompile Include="Problem #20 To Problem #32.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

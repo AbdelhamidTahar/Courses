@@ -153,7 +153,7 @@ stDate IncreaseDateByOneMonth(stDate Date)
 			Date.Month = 1;
 		}
 	}
-	else if(IsFirstMonthInYear(Date.Month))
+	else if (IsFirstMonthInYear(Date.Month))
 	{
 		short MaxNumberOfdaysInMonth2 = NumberOfDaysInAMonth(2, Date.Year);
 		if (Date.Day > MaxNumberOfdaysInMonth2)
@@ -190,7 +190,7 @@ stDate IncreaseDateByXMonths(stDate Date, short NumberOfNonths)
 
 stDate IncreaseDateByOneYear(stDate Date)
 {
-	
+
 	if (Date.Month == 2)
 	{
 		if (IsLastDayInMonth(Date))
@@ -203,10 +203,10 @@ stDate IncreaseDateByOneYear(stDate Date)
 	}
 	else
 		Date.Year++;
-	
+
 	return Date;
 }
-       
+
 stDate IncreaseDateByXYears(stDate Date, short NumberOfYears)
 {
 	for (short i = 1; i <= NumberOfYears; i++)
@@ -261,7 +261,7 @@ int main()
 	short HowManyAdd = 0;
 
 	Date1 = ReadFullDate();
-	
+
 	cout << "\n\nDate After:\n\n";
 
 
@@ -275,7 +275,7 @@ int main()
 	Date1 = IncreaseDateByOneWeek(Date1);
 	printf("03-Adding One Week is: %d/%d/%d\n", Date1.Day, Date1.Month, Date1.Year);
 
-	
+
 	Date1 = IncreaseDateByXWeeks(Date1, HowManyAdd);
 	printf("04-Adding %d Weeks is: %d/%d/%d\n", HowManyAdd, Date1.Day, Date1.Month, Date1.Year);
 
