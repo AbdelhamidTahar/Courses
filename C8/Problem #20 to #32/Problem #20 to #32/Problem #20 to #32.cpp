@@ -190,9 +190,21 @@ stDate IncreaseDateByXMonths(stDate Date, short NumberOfNonths)
 
 stDate IncreaseDateByOneYear(stDate Date)
 {
-	Date.Year++;
+	
+	if (Date.Month == 2)
+	{
+		if (IsLastDayInMonth(Date))
+		{
+			Date.Year++;
+			Date.Day = NumberOfDaysInAMonth(2, Date.Year);
+		}
+		else
+			Date.Year++;
+	}
+	else
+		Date.Year++;
+	
 	return Date;
-
 }
        
 stDate IncreaseDateByXYears(stDate Date, short NumberOfYears)
