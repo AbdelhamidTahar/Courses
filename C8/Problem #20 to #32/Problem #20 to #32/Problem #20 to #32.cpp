@@ -181,16 +181,132 @@ stDate IncreaseDateByOneMonth(stDate Date)
 	return Date;
 }
 
+stDate IncreaseDateByXMonths(stDate Date, short NumberOfNonths)
+{
+	for (short i = 1; i <= NumberOfNonths; i++)
+		Date = IncreaseDateByOneMonth(Date);
+	return Date;
+}
+
+stDate IncreaseDateByOneYear(stDate Date)
+{
+	Date.Year++;
+	return Date;
+
+}
+       
+stDate IncreaseDateByXYears(stDate Date, short NumberOfYears)
+{
+	for (short i = 1; i <= NumberOfYears; i++)
+		Date = IncreaseDateByOneYear(Date);
+	return Date;
+}
+
+stDate IncreaseDateByXYearsFaster(stDate Date, short NumberOfYears)
+{
+	Date.Year += NumberOfYears;
+	return Date;
+}
+
+stDate IncreaseDateByOneDecade(stDate Date)
+{
+	Date.Year += 10;
+	return Date;
+
+}
+
+stDate IncreaseDateByXDecades(stDate Date, short NumberOfDecades)
+{
+	for (short i = 1; i <= NumberOfDecades; i++)
+		Date = IncreaseDateByOneDecade(Date);
+	return Date;
+}
+
+stDate IncreaseDateByXDecadesFaster(stDate Date, short NumberOfDecades)
+{
+	Date.Year += (NumberOfDecades * 10);
+	return Date;
+}
+
+stDate IncreaseDateByOneCentury(stDate Date)
+{
+	Date.Year += 100;
+	return Date;
+
+}
+
+stDate IncreaseDateByOneMillennium(stDate Date)
+{
+	Date.Year += 1000;
+	return Date;
+
+}
+
 
 int main()
 {
 	stDate Date1;
+	short HowManyAdd = 0;
+
 	Date1 = ReadFullDate();
+	
+	cout << "Date After:\n\n";
+
 
 	Date1 = IncreaseDateByOneDay(Date1);
-	printf("01-Adding One day is: %d/%d/%d", Date1.Day, Date1.Month, Date1.Year);
+	printf("01-Adding One day is: %d/%d/%d\n", Date1.Day, Date1.Month, Date1.Year);
+
+	HowManyAdd = 10;
+	Date1 = IncreaseDateByXDays(Date1, HowManyAdd);
+	printf("01-Adding %d days is: %d/%d/%d\n", HowManyAdd, Date1.Day, Date1.Month, Date1.Year);
+
+	Date1 = IncreaseDateByOneWeek(Date1);
+	printf("01-Adding One Week is: %d/%d/%d\n", Date1.Day, Date1.Month, Date1.Year);
+
+	
+	Date1 = IncreaseDateByXWeeks(Date1, HowManyAdd);
+	printf("01-Adding %d Weeks is: %d/%d/%d\n", HowManyAdd, Date1.Day, Date1.Month, Date1.Year);
 
 
+	Date1 = IncreaseDateByOneMonth(Date1);
+	printf("01-Adding One Month is: %d/%d/%d\n", Date1.Day, Date1.Month, Date1.Year);
+
+
+	HowManyAdd = 5;
+	Date1 = IncreaseDateByXMonths(Date1, HowManyAdd);
+	printf("01-Adding %d Months is: %d/%d/%d\n", HowManyAdd, Date1.Day, Date1.Month, Date1.Year);
+
+
+	Date1 = IncreaseDateByOneYear(Date1);
+	printf("01-Adding One Year is: %d/%d/%d\n", Date1.Day, Date1.Month, Date1.Year);
+
+
+	HowManyAdd = 10;
+	Date1 = IncreaseDateByXYears(Date1, HowManyAdd);
+	printf("01-Adding %d Years is: %d/%d/%d\n", HowManyAdd, Date1.Day, Date1.Month, Date1.Year);
+
+	Date1 = IncreaseDateByXYearsFaster(Date1, HowManyAdd);
+	printf("01-Adding %d Years (Faster) is: %d/%d/%d\n", HowManyAdd, Date1.Day, Date1.Month, Date1.Year);
+
+
+	Date1 = IncreaseDateByOneDecade(Date1);
+	printf("01-Adding One Decade is: %d/%d/%d\n", Date1.Day, Date1.Month, Date1.Year);
+
+
+	Date1 = IncreaseDateByXDecades(Date1, HowManyAdd);
+	printf("01-Adding One Decades is: %d/%d/%d\n", Date1.Day, Date1.Month, Date1.Year);
+
+
+	Date1 = IncreaseDateByXDecadesFaster(Date1, HowManyAdd);
+	printf("01-Adding One Decades (Faster) is: %d/%d/%d\n", Date1.Day, Date1.Month, Date1.Year);
+
+
+	Date1 = IncreaseDateByOneCentury(Date1);
+	printf("01-Adding One Century is: %d/%d/%d\n", Date1.Day, Date1.Month, Date1.Year);
+
+
+	Date1 = IncreaseDateByOneMillennium(Date1);
+	printf("01-Adding One Millennium is: %d/%d/%d\n", Date1.Day, Date1.Month, Date1.Year);
 
 	return 0;
 }
