@@ -69,6 +69,11 @@ bool IsLastMonthInYear(short Month)
 	return Month == 12;
 }
 
+bool IsFirstMonthInYear(short Month)
+{
+	return Month == 1;
+}
+
 stDate IncreaseDateByOneDay(stDate Date)
 {
 	if (IsLastDayInMonth(Date))
@@ -136,12 +141,48 @@ stDate IncreaseDateByOneMonth(stDate Date)
 {
 	if (IsLastMonthInYear(Date.Month))
 	{
-
+		short NumberOfdays = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		if (Date.Day == NumberOfdays)
+		{
+			Date.Year++;
+			Date.Month = 1;
+			Date.Day = 31;
+		}
+		else
+		{
+			Date.Year++;
+			Date.Month = 1;
+		}
+	}
+	else if(IsFirstMonthInYear(Date.Month))
+	{
+		short NumberOfdays = NumberOfDaysInAMonth(2, Date.Year);
+		if (Date.Day > NumberOfdays)
+		{
+			Date.Month++;
+			Date.Day = NumberOfdays;
+		}
+		else
+		{
+			Date.Month++;
+		}
 	}
 	else
 	{
-
+		if (IsLastDayInMonth(Date))
+		{
+			Date.Month++;
+			Date.Day = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		}
+		else
+		{
+			Date.Month++;
+		}
 	}
+
+	
+
+
 }
 
 
