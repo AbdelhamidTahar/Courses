@@ -141,8 +141,7 @@ stDate IncreaseDateByOneMonth(stDate Date)
 {
 	if (IsLastMonthInYear(Date.Month))
 	{
-		short NumberOfdays = NumberOfDaysInAMonth(Date.Month, Date.Year);
-		if (Date.Day == NumberOfdays)
+		if (IsLastDayInMonth(Date))
 		{
 			Date.Year++;
 			Date.Month = 1;
@@ -156,11 +155,11 @@ stDate IncreaseDateByOneMonth(stDate Date)
 	}
 	else if(IsFirstMonthInYear(Date.Month))
 	{
-		short NumberOfdays = NumberOfDaysInAMonth(2, Date.Year);
-		if (Date.Day > NumberOfdays)
+		short MaxNumberOfdaysInMonth2 = NumberOfDaysInAMonth(2, Date.Year);
+		if (Date.Day > MaxNumberOfdaysInMonth2)
 		{
 			Date.Month++;
-			Date.Day = NumberOfdays;
+			Date.Day = MaxNumberOfdaysInMonth2;
 		}
 		else
 		{
@@ -179,10 +178,7 @@ stDate IncreaseDateByOneMonth(stDate Date)
 			Date.Month++;
 		}
 	}
-
-	
-
-
+	return Date;
 }
 
 
