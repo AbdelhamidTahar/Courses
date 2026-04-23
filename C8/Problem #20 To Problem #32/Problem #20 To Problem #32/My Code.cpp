@@ -81,14 +81,13 @@ stDate IncreaseDateByOneDay(stDate Date)
 		if (IsLastMonthInYear(Date.Month))
 		{
 			Date.Month = 1;
-			Date.Day = 1;
 			Date.Year++;
 		}
 		else
 		{
-			Date.Day = 1;
 			Date.Month++;
 		}
+		Date.Day = 1;
 	}
 	else
 	{
@@ -155,15 +154,11 @@ stDate IncreaseDateByOneMonth(stDate Date)
 	}
 	else if (IsFirstMonthInYear(Date.Month))
 	{
-		short MaxNumberOfdaysInMonth2 = NumberOfDaysInAMonth(2, Date.Year);
+		Date.Month++;
+		short MaxNumberOfdaysInMonth2 = NumberOfDaysInAMonth(Date.Month, Date.Year);
 		if (Date.Day > MaxNumberOfdaysInMonth2)
 		{
-			Date.Month++;
 			Date.Day = MaxNumberOfdaysInMonth2;
-		}
-		else
-		{
-			Date.Month++;
 		}
 	}
 	else
@@ -197,12 +192,10 @@ stDate IncreaseDateByOneYear(stDate Date)
 		{
 			Date.Year++;
 			Date.Day = NumberOfDaysInAMonth(2, Date.Year);
-		}
-		else
-			Date.Year++;
+			return Date;
+		}	
 	}
-	else
-		Date.Year++;
+	Date.Year++;
 
 	return Date;
 }
@@ -214,14 +207,95 @@ stDate IncreaseDateByXYears(stDate Date, short NumberOfYears)
 	return Date;
 }
 
+enum eIncreaseDateType { eXYearsFaster = 1, eOneDecade = 2, eXDecadesFaster = 3, OneCentury = 4, eOneMillennium };
+
+stDate HelpInMonth2(stDate Date, eIncreaseDateType IncreaseDateType, short NumberToAdd = 0)
+{
+
+		if (IsLastDayInMonth(Date))
+		{
+			switch (IncreaseDateType)
+			{
+			case IncreaseDateType::eXYearsFaster:
+			{
+				Date.Year += NumberToAdd;
+				Date.Day = NumberOfDaysInAMonth(Date.Month, Date.Year);
+				return Date;
+			}
+			case IncreaseDateType::eOneDecade:
+			{
+				Date.Year += 10;
+				Date.Day = NumberOfDaysInAMonth(Date.Month, Date.Year);
+				return Date;
+			}
+			case IncreaseDateType::eXDecadesFaster:
+			{
+				Date.Year += (NumberToAdd * 10);
+				Date.Day = NumberOfDaysInAMonth(Date.Month, Date.Year);
+				return Date;
+			}
+			case IncreaseDateType::OneCentury:
+			{
+				Date.Year += 100;
+				Date.Day = NumberOfDaysInAMonth(Date.Month, Date.Year);
+				return Date;
+			}
+			case IncreaseDateType::eOneMillennium:
+			{
+				Date.Year += 1000;
+				Date.Day = NumberOfDaysInAMonth(Date.Month, Date.Year);
+				return Date;
+			}
+			}
+		}
+		else
+		{
+			switch (IncreaseDateType)
+			{
+			case IncreaseDateType::eXYearsFaster:
+			{
+				Date.Year += NumberToAdd;
+			}
+			case IncreaseDateType::eOneDecade:
+			{
+				Date.Year += 10;
+			}
+			case IncreaseDateType::eXDecadesFaster:
+			{
+				Date.Year += (NumberToAdd * 10);
+			}
+			case IncreaseDateType::OneCentury:
+			{
+				Date.Year += 100;
+			}
+			case IncreaseDateType::eOneMillennium:
+			{
+				Date.Year += 1000;
+			}
+			}
+		}
+
+		return Date;
+
+}
+
 stDate IncreaseDateByXYearsFaster(stDate Date, short NumberOfYears)
 {
+	if (Date.Month == 2)
+	{
+		return HelpInMonth2(Date, eIncreaseDateType::eXYearsFaster, NumberOfYears);
+	}
 	Date.Year += NumberOfYears;
 	return Date;
 }
 
 stDate IncreaseDateByOneDecade(stDate Date)
 {
+	if (Date.Month == 2)
+	{
+		return HelpInMonth2(Date, eIncreaseDateType::eOneDecade);
+	}
+
 	Date.Year += 10;
 	return Date;
 
@@ -236,12 +310,20 @@ stDate IncreaseDateByXDecades(stDate Date, short NumberOfDecades)
 
 stDate IncreaseDateByXDecadesFaster(stDate Date, short NumberOfDecades)
 {
+	if (Date.Month == 2)
+	{
+		return HelpInMonth2(Date, eIncreaseDateType::eXDecadesFaster, NumberOfDecades);
+	}
 	Date.Year += (NumberOfDecades * 10);
 	return Date;
 }
 
 stDate IncreaseDateByOneCentury(stDate Date)
 {
+	if (Date.Month == 2)
+	{
+		return HelpInMonth2(Date, eIncreaseDateType::OneCentury);
+	}
 	Date.Year += 100;
 	return Date;
 
@@ -249,6 +331,10 @@ stDate IncreaseDateByOneCentury(stDate Date)
 
 stDate IncreaseDateByOneMillennium(stDate Date)
 {
+	if (Date.Month == 2)
+	{
+		return HelpInMonth2(Date, eIncreaseDateType::OneMillennium);
+	}
 	Date.Year += 1000;
 	return Date;
 
