@@ -176,7 +176,7 @@ stDate IncreaseDateByOneMonth(stDate Date)
 	return Date;
 }
 
-stDate IncreaseDateByXMonths(stDate Date, short NumberOfNonths)
+stDate IncreaseDateByXMonths(stDate Date, short NumberOfMonths)
 {
 	for (short i = 1; i <= NumberOfNonths; i++)
 		Date = IncreaseDateByOneMonth(Date);
