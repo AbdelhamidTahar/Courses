@@ -255,22 +255,27 @@ stDate HelpInMonth2(stDate Date, eIncreaseDateType IncreaseDateType, short Numbe
 			case IncreaseDateType::eXYearsFaster:
 			{
 				Date.Year += NumberToAdd;
+				break;
 			}
 			case IncreaseDateType::eOneDecade:
 			{
 				Date.Year += 10;
+				break;
 			}
 			case IncreaseDateType::eXDecadesFaster:
 			{
 				Date.Year += (NumberToAdd * 10);
+				break;
 			}
 			case IncreaseDateType::OneCentury:
 			{
 				Date.Year += 100;
+				break;
 			}
 			case IncreaseDateType::eOneMillennium:
 			{
 				Date.Year += 1000;
+				break;
 			}
 			}
 		}
