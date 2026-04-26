@@ -18,12 +18,12 @@ short NumberOfDaysInAMonth(short Month, short Year)
 	if (Month < 1 || Month>12)
 		return 0;
 	int days[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
-	return (Month == 2) ? (isLeapYear(Year) ? 29 : 28) :days[Month - 1];
+	return (Month == 2) ? (isLeapYear(Year) ? 29 : 28) : days[Month - 1];
 }
 
 bool IsLastDayInMonth(stDate Date)
 {
-	return (Date.Day == NumberOfDaysInAMonth(Date.Month,Date.Year));
+	return (Date.Day == NumberOfDaysInAMonth(Date.Month, Date.Year));
 }
 
 bool IsLastMonthInYear(short Month)
@@ -33,23 +33,34 @@ bool IsLastMonthInYear(short Month)
 
 stDate DecreaseDateByOneDay(stDate Date)
 {
-	if (IsLastDayInMonth(Date))
+
+	if (Date.Day != 1)
 	{
-		if (IsLastMonthInYear(Date.Month))
-		{
-			Date.Month = 1;
-			Date.Day = 1;
-			Date.Year++;
-		}
-		else
-		{
-			Date.Day = 1;
-			Date.Month++;
-		}
+		Date.Day--;
 	}
 	else
 	{
-		Date.Day++;
+		if (Date.Month == 1)
+		{
+			Date.Year--;
+			Date.Month = 12;
+			Date.Day = 31;
+		}
+		else
+		{
+			Date.Month--;
+			Date.Day = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		}
+	}
+
+	return Date;
+}
+
+stDate DecreaseDateByXDays(short Days, stDate Date)
+{
+	for (short i = 1; i <= Days; i++)
+	{
+		Date = DecreaseDateByOneDay(Date);
 	}
 	return Date;
 }
@@ -74,35 +85,22 @@ stDate DecreaseDateByXWeeks(short Weeks, stDate Date)
 
 stDate DecreaseDateByOneMonth(stDate Date)
 {
-	if (Date.Month == 12)
+	if (Date.Month == 1)
 	{
-		Date.Month = 1;
-		Date.Year++;
+		Date.Year--;
+		Date.Month = 12;
 	}
-	else
+	else 
 	{
-		Date.Month++;
+		Date.Month--;
+		short NumberOfDays = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		Date.Day = (Date.Day > NumberOfDays) ? NumberOfDays : Date.Day;
 	}
 
-	    //last check day in date should not exceed max days in the current month
-		// example if date is 31/1/2022 increasing one month should not be 31 / 2 / 2022, it should
-		// be 28/2/2022
-	short NumberOfDaysInCurrentMonth = NumberOfDaysInAMonth(Date.Month, Date.Year);
-	if (Date.Day > NumberOfDaysInCurrentMonth)
-	{
-		Date.Day = NumberOfDaysInCurrentMonth;
-	}
+
 	return Date;
 }
 
-stDate DecreaseDateByXDays(short Days, stDate Date)
-{
-	for (short i = 1; i <= Days; i++)
-	{
-		Date = DecreaseDateByOneDay(Date);
-	}
-	return Date;
-}
 
 stDate DecreaseDateByXMonths(short Months, stDate Date)
 {
@@ -115,7 +113,13 @@ stDate DecreaseDateByXMonths(short Months, stDate Date)
 
 stDate DecreaseDateByOneYear(stDate Date)
 {
-	Date.Year++;
+	Date.Year--;
+	if(Date.Month == 2)
+	{
+		short NumberOfdays = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		Date.Day = (Date.Day > NumberOfdays) ? NumberOfdays : Date.Day;
+	}
+
 	return Date;
 }
 
@@ -130,43 +134,72 @@ stDate DecreaseDateByXYears(short Years, stDate Date)
 
 stDate DecreaseDateByXYearsFaster(short Years, stDate Date)
 {
-	Date.Year += Years;
+	Date.Year -= Years;
+	if (Date.Month == 2)
+	{
+		short NumberOfdays = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		Date.Day = (Date.Day > NumberOfdays) ? NumberOfdays : Date.Day;
+	}
+
 	return Date;
 }
 
 stDate DecreaseDateByOneDecade(stDate Date)
 {
-	//Period of 10 years
-	Date.Year += 10;
+	
+	Date.Year -= 10;
+	if (Date.Month == 2)
+	{
+		short NumberOfdays = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		Date.Day = (Date.Day > NumberOfdays) ? NumberOfdays : Date.Day;
+	}
+
 	return Date;
 }
 
 stDate DecreaseDateByXDecades(short Decade, stDate Date)
 {
-	for (short i = 1; i <= Decade * 10; i++)
+	for (short i = 1; i <= Decade ; i++)
 	{
-		Date = DecreaseDateByOneYear(Date);
+		Date = DecreaseDateByOneDecade(Date);
 	}
 	return Date;
 }
 
 stDate DecreaseDateByXDecadesFaster(short Decade, stDate Date)
 {
-	Date.Year += Decade * 10;
+	Date.Year -= Decade * 10;
+	if (Date.Month == 2)
+	{
+		short NumberOfdays = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		Date.Day = (Date.Day > NumberOfdays) ? NumberOfdays : Date.Day;
+	}
+
 	return Date;
 }
 
 stDate DecreaseDateByOneCentury(stDate Date)
 {
-	//Period of 100 years
-	Date.Year += 100;
+
+	Date.Year -= 100;
+	if (Date.Month == 2)
+	{
+		short NumberOfdays = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		Date.Day = (Date.Day > NumberOfdays) ? NumberOfdays : Date.Day;
+	}
+
 	return Date;
 }
 
 stDate DecreaseDateByOneMillennium(stDate Date)
 {
-	//Period of 1000 years
-	Date.Year += 1000;
+	Date.Year -= 1000;
+	if (Date.Month == 2)
+	{
+		short NumberOfdays = NumberOfDaysInAMonth(Date.Month, Date.Year);
+		Date.Day = (Date.Day > NumberOfdays) ? NumberOfdays : Date.Day;
+	}
+
 	return Date;
 }
 
@@ -246,7 +279,7 @@ int main()
 	cout << "\n10-Substracting one Decade is: "
 		<< Date1.Day << "/" << Date1.Month << "/" << Date1.Year;
 
-		Date1 = DecreaseDateByXDecades(10, Date1);
+	Date1 = DecreaseDateByXDecades(10, Date1);
 	cout << "\n11-Substracting 10 Decades is: "
 		<< Date1.Day << "/" << Date1.Month << "/" << Date1.Year;
 
