@@ -78,6 +78,11 @@ bool IsWeekEnd(stDate Date)
 	return (DayIndex == 5 || DayIndex == 6);
 }
 
+bool IsBusinessDay(stDate Date)
+{
+	return !IsWeekEnd(Date);
+}
+
 bool isLeapYear(short Year)
 {
 	return (Year % 4 == 0 && Year % 100 != 0) || (Year % 400 == 0);
@@ -126,38 +131,35 @@ stDate IncreaseDateByOneDay(stDate Date)
 	return Date;
 }
 
-short ActucalVacatioDay(stDate VacationStartDate,stDate VacationEndDate)
+short CalculateVacationDays(stDate DateFrom, stDate DateTo)
 {
-	short ActucalDays = 0;
-	while (IsDate1BeforeDate2(VacationStartDate, VacationEndDate))
+	short DaysCount = 0;
+	while (IsDate1BeforeDate2(DateFrom, DateTo))
 	{
-		if (!IsWeekEnd(VacationStartDate))
-			ActucalDays++;
-		VacationStartDate = IncreaseDateByOneDay(VacationStartDate);
+		if (IsBusinessDay(DateFrom))
+			DaysCount++;
+		DateFrom = IncreaseDateByOneDay(DateFrom);
 	}
-	return ActucalDays;
+	return DaysCount;
 }
 
 int main()
 {
-	stDate VacationStartDate, VacationEndDate;
+	cout << "\nVacation Starts: ";
+	stDate DateFrom = ReadFullDate();
+	cout << "\nVacation Ends: ";
+	stDate DateTo = ReadFullDate();
 
-	cout << "Vacation Starts";
-	VacationStartDate = ReadFullDate();
-
-	cout << "\n\nVacation Ends";
-	VacationEndDate = ReadFullDate();
-
-	cout << "\nVacation From: " << DayShortName(DayOfWeekOrder(VacationStartDate))
-		<< ", " << VacationStartDate.Day << "/" << VacationStartDate.Month << "/" << VacationStartDate.Year
+	cout << "\nVacation From: " << DayShortName(DayOfWeekOrder(DateFrom))
+		<< ", " << DateFrom.Day << "/" << DateFrom.Month << "/" << DateFrom.Year
 		<< "\n";
 
-	cout << "Vacation From: " << DayShortName(DayOfWeekOrder(VacationEndDate))
-		<< ", " << VacationEndDate.Day << "/" << VacationEndDate.Month << "/" << VacationEndDate.Year
+	cout << "Vacation From: " << DayShortName(DayOfWeekOrder(DateTo))
+		<< ", " << DateTo.Day << "/" << DateTo.Month << "/" << DateTo.Year
 		<< "\n";
 
 
-	cout << "\n\nActucal Vacation Days is: " << ActucalVacatioDay(VacationStartDate, VacationEndDate);
+	cout << "\n\nActucal Vacation Days is: " << CalculateVacationDays(DateFrom, DateTo);
 
 	return 0;
 }
