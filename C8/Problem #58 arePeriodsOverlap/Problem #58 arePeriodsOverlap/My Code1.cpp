@@ -161,8 +161,11 @@ void SwapDates(stDate& Date1, stDate& Date2)
 
 bool IsPeriodsOverlap(stPeriod Period1, stPeriod Period2)
 {
-	if (CompareDates(Period1.StartDate, Period1.EndDate) != enDateCompare::After)
-		SwapDates(Period1.StartDate, Period1.EndDate);
+	if (CompareDates(Period1.StartDate, Periode2.StartDate) != enDateCompare::Before)
+	{
+		SwapDates(Period1.StartDate, Period2.StartDate);
+		SwapDates(Period1.EndDate, Period2.EndDate);
+	}
 
 	while (CompareDates(Period1.StartDate, Period1.EndDate) != enDateCompare::After)
 	{
