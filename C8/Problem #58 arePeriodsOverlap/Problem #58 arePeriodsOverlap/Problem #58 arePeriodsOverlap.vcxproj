@@ -127,8 +127,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="My Code1.cpp" />
-    <ClCompile Include="My Code2.cpp" />
     <ClCompile Include="Problem #58 arePeriodsOverlap.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

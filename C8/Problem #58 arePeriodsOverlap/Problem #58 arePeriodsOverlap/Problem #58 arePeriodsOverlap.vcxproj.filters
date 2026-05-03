@@ -18,11 +18,5 @@
     <ClCompile Include="Problem #58 arePeriodsOverlap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="My Code1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="My Code2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
