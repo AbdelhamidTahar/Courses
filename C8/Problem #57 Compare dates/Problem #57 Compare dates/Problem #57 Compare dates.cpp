@@ -60,12 +60,19 @@ bool IsDate1AfterDate2(stDate Date1, stDate Date2)
 	return (!IsDate1BeforeDate2(Date1, Date2) && !IsDate1EqualDate2(Date1, Date2));
 }
 
-enum eDateComparisonResult { Befor = -1, Equal = 0, After = 1 };
+enum enDateCompare { Before = -1, Equal = 0, After = 1 };
 
-eDateComparisonResult compareTwoDates(stDate Date1, stDate Date2)
+enDateCompare CompareDates(stDate Date1, stDate Date2)
 {
-	return IsDate1BeforeDate2(Date1, Date2) ? eDateComparisonResult::Befor 
-		: (IsDate1EqualDate2(Date1, Date2) ? eDateComparisonResult::Equal : eDateComparisonResult::After);
+	if (IsDate1BeforeDate2(Date1, Date2))
+		return enDateCompare::Before;
+	if (IsDate1EqualDate2(Date1, Date2))
+		return enDateCompare::Equal;
+	/* if (IsDate1AfterDate2(Date1,Date2))
+	return enDateCompare::After;*/
+
+	//this is faster
+	return enDateCompare::After;
 }
 
 int main()
@@ -75,7 +82,7 @@ int main()
 	Date1 = ReadFullDate();
 	Date2 = ReadFullDate();
 
-	cout << "Compare Result = " << compareTwoDates(Date1, Date2);
+	cout << "Compare Result = " << CompareDates(Date1, Date2);
 
 	return 0;
 }
