@@ -145,9 +145,25 @@ stDate IncreaseDateByOneDay(stDate Date)
 	return Date;
 }
 
+void SwapDates(stDate& Date1, stDate& Date2)
+{
+	stDate TempDate;
+	TempDate.Year = Date1.Year;
+	TempDate.Month = Date1.Month;
+	TempDate.Day = Date1.Day;
+	Date1.Year = Date2.Year;
+	Date1.Month = Date2.Month;
+	Date1.Day = Date2.Day;
+	Date2.Year = TempDate.Year;
+	Date2.Month = TempDate.Month;
+	Date2.Day = TempDate.Day;
+}
 
 bool IsPeriodsOverlap(stPeriod Period1, stPeriod Period2)
 {
+	if (CompareDates(Period1.StartDate, Period1.EndDate) != enDateCompare::After)
+		SwapDates(Period1.StartDate, Period1.EndDate);
+
 	while (CompareDates(Period1.StartDate, Period1.EndDate) != enDateCompare::After)
 	{
 		if (CompareDates(Period1.StartDate, Period2.StartDate) == enDateCompare::Equal)
