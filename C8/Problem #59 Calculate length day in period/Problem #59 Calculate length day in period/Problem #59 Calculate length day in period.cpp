@@ -172,7 +172,7 @@ int main()
 	stPeriod Period1 = ReadPeriod();
 
 	cout << "Period Length is :"<< CalculatePeriodLengthInDays(Period1);
-	cout << "\nPeriod Length (Include End Date) is :" <<  CalculatePeriodLengthInDays(Period1);
+	cout << "\nPeriod Length (Include End Date) is :" <<  CalculatePeriodLengthInDays(Period1,true);
 
 	return 0;
 }
