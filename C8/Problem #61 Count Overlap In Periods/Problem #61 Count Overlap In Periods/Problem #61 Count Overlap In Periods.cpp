@@ -153,7 +153,8 @@ int CalculateOverlapDaysInPeriods(stPeriod Period1, stPeriod Period2)
         SwapPeriods(Period1, Period2);
 
     int Count = 0;
-    while (isDateInPeriod(Period2.StartDate, Period1))
+    while (isDateInPeriod(Period2.StartDate, Period1) && 
+        !(CompareDates(Period2.StartDate, Period2.EndDate) == enDateCompare::After))
     {
         Count++;
         Period2.StartDate = IncreaseDateByOneDay(Period2.StartDate);
