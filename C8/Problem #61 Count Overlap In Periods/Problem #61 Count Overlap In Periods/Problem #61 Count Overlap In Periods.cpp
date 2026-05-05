@@ -166,6 +166,7 @@ int main()
     cout << "\nEnter Period 1:";
     stPeriod Period1 = ReadPeriod();
 
+
     cout << "\nEnter Period 2:";
     stPeriod Period2 = ReadPeriod();
 
