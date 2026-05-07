@@ -18,8 +18,5 @@
     <ClCompile Include="Problem #63 Converto date string to date.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="My Code.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

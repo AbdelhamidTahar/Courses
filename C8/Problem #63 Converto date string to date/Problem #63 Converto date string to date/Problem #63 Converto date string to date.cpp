@@ -1,63 +1,81 @@
 #include <iostream>
-#include <cctype>
 #include <string>
+#include <vector>
 using namespace std;
 
 struct stDate
 {
-	short Day;
-	short Month;
-	short Year;
+    short Year;
+    short Month;
+    short Day;
 };
 
-string ReadDateString()
+vector<string> SplitString(string S1, string Delim)
 {
-	string DateString;
-	cout << "Please Enter Date dd/mm/yyyy? ";
-	cin >> DateString;
-	return DateString;
+    vector<string> vString;
+    short pos = 0;
+    string sWord; // define a string variable
+
+    // use find() function to get the position of the delimiters
+    while ((pos = S1.find(Delim)) != std::string::npos)
+    {
+        sWord = S1.substr(0, pos); // store the word
+        if (sWord != "")
+        {
+            vString.push_back(sWord);
+        }
+        S1.erase(0, pos + Delim.length());
+    }
+
+    if (S1 != "")
+    {
+        vString.push_back(S1); // it adds last word of the string.
+    }
+
+    return vString;
 }
 
-stDate ConvertFromDateStringToDateStruct(string DateString, string Delim)
+// ProgrammingAdvices.com
+// © Copyright 2022
+// Problem # 64 and 65/4 Solution Using C++
+
+string DateToString(stDate Date)
 {
-	stDate Date;
-	short LengthDelim = Delim.length();
-	short Pos = 0;
-
-	//cut Day.
-	if ((Pos = DateString.find(Delim)) != std::string::npos)
-	{
-		Date.Day = stoi(DateString.substr(0, Pos));
-		DateString = DateString.erase(0, Pos + LengthDelim);
-	}
-
-	//cut Month
-	if ((Pos = DateString.find(Delim)) != std::string::npos)
-	{
-		Date.Month = stoi(DateString.substr(0, Pos));
-		DateString = DateString.erase(0, Pos + LengthDelim);
-	}
-	//Remind is Year.
-	Date.Year = stoi(DateString);
-
-	return Date;
+    return to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
 }
 
-string ConvertFromDateStructToDateString(stDate Date, string Delim)
+stDate StringToDate(string DateString)
 {
-	return to_string(Date.Day) + Delim + to_string(Date.Month) + Delim + to_string(Date.Year);
+    stDate Date;
+    vector<string> vDate;
+    vDate = SplitString(DateString, "/");
+
+    Date.Day = stoi(vDate[0]);
+    Date.Month = stoi(vDate[1]);
+    Date.Year = stoi(vDate[2]);
+
+    return Date;
+}
+
+string ReadStringDate(string Message)
+{
+    string DateString;
+    cout << Message;
+    getline(cin >> ws, DateString);
+    return DateString;
 }
 
 int main()
 {
-	string DateString = ReadDateString();
+    string DateString = ReadStringDate("\nPlease Enter Date dd/mm/yyyy? ");
+    stDate Date = StringToDate(DateString);
 
-	stDate Date = ConvertFromDateStringToDateStruct(DateString, "/");
-	cout << "\nDay: " << Date.Day;
-	cout << "\nMonth: " << Date.Month;
-	cout << "\nYear: " << Date.Year;
+    cout << "\nDay:" << Date.Day << endl;
+    cout << "Month:" << Date.Month << endl;
+    cout << "Year:" << Date.Year << endl;
 
-	cout << "\n\nYou entered: " << ConvertFromDateStructToDateString(Date, "/");
+    cout << "\nYou Entered: " << DateToString(Date) << "\n";
 
-	return 0;
+    system("pause>0");
+    return 0;
 }
