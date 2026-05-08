@@ -24,7 +24,8 @@ vector<string> SplitString(string S1, string Delim)
         {
             vString.push_back(sWord);
         }
-        S1.erase(0, pos + Delim.length());
+        S1.erase(0, pos + Delim.length()); /* erase() until
+        positon and move to next word. */
     }
 
     if (S1 != "")
@@ -36,12 +37,43 @@ vector<string> SplitString(string S1, string Delim)
 }
 
 
+string ReplaceWordInString(string S1, string StringToReplace, string sRepalceTo)
+{
+    short pos = S1.find(StringToReplace);
+    while (pos != std::string::npos)
+    {
+        S1 = S1.replace(pos, StringToReplace.length(), sRepalceTo);
+        pos = S1.find(StringToReplace); // find next
+    }
+    return S1;
+}
 
 string DateToString(stDate Date)
 {
     return to_string(Date.Day) + "/" + to_string(Date.Month) + "/" + to_string(Date.Year);
 }
 
+stDate StringToDate(string DateString)
+{
+    stDate Date;
+    vector<string> vDate;
+    vDate = SplitString(DateString, "/");
+    Date.Day = stoi(vDate[0]);
+    Date.Month = stoi(vDate[1]);
+    Date.Year = stoi(vDate[2]);
+    return Date;
+}
+
+
+
+string FormateDate(stDate Date, string DateFormat = "dd/mm/yyyy")
+{
+    string FormattedDateString = "";
+    FormattedDateString = ReplaceWordInString(DateFormat, "dd", to_string(Date.Day));
+    FormattedDateString = ReplaceWordInString(FormattedDateString, "mm", to_string(Date.Month));
+    FormattedDateString = ReplaceWordInString(FormattedDateString, "yyyy", to_string(Date.Year));
+    return FormattedDateString;
+}
 
 string ReadStringDate(string Message)
 {
@@ -50,66 +82,18 @@ string ReadStringDate(string Message)
     getline(cin >> ws, DateString);
     return DateString;
 }
-enum eDateFromate 
-{
-DDslashMMslashYYYY=1,
-YYYYslashDDslashMM=2,
-MMslashDDslashYYYY=3, 
-MMdashDDdashYYYY=4,
-DDdashMMdashYYYY=5,
-DaycommaMonthcommaYear =6
-};
-
-string ConvertDateFormate(string DateString, eDateFromate DateFromate)
-{
-    if (DateFromate == eDateFromate::DDslashMMslashYYYY)
-        return DateString;
-
-    vector<string>DateAsplitString = SplitString(DateString,"/");
-    switch (DateFromate)
-    {
-
-    case eDateFromate::YYYYslashDDslashMM:
-    {
-        return DateAsplitString[2] + '/' + DateAsplitString[0] + '/' + DateAsplitString[1];
-    }
-
-    case eDateFromate::MMslashDDslashYYYY:
-    {
-        return DateAsplitString[1] + '/' + DateAsplitString[0] + '/' + DateAsplitString[2];
-    }
-
-    case eDateFromate::MMdashDDdashYYYY:
-    {
-        return DateAsplitString[1] + '-' + DateAsplitString[0] + '-' + DateAsplitString[2];
-    }
-
-    case eDateFromate::DDdashMMdashYYYY:
-    {
-        return DateAsplitString[0] + '-' + DateAsplitString[1] + '-' + DateAsplitString[2];
-    }
-
-    case eDateFromate::DaycommaMonthcommaYear:
-    {
-        return "Day:" + DateAsplitString[0] + ", Month:"+ DateAsplitString[1] + ", Year:" + DateAsplitString[2];
-    }
-
-    }
-    return DateString;
-}
 
 int main()
 {
+    string DateString = ReadStringDate("\nPlease Enter Date dd/mm/yyyy? ");
+    stDate Date = StringToDate(DateString);
 
-    
-        string DateString = ReadStringDate("\nPlease Enter Date dd/mm/yyyy? ");
-        cout << ConvertDateFormate(DateString, DDslashMMslashYYYY) << endl;
-        cout << ConvertDateFormate(DateString, YYYYslashDDslashMM) << endl;
-        cout << ConvertDateFormate(DateString, MMslashDDslashYYYY) << endl;
-        cout << ConvertDateFormate(DateString, MMdashDDdashYYYY) << endl;
-        cout << ConvertDateFormate(DateString, DDdashMMdashYYYY) << endl;
-        cout << ConvertDateFormate(DateString, DaycommaMonthcommaYear) << endl;
-
+    cout << "\n" << FormateDate(Date) << "\n";
+    cout << "\n" << FormateDate(Date, "yyyy/dd/mm") << "\n";
+    cout << "\n" << FormateDate(Date, "mm/dd/yyyy") << "\n";
+    cout << "\n" << FormateDate(Date, "mm-dd-yyyy") << "\n";
+    cout << "\n" << FormateDate(Date, "dd-mm-yyyy") << "\n";
+    cout << "\n" << FormateDate(Date, "Day:dd, Month:mm, Year:yyyy") << "\n";
 
     system("pause>0");
     return 0;

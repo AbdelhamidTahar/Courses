@@ -18,8 +18,5 @@
     <ClCompile Include="Problem #65 Covert Date Format.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="My Code.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
