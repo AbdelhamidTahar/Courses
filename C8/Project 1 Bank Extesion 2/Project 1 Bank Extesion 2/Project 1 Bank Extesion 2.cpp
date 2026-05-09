@@ -8,10 +8,6 @@ using namespace std;
 const string ClientsFileName = "Clients.txt";
 const string UsersFileName = "Users.txt";
 
-void ShowManageUsersMenueScreen(sUser sUserExist);
-void ShowMainMenue(sUser sUserExist);
-void ShowTransactionsMenue(sUser sUserExist);
-
 struct sClient
 {
     string AccountNumber;
@@ -30,6 +26,10 @@ struct sUser
     string PassWord;
     short Permesions;
 };
+
+void ShowManageUsersMenueScreen(sUser sUserExist);
+void ShowMainMenue(sUser sUserExist);
+void ShowTransactionsMenue(sUser sUserExist);
 
 vector<string> SplitString(string S1, string Delim)
 {
@@ -697,7 +697,6 @@ enum ePermissions
 
 };
 
-
 void GoBackToMainMenue(sUser sUserExist)
 {
     cout << "\n\nPress any key to go back to Main Menue...";
@@ -706,11 +705,11 @@ void GoBackToMainMenue(sUser sUserExist)
 
 }
 
-void GoBackToTransactionsMenue()
+void GoBackToTransactionsMenue(sUser sUserExist)
 {
     cout << "\n\nPress any key to go back to Transactions Menue...";
     system("pause>0");
-    ShowTransactionsMenue();
+    ShowTransactionsMenue(sUserExist);
 
 }
 
@@ -722,11 +721,10 @@ void GoBackToManageUsersManu(sUser sUserExist)
 
 }
 
-bool IsHeHasPermesions(sUser User, enMainMenueOptions eOption)
+bool IsHeHasPermesions(sUser User, ePermissions eNumberPermissionsOption)
 {
-    return ((User.Permesions & eOption) != 0);
+    return ((User.Permesions & eNumberPermissionsOption) != 0);
 }
-
 
 short ReadTransactionsMenueOption()
 {
@@ -745,7 +743,7 @@ void PerfromTranactionsMenueOption(enTransactionsMenueOptions TransactionMenueOp
     {
         system("cls");
         ShowDepositScreen();
-        GoBackToTransactionsMenue();
+        GoBackToTransactionsMenue(sUserExist);
         break;
     }
 
@@ -753,7 +751,7 @@ void PerfromTranactionsMenueOption(enTransactionsMenueOptions TransactionMenueOp
     {
         system("cls");
         ShowWithDrawScreen();
-        GoBackToTransactionsMenue();
+        GoBackToTransactionsMenue(sUserExist);
         break;
     }
 
@@ -762,7 +760,7 @@ void PerfromTranactionsMenueOption(enTransactionsMenueOptions TransactionMenueOp
     {
         system("cls");
         ShowTotalBalancesScreen();
-        GoBackToTransactionsMenue();
+        GoBackToTransactionsMenue(sUserExist);
         break;
     }
 
@@ -828,7 +826,6 @@ sUser ConvertUserLinetoRecord(string Line, string Seperator = "#//#")
     return User;
 
 }
-
 
 vector <sUser> LoadUsersDataFromFile(string FileName)
 {
@@ -954,9 +951,8 @@ short ReadUserPermissions()
     Permissions = (AskPermission == 'y') ? Permissions += epManageUsers : Permissions;
 
 
-    return (Permissions == 127) ? -1 : Permissions;
+    return (Permissions == 63) ? -1 : Permissions;
 }
-
 
 sUser ReadUserInfo(string& UserName)
 {
@@ -983,7 +979,6 @@ string ConvertRecordToLine(sUser User, string Seperator = "#//#")
     return stClientRecord;
 
 }
-
 
 void ShowAddUserScreen()
 {
@@ -1051,7 +1046,6 @@ vector <sUser> SaveUsersDataToFile(string FileName, vector <sUser> vUsers, strin
 
 }
 
-
 void ShowDeleteUserScreen()
 {
     cout << "\n-----------------------------------\n";
@@ -1092,7 +1086,6 @@ void PrintUserCard(sUser User)
     cout << "\nPermesions  : " << User.Permesions;
     cout << "\n-----------------------------------\n";
 }
-
 
 void ShowUppdatetUserScreen()
 {
@@ -1145,7 +1138,6 @@ void ShowFindUserScreen()
 
 }
 
-
 void PerfromManageUsersManuOptions(enManageUsersOptions ManageUsersManuOptions, sUser sUserExist)
 {
     switch (ManageUsersManuOptions)
@@ -1154,35 +1146,35 @@ void PerfromManageUsersManuOptions(enManageUsersOptions ManageUsersManuOptions, 
     {
         system("cls");
         ShowListtUserScreen();
-        GoBackToManageUsersManu();
+        GoBackToManageUsersManu(sUserExist);
         break;
     }
     case enManageUsersOptions::eAddNewUser:
     {
         system("cls");
         ShowAddUserScreen();
-        GoBackToManageUsersManu();
+        GoBackToManageUsersManu(sUserExist);
         break;
     }
     case enManageUsersOptions::eDeleteUser:
     {
         system("cls");
         ShowDeleteUserScreen();
-        GoBackToManageUsersManu();
+        GoBackToManageUsersManu(sUserExist);
         break;
     }
     case enManageUsersOptions::eUpdateUser:
     {
         system("cls");
         ShowUppdatetUserScreen();
-        GoBackToManageUsersManu();
+        GoBackToManageUsersManu(sUserExist);
         break;
     }
     case enManageUsersOptions::eFindUser:
     {
         system("cls");
         ShowFindUserScreen();
-        GoBackToManageUsersManu();
+        GoBackToManageUsersManu(sUserExist);
         break;
     }
     case enManageUsersOptions::eMainMenue:
@@ -1204,7 +1196,6 @@ short ReadManageUsersManuOptions()
     return Choice;
 }
 
-
 void ShowManageUsersMenueScreen(sUser sUserExist)
 {
     system("cls");
@@ -1221,14 +1212,13 @@ void ShowManageUsersMenueScreen(sUser sUserExist)
     PerfromManageUsersManuOptions((enManageUsersOptions)ReadManageUsersManuOptions(),sUserExist);
 }
 
-
 void PerfromMainMenueOption(sUser sUserExist , enMainMenueOptions MainMenueOption)
 {
     switch (MainMenueOption)
     {
     case enMainMenueOptions::eListClients:
     {
-        if(IsHeHasPermesions(sUserExist,eListClients))
+        if(IsHeHasPermesions(sUserExist, ePermissions::epShowClientList))
         {
             system("cls");
             ShowAllClientsScreen();
@@ -1242,7 +1232,7 @@ void PerfromMainMenueOption(sUser sUserExist , enMainMenueOptions MainMenueOptio
     }
     case enMainMenueOptions::eAddNewClient:
     {
-        if (IsHeHasPermesions(sUserExist, eAddNewClient))
+        if (IsHeHasPermesions(sUserExist, ePermissions::epAddNewClient))
         {
             system("cls");
             ShowAddNewClientsScreen();
@@ -1256,7 +1246,7 @@ void PerfromMainMenueOption(sUser sUserExist , enMainMenueOptions MainMenueOptio
     }
     case enMainMenueOptions::eDeleteClient:
     {
-        if (IsHeHasPermesions(sUserExist, eDeleteClient))
+        if (IsHeHasPermesions(sUserExist, ePermissions::epDeleteClient))
         {
             system("cls");
             ShowDeleteClientScreen();
@@ -1270,7 +1260,7 @@ void PerfromMainMenueOption(sUser sUserExist , enMainMenueOptions MainMenueOptio
     }
     case enMainMenueOptions::eUpdateClient:
     {
-        if (IsHeHasPermesions(sUserExist, eUpdateClient))
+        if (IsHeHasPermesions(sUserExist, ePermissions::epUpdateClientInfo))
         {
             system("cls");
             ShowUpdateClientScreen();
@@ -1284,7 +1274,7 @@ void PerfromMainMenueOption(sUser sUserExist , enMainMenueOptions MainMenueOptio
     }
     case enMainMenueOptions::eFindClient:
     {
-        if (IsHeHasPermesions(sUserExist, eFindClient))
+        if (IsHeHasPermesions(sUserExist, ePermissions::epFindClient))
         {
             system("cls");
             ShowFindClientScreen();
@@ -1298,10 +1288,10 @@ void PerfromMainMenueOption(sUser sUserExist , enMainMenueOptions MainMenueOptio
     }
     case enMainMenueOptions::eShowTransactionsMenue:
     {
-        if (IsHeHasPermesions(sUserExist, eShowTransactionsMenue))
+        if (IsHeHasPermesions(sUserExist, ePermissions::epTransactions))
         {
             system("cls");
-            ShowTransactionsMenue();
+            ShowTransactionsMenue(sUserExist);
         }
         else
         {
@@ -1312,7 +1302,7 @@ void PerfromMainMenueOption(sUser sUserExist , enMainMenueOptions MainMenueOptio
     }
     case enMainMenueOptions::eManageUsers:
     {
-        if (IsHeHasPermesions(sUserExist, eManageUsers))
+        if (IsHeHasPermesions(sUserExist, ePermissions::epManageUsers))
         {
             system("cls");
             ShowManageUsersMenueScreen(sUserExist);
@@ -1334,9 +1324,6 @@ void PerfromMainMenueOption(sUser sUserExist , enMainMenueOptions MainMenueOptio
 
 }
 
-
-
-
 void ShowMainMenue(sUser sUserExist)
 {
     system("cls");
@@ -1355,7 +1342,6 @@ void ShowMainMenue(sUser sUserExist)
     PerfromMainMenueOption(sUserExist,(enMainMenueOptions)ReadMainMenueOption());
 }
 
-
 bool IsUserPasswordRigth(string& UserPassword, sUser &User)
 {
     return (UserPassword == User.PassWord);
@@ -1369,20 +1355,26 @@ void Login()
     cout << "\n-----------------------------------\n";
 
     vector <sUser> vUsers = LoadUsersDataFromFile(UsersFileName);
+    string UserName;
+    string PassWord;
+    sUser sUserExist;
 
     cout << "Enter User Name? ";
-    string UserName;
     getline(cin >> ws, UserName);
 
     cout << "Enter Password? ";
-    string PassWord;
     getline(cin >> ws, PassWord);
 
-    sUser sUserExist;
-    if (IsUserExist(UserName, vUsers, sUserExist) && IsUserPasswordRigth(PassWord, sUserExist))
+    while (!(IsUserExist(UserName, vUsers, sUserExist) && IsUserPasswordRigth(PassWord, sUserExist)))
     {
-        ShowMainMenue(sUserExist);
+        cout << "\nInvlaid UserName/Password!";
+        cout << "\nEnter User Name? ";
+        getline(cin >> ws, UserName);
+
+        cout << "Enter Password? ";
+        getline(cin >> ws, PassWord);
     }
+    ShowMainMenue(sUserExist);
 }
 
 int main()
