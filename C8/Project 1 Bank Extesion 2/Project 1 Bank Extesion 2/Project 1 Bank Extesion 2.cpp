@@ -683,6 +683,13 @@ enum enMainMenueOptions
     eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenue = 6, eManageUsers = 7, eLogout = 8
 };
 
+enum enManageUsersOptions {
+    eListUsers = 1, eAddNewUser = 2,
+    eDeleteUser = 3, eUpdateUser = 4,
+    eFindUser = 5, eMainMenue = 6
+};
+
+
 void GoBackToMainMenue()
 {
     cout << "\n\nPress any key to go back to Main Menue...";
@@ -701,10 +708,15 @@ void GoBackToTransactionsMenue()
 
 void GoBackToManageUsersManu()
 {
-    cout << "\n\nPress any key to go back toManageUsersManu...";
+    cout << "\n\nPress any key to go back to Manage Users Manu...";
     system("pause>0");
     ShowMainMenue();
 
+}
+
+bool IsHeHasPermesions(sUser User, enMainMenueOptions eOption)
+{
+    return ((User.Permesions & eOption) != 0);
 }
 
 
@@ -789,6 +801,221 @@ void PrintMessagewhinUserDoNotHavPermesions()
     cout << "\nAccess Denied,\nYou dont Have Permission To Do this,";
     cout << "\nPlease Conact Your Admin.";
 }
+
+void ShowListtUserScreen()
+{
+    vector <sUser> vUsers = LoadUsersDataFromFile(UsersFileName);
+
+
+    cout << "\n\t\t\t\t\tUser List (" << vUsers.size() << ") User(s).";
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
+    cout << "| " << left << setw(15) << "User Name";
+    cout << "| " << left << setw(10) << "Password";
+    cout << "| " << left << setw(40) << "Permesions";
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
+
+
+
+    for (sUser& Users : vUsers)
+    {
+
+        PrintUserRecordLine(Users);
+        cout << endl;
+    }
+
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
+}
+
+void ShowAddUserScreen()
+{
+    cout << "\n-----------------------------------\n";
+    cout << "\tAdd User Screen";
+    cout << "\n-----------------------------------\n";
+
+    vector <sUser> vUsers = LoadUsersDataFromFile(UsersFileName);
+    sUser User;
+    char AsKAddMoreUsers = 'n';
+
+    do
+    {
+        cout << "\nEnter Username? ";
+        getline(cin >> ws, User.Name);
+
+        while (IsUserExist(User.Name, vUsers, User))
+        {
+            cout << "\nUser With[" << User.Name << "] already exists, Enter another Username? ";
+            getline(cin >> ws, User.Name);
+        }
+
+        User = ReadUserInfo(User.Name);
+        AddDataLineToFile(UsersFileName, ConvertRecordToLine(User));
+        cout << "User Added Successfully, do you want to add more Users? Y/N? ";
+        cin >> AsKAddMoreUsers;
+
+    } while (AsKAddMoreUsers == 'y');
+}
+
+void ShowDeleteUserScreen()
+{
+    cout << "\n-----------------------------------\n";
+    cout << "\tDelet User Screen";
+    cout << "\n-----------------------------------\n";
+    vector <sUser> vUsers = LoadUsersDataFromFile(UsersFileName);
+    sUser User;
+
+
+
+    cout << "\nEnter User name? ";
+    getline(cin >> ws, User.Name);
+
+    if (IsUserExist(User.Name, vUsers, User))
+    {
+        if (IsThisUserAdmin(User))
+        {
+            cout << "\nYou can not Delete This User.\n";
+        }
+        else
+        {
+            SaveUsersDataToFile(UsersFileName, vUsers, User.Name);
+        }
+    }
+    else
+    {
+        cout << "\nSorry User [" << User.Name << "] Is Not Excest.";
+    }
+
+}
+
+void ShowUppdatetUserScreen()
+{
+    cout << "\n-----------------------------------\n";
+    cout << "\tUpdate User Screen";
+    cout << "\n-----------------------------------\n";
+    vector <sUser> vUsers = LoadUsersDataFromFile(UsersFileName);
+    sUser User;
+
+    cout << "\nEnter User name? ";
+    getline(cin >> ws, User.Name);
+
+    if (IsUserExist(User.Name, vUsers, User))
+    {
+        PrintUserCard(User);
+        User = ReadUserInfo(User.Name);
+        for (sUser& TempUser : vUsers)
+        {
+            if (TempUser.Name == User.Name)
+            {
+                TempUser = User;
+                break;
+            }
+        }
+        SaveUsersDataToFile(UsersFileName, vUsers);
+    }
+    else
+    {
+        cout << "\nSorry User [" << User.Name << "] Is Not Excest.";
+    }
+
+}
+
+void ShowFindUserScreen()
+{
+    cout << "\n-----------------------------------\n";
+    cout << "\tFind User Screen";
+    cout << "\n-----------------------------------\n";
+
+    vector <sUser> vUsers = LoadUsersDataFromFile(UsersFileName);
+    sUser User;
+
+    cout << "\nEnter User name? ";
+    getline(cin >> ws, User.Name);
+
+    if (IsUserExist(User.Name, vUsers, User))
+        PrintUserCard(User);
+    else
+        cout << "\nSorry User [" << User.Name << "] Is Not Excest.";
+
+}
+
+
+void PerfromManageUsersManuOptions(enManageUsersOptions ManageUsersManuOptions)
+{
+    switch (ManageUsersManuOptions)
+    {
+    case enManageUsersOptions::eListUsers:
+    {
+        system("cls");
+        ShowListtUserScreen();
+        GoBackToManageUsersManu();
+        break;
+    }
+    case enManageUsersOptions::eAddNewUser:
+    {
+        system("cls");
+        ShowAddUserScreen();
+        GoBackToManageUsersManu();
+        break;
+    }
+    case enManageUsersOptions::eDeleteUser:
+    {
+        system("cls");
+        ShowDeleteUserScreen();
+        GoBackToManageUsersManu();
+        break;
+    }
+    case enManageUsersOptions::eUpdateUser:
+    {
+        system("cls");
+        ShowUppdatetUserScreen();
+        GoBackToManageUsersManu();
+        break;
+    }
+    case enManageUsersOptions::eFindUser:
+    {
+        system("cls");
+        ShowFindUserScreen();
+        GoBackToManageUsersManu();
+        break;
+    }
+    case enManageUsersOptions::eMainMenue:
+    {
+
+        ShowMainMenue();
+
+    }
+    }
+
+}
+
+short ReadManageUsersManuOptions()
+{
+    cout << "Choose what do you want to do? [1 to 6]? ";
+    short Choice = 0;
+    cin >> Choice;
+
+    return Choice;
+}
+
+
+void ShowManageUsersMenueScreen()
+{
+    system("cls");
+    cout << "===========================================\n";
+    cout << "\t\tManage Users Menue Screen\n";
+    cout << "===========================================\n";
+    cout << "\t[1] List Users.\n";
+    cout << "\t[2] Add New User.\n";
+    cout << "\t[3] Delete User.\n";
+    cout << "\t[4] Update User.\n";
+    cout << "\t[5] Find User.\n";
+    cout << "\t[6] Main Menue.\n";
+    cout << "===========================================\n";
+    PerfromManageUsersManuOptions((enManageUsersOptions)ReadManageUsersManuOptions());
+}
+
 
 void PerfromMainMenueOption(sUser sUserExist , enMainMenueOptions MainMenueOption)
 {
@@ -902,95 +1129,12 @@ void PerfromMainMenueOption(sUser sUserExist , enMainMenueOptions MainMenueOptio
 
 }
 
-enum enManageUsersOptions {
-    eListUsers = 1, eAddNewUser = 2,
-    eDeleteUser = 3, eUpdateUser = 4,
-    eFindUser = 5, eShowMainMenue = 6
-};
-
-short ReadManageUsersManuOptions()
-{
-    cout << "Choose what do you want to do? [1 to 6]? ";
-    short Choice = 0;
-    cin >> Choice;
-
-    return Choice;
-}
-
-void GoBackToManageUsersManu()
-{
-    cout << "\n\nPress any key to go back to Manage Users Menue...";
-    system("pause>0");
-    ShowManageUsersMenueScreen();
-
-}
-
-void PerfromManageUsersManuOptions(enManageUsersOptions ManageUsersManuOptions)
-{
-    switch (ManageUsersManuOptions)
-    {
-    case enManageUsersOptions::eListUsers:
-    {
-        system("cls");
-        ShowListtUserScreen();
-        GoBackToManageUsersManu();
-        break;
-    }
-    case enManageUsersOptions::eAddNewUser:
-    {
-        system("cls");
-        ShowAddUserScreen();
-        GoBackToManageUsersManu();
-        break;
-    }
-    case enManageUsersOptions::eDeleteUser:
-    {
-        system("cls");
-        ShowDeleteUserScreen();
-        GoBackToManageUsersManu();
-        break;
-    }
-    case enManageUsersOptions::eUpdateUser:
-    {
-        system("cls");
-        ShowUppdatetUserScreen();
-        GoBackToManageUsersManu();
-        break;
-    }
-    case enManageUsersOptions::eFindUser:
-    {
-        system("cls");
-        ShowFindUserScreen();
-        GoBackToManageUsersManu();
-        break;
-    }
-    case enManageUsersOptions::eShowMainMenue:
-    {
-
-        ShowMainMenue();
-
-    }
-    }
-
-}
 
 
 
-void ShowManageUsersMenueScreen()
-{
-    system("cls");
-    cout << "===========================================\n";
-    cout << "\t\tManage Users Menue Screen\n";
-    cout << "===========================================\n";
-    cout << "\t[1] List Users.\n";
-    cout << "\t[2] Add New User.\n";
-    cout << "\t[3] Delete User.\n";
-    cout << "\t[4] Update User.\n";
-    cout << "\t[5] Find User.\n";
-    cout << "\t[6] Main Menue.\n";
-    cout << "===========================================\n";
-    PerfromManageUsersManuOptions((enManageUsersOptions)ReadManageUsersManuOptions());
-}
+
+
+
 
 
 
@@ -1037,32 +1181,6 @@ void PrintUserRecordLine(sUser User)
 
 }
 
-void ShowListtUserScreen()
-{
-    vector <sUser> vUsers = LoadUsersDataFromFile(UsersFileName);
-
-
-    cout << "\n\t\t\t\t\tUser List (" << vUsers.size() << ") User(s).";
-    cout << "\n_______________________________________________________";
-    cout << "_________________________________________\n" << endl;
-    cout << "| " << left << setw(15) << "User Name";
-    cout << "| " << left << setw(10) << "Password";
-    cout << "| " << left << setw(40) << "Permesions";
-    cout << "\n_______________________________________________________";
-    cout << "_________________________________________\n" << endl;
-
-
-
-        for (sUser &Users : vUsers)
-        {
-
-            PrintUserRecordLine(Users);
-            cout << endl;
-        }
-
-    cout << "\n_______________________________________________________";
-    cout << "_________________________________________\n" << endl;
-}
 
 
 
@@ -1208,34 +1326,6 @@ bool IsUserExist(string& UserName, vector <sUser>& vUsers,sUser &sUserExist)
     return false;
 }
 
-void ShowAddUserScreen()
-{
-    cout << "\n-----------------------------------\n";
-    cout << "\tAdd User Screen";
-    cout << "\n-----------------------------------\n";
-
-    vector <sUser> vUsers = LoadUsersDataFromFile(UsersFileName);
-    sUser User; 
-    char AsKAddMoreUsers = 'n';
-
-    do
-    {
-        cout << "\nEnter Username? ";
-        getline(cin >> ws, User.Name);
-
-        while (IsUserExist(User.Name, vUsers, User))
-        {
-            cout << "\nUser With[" << User.Name << "] already exists, Enter another Username? ";
-            getline(cin >> ws, User.Name);
-        }
-
-        User = ReadUserInfo(User.Name);
-        AddDataLineToFile(UsersFileName, ConvertRecordToLine(User));
-        cout << "User Added Successfully, do you want to add more Users? Y/N? ";
-        cin >> AsKAddMoreUsers;
-
-    } while (AsKAddMoreUsers == 'y');
-}
 
 //===================================================== 3 Delet User
 
@@ -1276,36 +1366,6 @@ vector <sUser> SaveUsersDataToFile(string FileName, vector <sUser> vUsers,string
 
 }
 
-void ShowDeleteUserScreen()
-{
-    cout << "\n-----------------------------------\n";
-    cout << "\tDelet User Screen";
-    cout << "\n-----------------------------------\n";
-    vector <sUser> vUsers = LoadUsersDataFromFile(UsersFileName);
-    sUser User;
-
-
-
-        cout << "\nEnter User name? ";
-        getline(cin >> ws, User.Name);
-
-        if (IsUserExist(User.Name, vUsers, User))
-        {
-            if (IsThisUserAdmin(User))
-            {
-                cout << "\nYou can not Delete This User.\n";
-            }
-            else
-            {
-                SaveUsersDataToFile(UsersFileName, vUsers, User.Name);
-            }
-        }
-        else
-        {
-            cout << "\nSorry User [" << User.Name << "] Is Not Excest.";
-        }
-    
-}
 
 //===================================================== 4 Uppdate User
 
@@ -1319,64 +1379,11 @@ void PrintUserCard(sUser User)
     cout << "\n-----------------------------------\n";
 }
 
-void ShowUppdatetUserScreen()
-{
-    cout << "\n-----------------------------------\n";
-    cout << "\tUpdate User Screen";
-    cout << "\n-----------------------------------\n";
-    vector <sUser> vUsers = LoadUsersDataFromFile(UsersFileName);
-    sUser User;
-
-    cout << "\nEnter User name? ";
-    getline(cin >> ws, User.Name);
-
-    if (IsUserExist(User.Name, vUsers, User))
-    {
-        PrintUserCard(User);
-        User = ReadUserInfo(User.Name);
-        for (sUser& TempUser : vUsers)
-        {
-            if (TempUser.Name == User.Name)
-            {
-                TempUser = User;
-                break;
-            }
-        }
-        SaveUsersDataToFile(UsersFileName, vUsers);
-    }
-    else
-    {
-        cout << "\nSorry User [" << User.Name << "] Is Not Excest.";
-    }
-
-}
 
 //===================================================== 5 Find User
-void ShowFindUserScreen()
-{
-    cout << "\n-----------------------------------\n";
-    cout << "\tFind User Screen";
-    cout << "\n-----------------------------------\n";
-
-    vector <sUser> vUsers = LoadUsersDataFromFile(UsersFileName);
-    sUser User;
-
-    cout << "\nEnter User name? ";
-    getline(cin >> ws, User.Name);
-
-    if (IsUserExist(User.Name, vUsers, User))
-        PrintUserCard(User);
-    else
-        cout << "\nSorry User [" << User.Name << "] Is Not Excest.";
-
-}
 
 //=====================================================
 
-bool IsHeHasPermesions(sUser User, enMainMenueOptions eOption)
-{
-    return ((User.Permesions & eOption) != 0);
-}
 
 
 
