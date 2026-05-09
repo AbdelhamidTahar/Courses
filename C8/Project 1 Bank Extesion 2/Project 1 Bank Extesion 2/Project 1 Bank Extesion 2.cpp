@@ -693,7 +693,7 @@ enum ePermissions
 {
     epShowClientList = 1, epAddNewClient = 2, epDeleteClient = 4,
     epUpdateClientInfo = 8, epFindClient = 16, epTransactions = 32,
-    epManageUsers = 46
+    epManageUsers = 64
 
 };
 
@@ -923,35 +923,42 @@ short ReadUserPermissions()
 
     cout << "\nShow Client List? y/n? \n ";
     cin >> AskPermission;
-    Permissions = (AskPermission == 'y') ? Permissions += ePermissions::epShowClientList : Permissions;
+    if(AskPermission =='y')
+    Permissions = Permissions | ePermissions::epShowClientList;
 
 
     cout << "\nAdd New Client? y/n? \n ";
     cin >> AskPermission;
-    Permissions = (AskPermission == 'y') ? Permissions += epAddNewClient : Permissions;
+    if (AskPermission == 'y')
+        Permissions = Permissions | Permissions;
 
     cout << "\nDelete Client? y/n? \n ";
     cin >> AskPermission;
-    Permissions = (AskPermission == 'y') ? Permissions += epDeleteClient : Permissions;
+    if (AskPermission == 'y')
+        Permissions = Permissions | ePermissions::epDeleteClient;
 
     cout << "\nUpdate Client Info? y/n? \n ";
     cin >> AskPermission;
-    Permissions = (AskPermission == 'y') ? Permissions += epUpdateClientInfo : Permissions;
+    if (AskPermission == 'y')
+        Permissions = Permissions | ePermissions::epUpdateClientInfo;
 
     cout << "\nFind Client? y/n? \n ";
     cin >> AskPermission;
-    Permissions = (AskPermission == 'y') ? Permissions += epFindClient : Permissions;
+    if (AskPermission == 'y')
+        Permissions = Permissions | ePermissions::epFindClient;
 
     cout << "\nTransactions? y/n? \n ";
     cin >> AskPermission;
-    Permissions = (AskPermission == 'y') ? Permissions += epTransactions : Permissions;
+    if (AskPermission == 'y')
+        Permissions = Permissions | ePermissions::epTransactions;
 
     cout << "\nManage Users? y/n? \n ";
     cin >> AskPermission;
-    Permissions = (AskPermission == 'y') ? Permissions += epManageUsers : Permissions;
+    if (AskPermission == 'y')
+        Permissions = Permissions | ePermissions::epManageUsers;
 
 
-    return (Permissions == 63) ? -1 : Permissions;
+    return (Permissions == 127) ? -1 : Permissions;
 }
 
 sUser ReadUserInfo(string& UserName)
@@ -1212,106 +1219,147 @@ void ShowManageUsersMenueScreen(sUser sUserExist)
     PerfromManageUsersManuOptions((enManageUsersOptions)ReadManageUsersManuOptions(),sUserExist);
 }
 
-void PerfromMainMenueOption(sUser sUserExist , enMainMenueOptions MainMenueOption)
+void ExecuteListClients(sUser sUserExist )
+{
+    if (IsHeHasPermesions(sUserExist, ePermissions::epShowClientList))
+    {
+        system("cls");
+        ShowAllClientsScreen();
+    }
+    else
+    {
+        system("cls");
+        PrintMessagewhinUserDoNotHavPermesions();
+        GoBackToMainMenue(sUserExist);
+    }
+}
+
+void ExecuteAddNewClient(sUser sUserExist)
+{
+    if (IsHeHasPermesions(sUserExist, ePermissions::epAddNewClient))
+    {
+        system("cls");
+        ShowAddNewClientsScreen();
+    }
+    else
+    {
+        system("cls");
+        PrintMessagewhinUserDoNotHavPermesions();
+        GoBackToMainMenue(sUserExist);
+    }
+}
+
+void ExecuteDeleteClient(sUser sUserExist)
+{
+    if (IsHeHasPermesions(sUserExist, ePermissions::epDeleteClient))
+    {
+        system("cls");
+        ShowDeleteClientScreen();
+    }
+    else
+    {
+        system("cls");
+        PrintMessagewhinUserDoNotHavPermesions();
+        GoBackToMainMenue(sUserExist);
+    }
+}
+
+void ExecuteUpdateClient(sUser sUserExist)
+{
+    if (IsHeHasPermesions(sUserExist, ePermissions::epUpdateClientInfo))
+    {
+        system("cls");
+        ShowUpdateClientScreen();
+    }
+    else
+    {
+        system("cls");
+        PrintMessagewhinUserDoNotHavPermesions();
+        GoBackToMainMenue(sUserExist);
+    }
+}
+
+void ExecuteFindClient(sUser sUserExist  )
+{
+    if (IsHeHasPermesions(sUserExist, ePermissions::epFindClient))
+    {
+        system("cls");
+        ShowFindClientScreen();
+    }
+    else
+    {
+        system("cls");
+        PrintMessagewhinUserDoNotHavPermesions();
+        GoBackToMainMenue(sUserExist);
+    }
+}
+
+void ExecuteTransactionsMenue(sUser sUserExist)
+{
+    if (IsHeHasPermesions(sUserExist, ePermissions::epTransactions))
+    {
+        system("cls");
+        ShowTransactionsMenue(sUserExist);
+    }
+    else
+    {
+        system("cls");
+        PrintMessagewhinUserDoNotHavPermesions();
+        GoBackToMainMenue(sUserExist);
+    }
+}
+
+void ExecuteTransactionsMenue(sUser sUserExist)
+{
+    if (IsHeHasPermesions(sUserExist, ePermissions::epManageUsers))
+    {
+        system("cls");
+        ShowManageUsersMenueScreen(sUserExist);
+    }
+    else
+    {
+        PrintMessagewhinUserDoNotHavPermesions();
+        GoBackToMainMenue(sUserExist);
+    }
+}
+
+void PerfromMainMenueOption(sUser sUserExist, enMainMenueOptions MainMenueOption)
 {
     switch (MainMenueOption)
     {
     case enMainMenueOptions::eListClients:
     {
-        if(IsHeHasPermesions(sUserExist, ePermissions::epShowClientList))
-        {
-            system("cls");
-            ShowAllClientsScreen();
-        }
-        else
-        {
-            PrintMessagewhinUserDoNotHavPermesions();
-        }
-        GoBackToMainMenue(sUserExist);
+        ExecuteListClients(sUserExist);
         break;
     }
     case enMainMenueOptions::eAddNewClient:
     {
-        if (IsHeHasPermesions(sUserExist, ePermissions::epAddNewClient))
-        {
-            system("cls");
-            ShowAddNewClientsScreen();
-        }
-        else
-        {
-            PrintMessagewhinUserDoNotHavPermesions();
-        }
-        GoBackToMainMenue(sUserExist);
+        ExecuteAddNewClient(sUserExist);
         break;
     }
     case enMainMenueOptions::eDeleteClient:
     {
-        if (IsHeHasPermesions(sUserExist, ePermissions::epDeleteClient))
-        {
-            system("cls");
-            ShowDeleteClientScreen();
-        }
-        else
-        {
-            PrintMessagewhinUserDoNotHavPermesions();
-        }
-        GoBackToMainMenue(sUserExist);
+        ExecuteDeleteClient(sUserExist);
         break;
     }
     case enMainMenueOptions::eUpdateClient:
     {
-        if (IsHeHasPermesions(sUserExist, ePermissions::epUpdateClientInfo))
-        {
-            system("cls");
-            ShowUpdateClientScreen();
-        }
-        else
-        {
-            PrintMessagewhinUserDoNotHavPermesions();
-        }
-        GoBackToMainMenue(sUserExist);
+        ExecuteUpdateClient(sUserExist);
         break;
     }
     case enMainMenueOptions::eFindClient:
     {
-        if (IsHeHasPermesions(sUserExist, ePermissions::epFindClient))
-        {
-            system("cls");
-            ShowFindClientScreen();
-        }
-        else
-        {
-            PrintMessagewhinUserDoNotHavPermesions();
-        }
-        GoBackToMainMenue(sUserExist);
+        ExecuteUpdateClient(sUserExist);
         break;
     }
     case enMainMenueOptions::eShowTransactionsMenue:
     {
-        if (IsHeHasPermesions(sUserExist, ePermissions::epTransactions))
-        {
-            system("cls");
-            ShowTransactionsMenue(sUserExist);
-        }
-        else
-        {
-            PrintMessagewhinUserDoNotHavPermesions();
-            GoBackToMainMenue(sUserExist);
-        }
+        ExecuteTransactionsMenue(sUserExist);
         break;
     }
     case enMainMenueOptions::eManageUsers:
     {
-        if (IsHeHasPermesions(sUserExist, ePermissions::epManageUsers))
-        {
-            system("cls");
-            ShowManageUsersMenueScreen(sUserExist);
-        }
-        else
-        {
-            PrintMessagewhinUserDoNotHavPermesions();
-            GoBackToMainMenue(sUserExist);
-        }
+        ExecuteTransactionsMenue(sUserExist);
         break;
     }
     case enMainMenueOptions::eLogout:
