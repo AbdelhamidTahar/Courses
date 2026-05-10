@@ -723,7 +723,12 @@ void GoBackToManageUsersManu(sUser sUserExist)
 
 bool IsHeHasPermesions(sUser User, ePermissions eNumberPermissionsOption)
 {
-    return ((User.Permesions & eNumberPermissionsOption) != 0);
+    if(User.Permesions == -1)
+        return true;
+
+    if ((User.Permesions & eNumberPermissionsOption) == 0)
+        return false;
+    return true;
 }
 
 short ReadTransactionsMenueOption()
@@ -930,7 +935,7 @@ short ReadUserPermissions()
     cout << "\nAdd New Client? y/n? \n ";
     cin >> AskPermission;
     if (AskPermission == 'y')
-        Permissions = Permissions | Permissions;
+        Permissions = Permissions | ePermissions::epAddNewClient;
 
     cout << "\nDelete Client? y/n? \n ";
     cin >> AskPermission;
@@ -957,8 +962,10 @@ short ReadUserPermissions()
     if (AskPermission == 'y')
         Permissions = Permissions | ePermissions::epManageUsers;
 
+    if (Permissions == 127)
+        return -1;
 
-    return (Permissions == 127) ? -1 : Permissions;
+    return Permissions;
 }
 
 sUser ReadUserInfo(string& UserName)
@@ -1075,6 +1082,8 @@ void ShowDeleteUserScreen()
         else
         {
             SaveUsersDataToFile(UsersFileName, vUsers, User.Name);
+            cout << "\nUser Delet successfully";
+
         }
     }
     else
@@ -1230,7 +1239,7 @@ void ExecuteListClients(sUser sUserExist )
     {
         system("cls");
         PrintMessagewhinUserDoNotHavPermesions();
-        GoBackToMainMenue(sUserExist);
+ 
     }
 }
 
@@ -1245,7 +1254,7 @@ void ExecuteAddNewClient(sUser sUserExist)
     {
         system("cls");
         PrintMessagewhinUserDoNotHavPermesions();
-        GoBackToMainMenue(sUserExist);
+
     }
 }
 
@@ -1260,7 +1269,7 @@ void ExecuteDeleteClient(sUser sUserExist)
     {
         system("cls");
         PrintMessagewhinUserDoNotHavPermesions();
-        GoBackToMainMenue(sUserExist);
+
     }
 }
 
@@ -1275,7 +1284,7 @@ void ExecuteUpdateClient(sUser sUserExist)
     {
         system("cls");
         PrintMessagewhinUserDoNotHavPermesions();
-        GoBackToMainMenue(sUserExist);
+
     }
 }
 
@@ -1290,7 +1299,7 @@ void ExecuteFindClient(sUser sUserExist  )
     {
         system("cls");
         PrintMessagewhinUserDoNotHavPermesions();
-        GoBackToMainMenue(sUserExist);
+
     }
 }
 
@@ -1305,21 +1314,22 @@ void ExecuteTransactionsMenue(sUser sUserExist)
     {
         system("cls");
         PrintMessagewhinUserDoNotHavPermesions();
-        GoBackToMainMenue(sUserExist);
+
     }
 }
 
-void ExecuteTransactionsMenue(sUser sUserExist)
+void ExecuteManageUsers(sUser sUserExist)
 {
     if (IsHeHasPermesions(sUserExist, ePermissions::epManageUsers))
     {
         system("cls");
         ShowManageUsersMenueScreen(sUserExist);
+
     }
     else
     {
         PrintMessagewhinUserDoNotHavPermesions();
-        GoBackToMainMenue(sUserExist);
+
     }
 }
 
@@ -1330,36 +1340,43 @@ void PerfromMainMenueOption(sUser sUserExist, enMainMenueOptions MainMenueOption
     case enMainMenueOptions::eListClients:
     {
         ExecuteListClients(sUserExist);
+        GoBackToMainMenue(sUserExist);
         break;
     }
     case enMainMenueOptions::eAddNewClient:
     {
         ExecuteAddNewClient(sUserExist);
+        GoBackToMainMenue(sUserExist);
         break;
     }
     case enMainMenueOptions::eDeleteClient:
     {
         ExecuteDeleteClient(sUserExist);
+        GoBackToMainMenue(sUserExist);
         break;
     }
     case enMainMenueOptions::eUpdateClient:
     {
         ExecuteUpdateClient(sUserExist);
+        GoBackToMainMenue(sUserExist);
         break;
     }
     case enMainMenueOptions::eFindClient:
     {
-        ExecuteUpdateClient(sUserExist);
+        ExecuteFindClient(sUserExist);
+        GoBackToMainMenue(sUserExist);
         break;
     }
     case enMainMenueOptions::eShowTransactionsMenue:
     {
         ExecuteTransactionsMenue(sUserExist);
+        GoBackToMainMenue(sUserExist);
         break;
     }
     case enMainMenueOptions::eManageUsers:
     {
-        ExecuteTransactionsMenue(sUserExist);
+        ExecuteManageUsers(sUserExist);
+        GoBackToMainMenue(sUserExist);
         break;
     }
     case enMainMenueOptions::eLogout:
