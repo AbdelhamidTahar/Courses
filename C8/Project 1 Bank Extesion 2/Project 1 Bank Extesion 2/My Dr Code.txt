@@ -290,7 +290,7 @@ int ReadPermissionsToSet()
     cin >> Answer;
     if (Answer == 'y' || Answer == 'Y')
     {
-
+        
 
         Permissions += enMainMenuePermissions::pListClients;
     }
@@ -464,8 +464,8 @@ void ShowAccessDeniedMessage()
 
 void ShowAllClientsScreen()
 {
-
-
+   
+    
     if (!CheckAccessPermission(enMainMenuePermissions::pListClients))
     {
         ShowAccessDeniedMessage();
@@ -1462,7 +1462,7 @@ void ShowManageUsersMenue()
     cout << "\t[5] Find User.\n";
     cout << "\t[6] Main Menue.\n";
     cout << "===========================================\n";
-
+    
 
     PerfromManageUsersMenueOption((enManageUsersMenueOptions)ReadManageUsersMenueOption());
 }
@@ -1537,7 +1537,7 @@ void ShowMainMenue()
     cout << "\t[7] Manage Users.\n";
     cout << "\t[8] Logout.\n";
     cout << "===========================================\n";
-
+    
 
     PerfromMainMenueOption((enMainMenueOptions)ReadMainMenueOption());
 }
