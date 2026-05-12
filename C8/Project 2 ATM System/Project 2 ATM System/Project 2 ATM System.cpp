@@ -18,8 +18,15 @@ enum enATMMenueOptions {
 };
 
 enum enQuickWithdrawOptions {
-    ewp1 = 1, ewp2 = 2, ewp3 = 3, ewp4 = 4,
-    ewp5 = 5, ewp6 = 6, ewp7 = 7, ewp8 = 8, ewpExit = 9
+    ewpQuickWithdraw20 = 1,
+    ewpQuickWithdraw50 = 2,
+    ewpQuickWithdraw100 = 3,
+    ewpQuickWithdraw200 = 4,
+    ewpQuickWithdraw400 = 5,
+    ewpQuickWithdraw600 = 6,
+    ewpQuickWithdraw800 = 7,
+    ewpQuickWithdraw1000 = 8,
+    ewpExit = 9
 };
 
 struct sClient
@@ -65,7 +72,6 @@ vector<string> SplitString(string S1, string Delim)
 
 }
 
-
 sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
 {
 
@@ -84,7 +90,6 @@ sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
     return Client;
 
 }
-
 
 vector <sClient> LoadCleintsDataFromFile(string FileName)
 {
@@ -115,7 +120,6 @@ vector <sClient> LoadCleintsDataFromFile(string FileName)
     return vClients;
 
 }
-
 
 bool FindClientByAccountNumberAndPinCode(string AccountNumber, string  PinCode, sClient& CurrentClient)
 {
@@ -169,7 +173,6 @@ short ReadMQuickWithdrawMenuSecreenOption()
     return Choice;
 }
 
-
 bool IsBalanceEnough(sClient CLient, double Balance)
 {
     return (CLient.AccountBalance >= Balance);
@@ -196,7 +199,6 @@ string ConvertRecordToLine(sClient Client, string Seperator = "#//#")
     return stClientRecord;
 
 }
-
 
 vector <sClient> SaveCleintsDataToFile(string FileName, vector <sClient> vClients)
 {
@@ -229,7 +231,6 @@ vector <sClient> SaveCleintsDataToFile(string FileName, vector <sClient> vClient
     return vClients;
 
 }
-
 
 bool DepositBalanceToClientByAccountNumberATM(string AccountNumber, double Amount, vector <sClient>& vClients)
 {
@@ -275,56 +276,25 @@ void DepositQuickWithdrawBalanceOptions(string AccountNumber, double Amount)
 
 void PerfromQuickWithdrawMenueOption(enQuickWithdrawOptions QuickWithdrawOptions)
 {
+
+
+
+    short arrQuickWithdraw[] = { 20,50,100,200,400,600,800,1000 };
+
     switch (QuickWithdrawOptions)
     {
 
-    case enQuickWithdrawOptions::ewp1:
-    {
-        DepositQuickWithdrawBalanceOptions(CurrentClient.AccountNumber, 20);
-        GoBackToATMMainMenue();
-    }
-    case enQuickWithdrawOptions::ewp2:
-    {
-        DepositQuickWithdrawBalanceOptions(CurrentClient.AccountNumber,50);
-        GoBackToATMMainMenue();
-    }
-    case enQuickWithdrawOptions::ewp3:
-    {
-        DepositQuickWithdrawBalanceOptions(CurrentClient.AccountNumber, 100);
-        GoBackToATMMainMenue();
-    }
-    case enQuickWithdrawOptions::ewp4:
-    {
-        DepositQuickWithdrawBalanceOptions(CurrentClient.AccountNumber, 200);
-        GoBackToATMMainMenue();
-    }
-    case enQuickWithdrawOptions::ewp5:
-    {
-        DepositQuickWithdrawBalanceOptions(CurrentClient.AccountNumber, 400);
-        GoBackToATMMainMenue();
-    }
-    case enQuickWithdrawOptions::ewp6:
-    {
-        DepositQuickWithdrawBalanceOptions(CurrentClient.AccountNumber, 600);
-        GoBackToATMMainMenue();
-    }
-    case enQuickWithdrawOptions::ewp7:
-    {
-        DepositQuickWithdrawBalanceOptions(CurrentClient.AccountNumber, 800);
-        GoBackToATMMainMenue();
-    }
-    case enQuickWithdrawOptions::ewp8:
-    {
-        DepositQuickWithdrawBalanceOptions(CurrentClient.AccountNumber, 1000);
-        GoBackToATMMainMenue();
-    }
-        
     case enQuickWithdrawOptions::ewpExit:
     {
         GoBackToATMMainMenue();
         break;
     }
-    
+    default:
+    {
+        DepositQuickWithdrawBalanceOptions(CurrentClient.AccountNumber, arrQuickWithdraw[QuickWithdrawOptions-1]);
+        GoBackToATMMainMenue();
+        break;
+    }  
     }
 }
 
@@ -346,8 +316,6 @@ void ShowQuickWithdrawMenuSecreen()
  
 
 }
-
-
 
 void GoBackShowNormalWithdrawSecreen()
 {
@@ -461,7 +429,6 @@ void ShowDepositSecreen()
     Deposit();
 }
 
-
 void CheckBalanceSecreen()
 {
     cout << "\n-----------------------------------\n";
@@ -470,7 +437,6 @@ void CheckBalanceSecreen()
 
     cout << "Your Balance is: "<< CurrentClient.AccountBalance;
 }
-
 
 void PerfromMainATMMenueOption(enATMMenueOptions ATMMenueOptions)
 {
@@ -495,20 +461,22 @@ void PerfromMainATMMenueOption(enATMMenueOptions ATMMenueOptions)
         system("cls");
         ShowDepositSecreen();
         GoBackToATMMainMenue();
-
+        break;
     }
     case enATMMenueOptions::eCheckrBalance:
     {
         system("cls");
         CheckBalanceSecreen();
         GoBackToATMMainMenue();
-
+        break;
     }
     case enATMMenueOptions::eLogout:
+    {
         Login();
+        break;
+    }
     }
 }
-
 
 void ShowATMMainMenue()
 {

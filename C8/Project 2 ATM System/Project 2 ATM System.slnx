@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Project 2 ATM System/Project 2 ATM System.vcxproj" />
+  <Project Path="Project 2 ATM System/Project 2 ATM System.vcxproj" Id="b878e93c-cd42-4db2-a032-8b2bb9ae88c5" />
 </Solution>
