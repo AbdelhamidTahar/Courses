@@ -17,18 +17,6 @@ enum enATMMenueOptions {
     eDeposit = 3, eCheckrBalance = 4, eLogout = 5
 };
 
-enum enQuickWithdrawOptions {
-    ewpQuickWithdraw20 = 1,
-    ewpQuickWithdraw50 = 2,
-    ewpQuickWithdraw100 = 3,
-    ewpQuickWithdraw200 = 4,
-    ewpQuickWithdraw400 = 5,
-    ewpQuickWithdraw600 = 6,
-    ewpQuickWithdraw800 = 7,
-    ewpQuickWithdraw1000 = 8,
-    ewpExit = 9
-};
-
 struct sClient
 {
     string AccountNumber;
@@ -166,9 +154,15 @@ void GoBackToATMMainMenue()
 
 short ReadMQuickWithdrawMenuSecreenOption()
 {
-    cout << "Choose what to withdraw from[1] to [8] ? ";
     short Choice = 0;
+    cout << "Choose what to withdraw from[1] to [9] ? ";
     cin >> Choice;
+
+    while (Choice < 1 || Choice>9)
+    {
+        cout << "\nChoose what to withdraw from[1] to [9] ? ";
+        cin >> Choice;
+    }
 
     return Choice;
 }
@@ -232,9 +226,10 @@ vector <sClient> SaveCleintsDataToFile(string FileName, vector <sClient> vClient
 
 }
 
-bool DepositBalanceToClientByAccountNumberATM(string AccountNumber, double Amount, vector <sClient>& vClients)
+bool DepositBalanceToClientByAccountNumber(string AccountNumber, double Amount, vector <sClient>& vClients)
 {
     char Answer = 'n';
+
     cout << "\n\nAre you sure you want perfrom this transaction? y/n ? ";
     cin >> Answer;
     if (Answer == 'y' || Answer == 'Y')
@@ -245,7 +240,6 @@ bool DepositBalanceToClientByAccountNumberATM(string AccountNumber, double Amoun
             if (C.AccountNumber == AccountNumber)
             {
                 C.AccountBalance += Amount;
-                CurrentClient = C;
                 SaveCleintsDataToFile(ClientsFileName, vClients);
                 cout << "\n\nDone Successfully. New balance is: " << C.AccountBalance;
 
@@ -255,47 +249,60 @@ bool DepositBalanceToClientByAccountNumberATM(string AccountNumber, double Amoun
         }
 
 
-        return false;
-    }
 
+    }
+    return false;
 }
 
-void DepositQuickWithdrawBalanceOptions(string AccountNumber, double Amount)
+short GetQuickWithdrowAmount(short QuickWithdrawOptions)
 {
-    if (IsBalanceEnough(CurrentClient, Amount))
-    {
-        vector<sClient>vClients = LoadCleintsDataFromFile(ClientsFileName);
-        DepositBalanceToClientByAccountNumberATM(CurrentClient.AccountNumber, Amount * -1, vClients);
-    }
-    else
-    {
-        cout << "The amount exceeds your balance, make another choice.";
-
-    }
-}
-
-void PerfromQuickWithdrawMenueOption(enQuickWithdrawOptions QuickWithdrawOptions)
-{
-
-
-
-    short arrQuickWithdraw[] = { 20,50,100,200,400,600,800,1000 };
 
     switch (QuickWithdrawOptions)
     {
-
-    case enQuickWithdrawOptions::ewpExit:
-    {
-        GoBackToATMMainMenue();
-        break;
-    }
+    case 1:
+        return 20;
+    case 2:
+        return 50;
+    case 3:
+        return 100;
+    case 4:
+        return 200;
+    case 5:
+        return 400;
+    case 6:
+        return 600;
+    case 7:
+        return 800;
+    case 8:
+        return 1000;
     default:
+        return 0;
+    }
+}
+
+void PerfromQuickWithdrawMenueOption(short QuickWithdrawOptions)
+{
+
+    if (QuickWithdrawOptions == 9)
     {
-        DepositQuickWithdrawBalanceOptions(CurrentClient.AccountNumber, arrQuickWithdraw[QuickWithdrawOptions - 1]);
-        GoBackToATMMainMenue();
-        break;
+        return;
     }
+    short Amount = GetQuickWithdrowAmount(QuickWithdrawOptions);
+    if (Amount > CurrentClient.AccountBalance)
+    {
+        cout << "\nThe amount exceeds your balance, make another choice.\n";
+        cout << "\n\nPress any key to Countenu...";
+        system("pause>0");
+        ShowQuickWithdrawMenuSecreen();
+        return;
     }
+
+    vector<sClient>vClients = LoadCleintsDataFromFile(ClientsFileName);
+    if (DepositBalanceToClientByAccountNumber(CurrentClient.AccountNumber, Amount * -1, vClients))
+        CurrentClient.AccountBalance -= Amount;
+
+
+
 }
 
 void ShowQuickWithdrawMenuSecreen()
@@ -312,7 +319,7 @@ void ShowQuickWithdrawMenuSecreen()
     cout << "===========================================\n";
     cout << "Your Balance is " << CurrentClient.AccountBalance;
 
-    PerfromQuickWithdrawMenueOption((enQuickWithdrawOptions)ReadMQuickWithdrawMenuSecreenOption());
+    PerfromQuickWithdrawMenueOption(ReadMQuickWithdrawMenuSecreenOption());
 
 
 }
@@ -358,43 +365,36 @@ bool IsNumberMultipleOfX(int Amount, int X)
     return (Reminder == 0) ? true : false;
 }
 
+int ReadWithDrawAmont()
+{
+    int Amount;
+    cout << "\nEnter an amount multiple of 5's ? ";
+
+    cin >> Amount;
+
+    while (Amount % 5 != 0)
+    {
+        cout << "\nEnter an amount multiple of 5's ? ";
+        cin >> Amount;
+    }
+    return Amount;
+}
+
 void NormalWithdraw()
 {
-    bool HasEnoughBalance = true;
-    bool IsAmountMultipleOfX = false;
-    double Amount;
-
-    do
+    int Amount = ReadWithDrawAmont();
+    if (Amount > CurrentClient.AccountBalance)
     {
-        Amount = ReadAmount("\nEnter an amount multiple of 5's ? ");
-        HasEnoughBalance = IsHasEnoughBalance(CurrentClient.AccountNumber, Amount);
-
-        if (HasEnoughBalance)
-        {
-            IsAmountMultipleOfX = IsNumberMultipleOfX((int)Amount, 5);
-
-            if (IsAmountMultipleOfX == true)
-            {
-                vector<sClient>vclients = LoadCleintsDataFromFile(ClientsFileName);
-                DepositBalanceToClientByAccountNumberATM(CurrentClient.AccountNumber, Amount * -1, vclients);
-                break;
-            }
-        }
-        else
-        {
-            cout << "\n\Enter execceds your balanc, make another choice.";
-            cout << "\n\nPress any key to Countenu...";
-            system("pause>0");
-            system("cls");
-            cout << "\n-----------------------------------\n";
-            cout << "\tNormal Withdraw Screen";
-            cout << "\n-----------------------------------\n";
-        }
-
-    } while (HasEnoughBalance == false || IsAmountMultipleOfX == false);
-
-
-
+        cout << "\nThe amount exceeds your balance, make another choice.\n";
+        cout << "\n\nPress any key to Countenu...";
+        system("pause>0");
+        system("cls");
+        ShowNormalWithdrawSecreen();
+        return;
+    }
+    vector<sClient>vClients = LoadCleintsDataFromFile(ClientsFileName);
+    if (DepositBalanceToClientByAccountNumber(CurrentClient.AccountNumber, Amount * -1, vClients))
+        CurrentClient.AccountBalance -= Amount;
 }
 
 void ShowNormalWithdrawSecreen()
@@ -407,17 +407,24 @@ void ShowNormalWithdrawSecreen()
 
 }
 
-void Deposit()
+double ReadPositiveAmount()
 {
-    double Amount;
+    double Amount = 0;
     do
     {
         cout << "Enter a positive Deposit Amount? ";
         cin >> Amount;
+    } while (Amount == 0);
 
-    } while (Amount < 0);
-    vector <sClient> vClients = LoadCleintsDataFromFile(ClientsFileName);
-    DepositBalanceToClientByAccountNumberATM(CurrentClient.AccountNumber, Amount, vClients);
+    return Amount;
+}
+
+void Deposit()
+{
+    double Amount = ReadPositiveAmount();
+    vector<sClient>vClients = LoadCleintsDataFromFile(ClientsFileName);
+    if (DepositBalanceToClientByAccountNumber(CurrentClient.AccountNumber, Amount * -1, vClients))
+        CurrentClient.AccountBalance -= Amount;
 
 }
 

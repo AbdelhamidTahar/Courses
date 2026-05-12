@@ -314,7 +314,7 @@ int ReadWithDrawAmont()
     cout << "\nEnter an amount multiple of 5's ? ";
 
     cin >> Amount;
-
+   
     while (Amount % 5 != 0)
     {
         cout << "\nEnter an amount multiple of 5's ? ";
@@ -436,14 +436,14 @@ void ShowMainMenue()
     cout << "\t[4] Check Balance.\n";
     cout << "\t[5] Logout.\n";
     cout << "===========================================\n";
-
+    
 
     PerfromMainMenueOption((enMainMenueOptions)ReadMainMenueOption());
 }
 
 bool  LoadClientInfo(string AccountNumber, string PinCode)
 {
-
+    
     if (FindClientByAccountNumberAndPinCode(AccountNumber, PinCode, CurrentClient))
         return true;
     else
