@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="e2 Classes and objects/e2 Classes and objects.vcxproj" />
+</Solution>
