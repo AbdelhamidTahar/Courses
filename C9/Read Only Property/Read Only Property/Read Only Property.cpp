@@ -48,9 +48,9 @@ public:
 		return _FirstName + _LastName;
 	}
 
-	void SetAge(short Age)
+	void SetAge(string Age)
 	{
-		_Age = Age;
+		_Age = stoi(Age);
 	}
 	short GetAge()
 	{
@@ -85,7 +85,7 @@ int main()
 
 	Person1.FirstName = "Abdelhamid";
 	Person1.LastName = "TAHAR";
-	Person1.Age = 24;
+	Person1.Age = "24";
 	Person1.Sex = 1;
 	Person1.IsLive = 1;
 	
