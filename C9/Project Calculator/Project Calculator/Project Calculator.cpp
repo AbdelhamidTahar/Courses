@@ -1,116 +1,117 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 class clsCalculator
 {
 private:
-	int _Result;
-	int _InputValue;
-	string _OperationType;
+    float _Result = 0;
+    float _LastNumber = 0;
+    string _LastOperation = "Clear";
+    float _PreviousResult = 0;
 
-	void _SetResult(int Result)
-	{
-		_Result = Result;
-	}
-	__declspec(property(get = GetFinalResults, put = _SetResult))int Result;
-
-	void _SetInputValue(int InputValue)
-	{
-		_InputValue = InputValue;
-	}
-	int _GetInputValue()
-	{
-		return _InputValue;
-	}
-	__declspec(property(get = _GetInputValue, put = _SetInputValue))int InputValue;
-
-	void _SetOperationType(string OperationType)
-	{
-		_OperationType = OperationType;
-	}
-	string _GetOperationType()
-	{
-		return _OperationType;
-	}
-	__declspec(property(get = _GetOperationType, put = _SetOperationType))string OperationType;
+    bool _IsZero(float Number)
+    {
+        return (Number == 0);
+    }
 
 public:
-	int GetFinalResults()
-	{
-		return _Result;
-	}
-	bool Clear()
-	{
-		Result = 0;
-		InputValue = 0;
-		OperationType = "Clear";
-		return true;
-	}
-	bool Add(int Input)
-	{
-		OperationType = "Adding";
-		InputValue = Input;
-		Result = Result + InputValue;
-		return true;
-	}
-	bool Divide(int Input)
-	{
-		Input = (Input == 0) ? 1 : Input;
+    void Add(float Number)
+    {
+        _LastNumber = Number;
+        _PreviousResult = _Result;
+        _LastOperation = "Adding";
+        _Result += Number;
+    }
 
-		OperationType = "Dividing";
-		InputValue = Input;
-		Result = Result / InputValue;
-		return true;
-	}
-	bool Multiplay(int Input)
-	{
-		OperationType = "Multiplaying";
-		InputValue = Input;
-		Result = Result * InputValue;
-		return true;
-	}
-	bool Subtract(int Input)
-	{
-		OperationType = "Subtracing";
-		InputValue = Input;
-		Result = Result - InputValue;
-		return true;
-	}
-	void PrintResult()
-	{
-		cout << "Result After " +
-			OperationType + " " +
-			to_string(InputValue) + " is: " +
-			to_string(GetFinalResults()) +
-			"\n";
-	}
+    void Subtract(float Number)
+    {
+        _LastNumber = Number;
+        _PreviousResult = _Result;
+        _LastOperation = "Subtracting";
+        _Result -= Number;
+    }
 
+
+        void Divide(float Number)
+    {
+        _LastNumber = Number;
+        if (_IsZero(Number))
+        {
+            Number = 1;
+        }
+        _PreviousResult = _Result;
+        _LastOperation = "Dividing";
+        _Result /= Number;
+    }
+
+    void Multiply(float Number)
+    {
+        _LastNumber = Number;
+        _LastOperation = "Multiplying";
+        _PreviousResult = _Result;
+        _Result *= Number;
+    }
+
+    float GetFinalResults()
+    {
+        return _Result;
+    }
+
+    void Clear()
+    {
+        _LastNumber = 0;
+        _PreviousResult = 0;
+        _LastOperation = "Clear";
+        _Result = 0;
+    }
+
+ 
+
+    void CancelLastOperation()
+    {
+        _LastNumber = 0;
+        _LastOperation = "Cancelling Last Operation";
+        _Result = _PreviousResult;
+    }
+
+    void PrintResult()
+    {
+        cout << "Result ";
+        cout << "After " << _LastOperation << " " << _LastNumber << " is: " << _Result << "\n";
+    }
 };
+
+
+
 int main()
 {
-	clsCalculator Calculator1;
-	Calculator1.Clear();
-	Calculator1.PrintResult();
+    clsCalculator Calculator1;
 
-	Calculator1.Add(14);
-	Calculator1.PrintResult();
+    Calculator1.Clear();
+    Calculator1.Add(10);
+    Calculator1.PrintResult();
 
-	Calculator1.Subtract(4);
-	Calculator1.PrintResult();
+    Calculator1.Add(100);
+    Calculator1.PrintResult();
 
-	Calculator1.Multiplay(9);
-	Calculator1.PrintResult();
+    Calculator1.Subtract(20);
+    Calculator1.PrintResult();
 
-	Calculator1.Divide(4);
-	Calculator1.PrintResult();
+    Calculator1.Divide(0);
+    Calculator1.PrintResult();
 
-	Calculator1.Divide(0);
-	Calculator1.PrintResult();
+    Calculator1.Divide(2);
+    Calculator1.PrintResult();
 
-	Calculator1.Clear();
-	Calculator1.PrintResult();
+    Calculator1.Multiply(3);
+    Calculator1.PrintResult();
 
+    Calculator1.CancelLastOperation();
+    Calculator1.PrintResult();
 
-	return 0;
+    Calculator1.Clear();
+    Calculator1.PrintResult();
+
+    system("pause>0");
+    return 0;
 }
