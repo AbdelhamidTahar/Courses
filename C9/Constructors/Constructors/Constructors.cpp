@@ -21,15 +21,15 @@ public:
 		_ZipCode = ZipCode;
 	}
 
-	//Constructors2
-	clsAddress()
+	//Copy Constructors
+	clsAddress(clsAddress& _Old_Obj)
 
 	{
-		_Country = "Nothing";
-		_City = "Nothing";
-		_Street = "Nothing";
-		_PObox = "Nothing";
-		_ZipCode = "Nothing";
+		_Country = _Old_Obj.Country();
+		_City = _Old_Obj.City();
+		_Street = _Old_Obj.Street();
+		_PObox = _Old_Obj.PObox();
+		_ZipCode = _Old_Obj.ZipCode();
 	}
 			
 	void SetCountry(string Country)
@@ -100,7 +100,7 @@ int main()
 	clsAddress Address1("Algeara", "Tebessa", "AirPort", "152243", "12000");
 	Address1.PrintAddress();
 
-	clsAddress Address2;
+	clsAddress Address2=Address1;
 	Address2.PrintAddress();
 
 	return 0;
