@@ -1,0 +1,122 @@
+#include <iostream>
+using namespace std;
+
+class clsAddress
+{
+private:
+	string _Country;
+	string _City;
+	string _Street;
+	string _PObox;
+	string _ZipCode;
+
+public:
+	//Constructors1
+	clsAddress(string Country, string City, string Street, string PObox, string ZipCode)
+	{
+		_Country = Country;
+		_City = City;
+		_Street = Street;
+		_PObox = PObox;
+		_ZipCode = ZipCode;
+	}
+
+	//Copy Constructors
+	clsAddress(clsAddress& _Old_Obj)
+
+	{
+		_Country = _Old_Obj.Country();
+		_City = _Old_Obj.City();
+		_Street = _Old_Obj.Street();
+		_PObox = _Old_Obj.PObox();
+		_ZipCode = _Old_Obj.ZipCode();
+	}
+
+	void SetCountry(string Country)
+	{
+		_Country = Country;
+	}
+	string Country()
+	{
+		return _Country;
+	}
+
+	void SetCity(string City)
+	{
+		_Country = City;
+	}
+	string City()
+	{
+		return _City;
+	}
+
+	void SetStreet(string Street)
+	{
+		_Street = Street;
+	}
+	string Street()
+	{
+		return _Street;
+	}
+
+	void SetPObox(string PObox)
+	{
+		_PObox = PObox;
+	}
+	string PObox()
+	{
+		return _PObox;
+	}
+
+	void SetZipCode(string ZipCode)
+	{
+		_ZipCode = ZipCode;
+	}
+	string ZipCode()
+	{
+		return _ZipCode;
+	}
+
+	void PrintAddress()
+	{
+		cout << "\n-----------------\n";
+
+		cout << "Country: " << _Country << endl;
+		cout << "City: " << _City << endl;
+		cout << "Street: " << _Street << endl;
+		cout << "PObox: " << _PObox << endl;
+		cout << "Zip Code: " << _ZipCode << endl;
+
+		cout << "\n-----------------\n";
+
+	}
+
+	~clsAddress()
+	{
+		cout << "Hello, I'm The Dustroctor.\n";
+	}
+
+};
+
+void TestDustroctor()
+{
+
+	clsAddress Address1("Algeara", "Tebessa", "AirPort", "152243", "12000");
+	Address1.PrintAddress();
+
+	clsAddress* PAddress = new clsAddress("Algeara", "Tebessa", "AirPort", "152243", "12000");
+	Address1.PrintAddress();
+	delete PAddress;
+
+
+}
+
+int main()
+{
+
+	TestDustroctor();
+
+
+
+	return 0;
+}

@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Constructors/Constructors.vcxproj" Id="2e41322b-5cb1-468e-b213-0eb835a76e05" />
+  <Project Path="Dustroctors/Dustroctors.vcxproj" />
 </Solution>
