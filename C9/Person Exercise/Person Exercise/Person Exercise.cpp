@@ -7,7 +7,6 @@ private:
 	int _ID;
 	string _FirstName;
 	string _LastName;
-	string _FullName;
 	string _Email;
 	string _Phone;
 
@@ -22,7 +21,6 @@ public:
 		_ID = ID;
 		_FirstName = FirstName;
 		_LastName = LastName;
-		_FullName = FullName();
 		_Email = Email;
 		_Phone = Phone;
 	}
@@ -86,12 +84,12 @@ public:
 		cout << "\nInfo\n";
 
 		cout << "-----------------------------\n";
-		cout << "ID: " << _ID << endl;
+		cout << "ID		  : " << _ID << endl;
 		cout << "FirstName: " << _FirstName << endl;
-		cout << "LastName: " << _LastName << endl;
-		cout << "FullName: " << _FullName << endl;
-		cout << "Email: " << _Email << endl;
-		cout << "Phone: " << _Phone << endl;
+		cout << "LastName : " << _LastName << endl;
+		cout << "FullName : " << FullName() << endl;
+		cout << "Email    : " << _Email << endl;
+		cout << "Phone	  : " << _Phone << endl;
 		cout << "-----------------------------\n";
 
 
