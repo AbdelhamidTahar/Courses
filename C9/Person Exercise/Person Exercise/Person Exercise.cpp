@@ -9,13 +9,7 @@ private:
 	string _LastName;
 	string _Email;
 	string _Phone;
-
 public:
-	string FullName()
-	{
-		return _FirstName + " " + _LastName;
-	}
-
 	clsPerson(int ID, string FirstName, string LastName, string Email, string Phone)
 	{
 		_ID = ID;
@@ -24,82 +18,105 @@ public:
 		_Email = Email;
 		_Phone = Phone;
 	}
-
+	
+	//Read Only Property
 	int ID()
 	{
 		return _ID;
 	}
-
-	void SetFirstName(string FirstName)
+	
+	//Property Set
+	void setFirstName(string FirstName)
 	{
 		_FirstName = FirstName;
 	}
+	
+	//Property Get
 	string FirstName()
 	{
 		return _FirstName;
 	}
 
-	void SetLastName(string LastName)
+	//Property Set
+	void setLastName(string LastName)
 	{
 		_LastName = LastName;
 	}
+	
+	//Property Get
 	string LastName()
 	{
 		return _LastName;
 	}
-
-	void SetEmail(string Email)
+	
+	//Property Set
+	void setEmail(string Email)
 	{
 		_Email = Email;
 	}
+	
+	//Property Get
 	string Email()
 	{
 		return _Email;
 	}
-
-	void SetPhone(string Phone)
+	
+	//Property Set
+	void setPhone(string Phone)
 	{
 		_Phone = Phone;
 	}
+	
+	//Property Get
 	string Phone()
 	{
 		return _Phone;
 	}
-
-	void SendEmail(string Subjct, string Body)
+	
+	string FullName()
 	{
-		cout << "\nThe following Message sent Successfully to email: " << _Email << endl;
-		cout << "Subjct: " << Subjct << endl;
-		cout << "Body: " << Body << endl;
-	}
-
-	void SendSMS(string Body)
-	{
-		cout << "\nThe following Message sent Successfully to Phone: " << _Phone << endl;
-		cout << Body << endl;
+		return _FirstName + " " + _LastName;
 	}
 
 	void Print()
 	{
-		cout << "\nInfo\n";
+		cout << "\nInfo:";
+		cout << "\n___________________";
+		cout << "\nID : " << _ID;
+		cout << "\nFirstName: " << _FirstName;
+		cout << "\nLastName : " << _LastName;
+		cout << "\nFull Name: " << FullName();
+		cout << "\nEmail : " << _Email;
+		cout << "\nPhone : " << _Phone;
+		cout << "\n___________________\n";
+	}
 
-		cout << "-----------------------------\n";
-		cout << "ID		  : " << _ID << endl;
-		cout << "FirstName: " << _FirstName << endl;
-		cout << "LastName : " << _LastName << endl;
-		cout << "FullName : " << FullName() << endl;
-		cout << "Email    : " << _Email << endl;
-		cout << "Phone	  : " << _Phone << endl;
-		cout << "-----------------------------\n";
-
-
+	void SendEmail(string Subject, string Body)
+	{
+		cout << "\nThe following message sent successfully to email: " << _Email;
+		cout << "\nSubject: " << Subject;
+		cout << "\nBody: " << Body << endl;
+	}
+	
+	void SendSMS(string TextMessage)
+	{
+		cout << "\nThe following SMS sent successfully to phone: "
+			<< _Phone;
+		cout << "\n" << TextMessage << endl;
 	}
 };
 
 int main()
 {
-	clsPerson Person1(10, "Abdelhamid", "TAHAR", "taharabdalhamid12@gmail.com", "0696376164");
+	clsPerson Person1(10, "Mohammed", "Abu-Hadhoud","my@gmail.com","0098387727");
+	
 	Person1.Print();
-	Person1.SendEmail("HI", "THIS IS JUST TEST");
-	Person1.SendSMS("THIS IS JUST SMS TEST GOOD BYE.");
+	
+	Person1.SendEmail("Hi", "How are you?");
+	
+	Person1.SendSMS("How are you?");
+	
+	system("pause>0");
+	
+	return 0;
 }
