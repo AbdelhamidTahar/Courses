@@ -13,14 +13,14 @@ private:
 
 public:
 
-	//clsPerson(int ID, string FirstName, string LastName, string Email, string Phone)
-	//{
-	//	_ID = ID;
-	//	_FirstName = FirstName;
-	//	_LastName = LastName;
-	//	_Email = Email;
-	//	_Phone = Phone;
-	//}
+	clsPerson(int ID, string FirstName, string LastName, string Email, string Phone)
+	{
+		_ID = ID;
+		_FirstName = FirstName;
+		_LastName = LastName;
+		_Email = Email;
+		_Phone = Phone;
+	}
 	
 	//Read Only Property
 	int ID()
@@ -117,10 +117,20 @@ private:
 
 public:
 
+
+	clsEmployee(int ID, string FirstName, string LastName, string Email, string Phone,string Title, string Department, float Salary)
+		:clsPerson(ID, FirstName, LastName, Email, Phone)
+	{
+		_Title = Title;
+		_Department = Department;
+		_Salary = Salary;
+	}
+
 	void setTitle(string Title)
 	{
 		_Title = Title;
 	}
+
 	string Title()
 	{
 		return _Title;
@@ -148,20 +158,10 @@ public:
 int main()
 {
 
-	clsEmployee Employee1;
-
-	Employee1.setFirstName("abdelhamid");
-	Employee1.setLastName("TAHAR");
-	Employee1.setPhone("0555174615");
-	Employee1.setEmail("taharabdalhamid12@gmail.com");
-	Employee1.setTitle("Softwer engineer");
-	Employee1.setDepartment("CS");
-	Employee1.setSalary(6000);
+	clsEmployee Employee1(001, "ABDELHAMID", "TAHAR", "taharabdalhamid12@gmail.com", "+213696376163", "CEO", "CS", 5000);
 
 	Employee1.Print();
-	Employee1.SendEmail("TEST", "THIS IS JUST A TEST I'M SORRY ABOUT THAT.\nHAVE A GOOD DAY:)\n");
-	Employee1.SendSMS
-	("HI, THERE I'M REALY SICK TODAY I'M GO TO THE DOCTOR TODAY I'M SOORY I CAN'T WORK TODAY:(\n");
+
 
 	return 0;
 }
