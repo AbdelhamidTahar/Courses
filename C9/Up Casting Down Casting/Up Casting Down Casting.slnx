@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Up Casting Down Casting/Up Casting Down Casting.vcxproj" />
+</Solution>
