@@ -31,10 +31,14 @@ public:
 
 int main()
 {
-	clsPerson Person;
+	clsPerson  Person;
 	clsStudent Student;
 	clsEmpleey Empleey;
 
+
+	Person.Print();
+	Student.Print();
+	Empleey.Print();
 
 
 	clsPerson* PTRPerson1 = &Student;
@@ -43,7 +47,8 @@ int main()
 	clsPerson* PTRPerson2 = &Empleey;
 	PTRPerson2->Print();
 
-
+	clsPerson* PTRPerson3 = &Person;
+	PTRPerson3->Print();
 
 	return 0;
 }
