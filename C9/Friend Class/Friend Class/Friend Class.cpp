@@ -49,7 +49,7 @@ protected:
 public:
 	bool VB7, VB8, VB9;
 
-	clsA b;
+
 
 	clsB()
 	{
@@ -57,12 +57,6 @@ public:
 		_VB4 = 00; _VB5 = 00; _VB6 = 00;
 		VB7 = 00; VB8 = 00; VB9 = 00;
 
-		b._VA1 = 00;
-		b._VA2 = 00;
-		b._VA3 = 00;
-		b._VA4 = 00;
-		b._VA5 = 00;
-		b._VA6 = 00;
 	}
 
 	void PrintPrivateclassBMembersInClassB()
@@ -74,12 +68,15 @@ public:
 	}
 
 
-	void PrintPrivateclassAMembersInClassA()
+	void PrintPrivateclassAMembersInClassA(clsA ObjectA)
 	{
+		ObjectA._VA1 = 00;
+		ObjectA._VA2 = 00;
+		ObjectA._VA3 = 00;
 		cout << "Print Private class A Members After Modifi In Class b\n";
-		cout << "_VA1: " << b._VA1 << endl;
-		cout << "_VA2: " << b._VA2 << endl;
-		cout << "_VA3: " << b._VA3 << endl;
+		cout << "_VA1: " << ObjectA._VA1 << endl;
+		cout << "_VA2: " << ObjectA._VA2 << endl;
+		cout << "_VA3: " << ObjectA._VA3 << endl;
 	}
 
 };
@@ -96,7 +93,7 @@ int main()
 
 	clsB ObjectB;
 	ObjectB.PrintPrivateclassBMembersInClassB();
-	ObjectB.PrintPrivateclassAMembersInClassA();
+	ObjectB.PrintPrivateclassAMembersInClassA(ObjectA);
 
 	cout << ObjectA.VA1();
 
