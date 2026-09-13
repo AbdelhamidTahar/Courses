@@ -37,6 +37,8 @@ public:
 		return _VA1;
 	}
 
+
+
 	friend class clsB;
 };
 
@@ -48,6 +50,7 @@ protected:
 	float _VB4, _VB5, _VB6;
 public:
 	bool VB7, VB8, VB9;
+
 
 
 
@@ -78,7 +81,7 @@ public:
 		cout << "_VA2: " << ObjectA._VA2 << endl;
 		cout << "_VA3: " << ObjectA._VA3 << endl;
 	}
-
+	
 };
 
 
