@@ -5,7 +5,7 @@ using namespace std;
 class clsPerson {
 
 private:
-
+    string _FullName;
     class  clsAddress
     {
     private:
@@ -72,7 +72,16 @@ private:
     };
 
 public:
-    string FullName;
+
+    void SetFullName(string FullName)
+    {
+        _FullName = FullName;
+    }
+    string FullName()
+    {
+        return _FullName;
+    }
+
     clsAddress Address;
 
 
