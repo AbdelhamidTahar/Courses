@@ -48,8 +48,8 @@ int main()
 
 	for (int i = 0; i < NumberOfObjects; i++)
 	{
-		ObjectsArray[i].SetFirstName("Test");
-		ObjectsArray[i].SetLastName("Tast");
+		ObjectsArray[i] = clsPerson("Test", "Test");
+
 	}
 
 	for (int i = 0; i < NumberOfObjects; i++)
