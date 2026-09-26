@@ -21,8 +21,13 @@ public:
 		tm* Date = localtime(&TimeInSeconds);
 
 		this->_Day = Date->tm_mday;
-		this->_Day = Date->tm_mon + 1;
-		this->_Day = Date->tm_year + 1990;
+		this->_Month = Date->tm_mon + 1;
+		this->_Year = Date->tm_year + 1900;
+	}
+
+	clsDate(string Date)
+	{
+		*this = StringToDate(Date);
 	}
 
 	clsDate(short Day, short Month, short Year)
@@ -940,6 +945,11 @@ public:
 	short DaysUntilTheEndOfYear()
 	{
 		return DaysUntilTheEndOfYear(*this);
+	}
+
+	void Print()
+	{
+		cout << _Day << '/' << _Month << '/' << _Year << endl;
 	}
 
 };
