@@ -26,5 +26,8 @@
     <ClInclude Include="..\..\String Library Project\String Library Project\clsString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clsPeriod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

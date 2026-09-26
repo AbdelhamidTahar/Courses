@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\String Library Project\String Library Project\clsString.h" />
     <ClInclude Include="clsDate.h" />
+    <ClInclude Include="clsPeriod.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
