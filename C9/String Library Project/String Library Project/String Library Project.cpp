@@ -1,61 +1,183 @@
-#include<iostream>
-#include"clsString.h"
+
+//ProgrammingAdvices.com
+//Mohammed Abu-Hadhoud
+#include <iostream>
+#include "clsString.h"
+
 using namespace std;
 
 int main()
+
 {
-    clsString S1("Abdelhaimd TAHAR 43--.");
-
-   cout << "Upper All String: " << S1.UpperAllString() << endl;
-
-   cout << "Lower All String: " << S1.LowerAllString() << endl;
-    
-
-    S1.PrintFirstLetterOfEachWord();
-    cout << "\nUpper First Letter Of EachWord: " << S1.UpperFirstLetterOfEachWord() << endl;
+    clsString String1;
 
 
-    cout << "Lower First Letter Of EachWord: " << S1.LowerFirstLetterOfEachWord() << endl;
+    clsString String2("Mohammed");
 
-    cout << "Count Capital Letters: " << S1.CountCapitalLetters() << endl;
+    String1.Value = "Ali Ahmed";
 
-    cout << "Count Small Letters: " << S1.CountSmallLetters() << endl;
+    cout << "String1 = " << String1.Value << endl;
+    cout << "String2 = " << String2.Value << endl;
 
-    cout << "Count All Letters: " << S1.CountLetters(S1.All)<< endl;
+    cout << "Number of words: " << String1.CountWords() << endl;
 
-    cout << "Count Capital Letters: " << S1.CountLetters(S1.CapitalLetters)<< endl;
+    cout << "Number of words: " << String1.CountWords("Fadi ahmed rateb omer") << endl;
 
-    cout << "Count Small Letters: " << S1.CountLetters(S1.SmallLetters)<< endl;
+    cout << "Number of words: " <<
+        clsString::CountWords("Mohammed Saqer Abu-Hadhoud") << endl;
 
-    cout << "Count Letter 't': " << S1.CountLetter('t') << endl;
+    //----------------
+    clsString String3("hi how are you?");
 
-    cout << "Count Vowels : " << S1.CountVowels() << endl;
+    cout << "String 3 = " << String3.Value << endl;
 
-    S1.PrintVowels();
-    cout << endl;
-    S1.PrintEachWordInString();
+    cout << "String Length = " << String3.Length() << endl;
 
-    cout << "\nCount Words: " << S1.CountWords() << endl;
+    String3.UpperFirstLetterOfEachWord();
+    cout << String3.Value << endl;
 
-    S1.SplitString(" ");
+    //----------------
 
-    cout << "Trim Rigth: " << S1.TrimRigth()<< endl;
+    String3.LowerFirstLetterOfEachWord();
+    cout << String3.Value << endl;
 
-    cout << "Trim Left: " << S1.TrimLeft() << endl;
+    //----------------
 
-    cout << "Trim : " << S1.Trim() <<  endl;
+    String3.UpperAllString();
+    cout << String3.Value << endl;
 
-    cout << "Reverse Words: "<< S1.ReverseWordsInString() << endl;
+    //----------------
 
-    cout << "Replace Word In String Using Built In Function: "
-        << S1.ReplaceWordInStringUsingBuiltInFunction("abdelhamid", "HAMID") << endl;
+    String3.LowerAllString();
+    cout << String3.Value << endl;
 
-    cout << "Remove Punctuations From String: " <<S1.RemovePunctuationsFromString() << endl;
+    //----------------
+
+    cout << "After inverting a : "
+        << clsString::InvertLetterCase('a') << endl;
+
+    //----------------
+
+    String3.Value = "AbCdEfg";
+
+    String3.InvertAllLettersCase();
+    cout << String3.Value << endl;
+
+    String3.InvertAllLettersCase();
+    cout << String3.Value << endl;
+
+    //----------------
+
+    cout << "Capital Letters count : "
+        << clsString::CountLetters("Mohammed Abu-Hadhoud", clsString::CapitalLetters)
+        << endl << endl;
+
+    //----------------
+
+    String3.Value = "Welcome to Jordan";
+    cout << String3.Value << endl;
+
+    cout << "Capital Letters count :" << String3.CountCapitalLetters() << endl;
+
+    //----------------
+
+    cout << "Small Letters count :" << String3.CountSmallLetters() << endl;
+
+    //----------------
+
+    cout << "vowels count :" << String3.CountVowels() << endl;
+
+    //----------------
+
+    cout << "letter E count :" << String3.CountSpecificLetter('E', false) << endl;
+
+    //----------------
+
+    cout << "is letter u vowel? " << clsString::IsVowel('a')
+        << endl;
+
+    //----------------
+
+    cout << "Words Count" << String3.CountWords()
+        << endl;
+
+    //----------------
 
 
-    cout << endl << endl;
-    cout << " Object After all Edit :" << S1.Value << endl;
+    vector<string> vString;
 
-    
-}
+    vString = String3.Split(" ");
+
+    cout << "\nTokens = " << vString.size() << endl;
+
+    for (string& s : vString)
+    {
+        cout << s << endl;
+    }
+
+    //----------------
+
+    //Tirms
+    String3.Value = "    Mohammed Abu-Hahdoud     ";
+    cout << "\nString     = " << String3.Value;
+
+    String3.Value = "    Mohammed Abu-Hahdoud     ";
+    String3.TrimLeft();
+    cout << "\n\nTrim Left  = " << String3.Value;
+
+    //----------------
+
+    String3.Value = "    Mohammed Abu-Hahdoud     ";
+    String3.TrimRight();
+    cout << "\nTrim Right = " << String3.Value;
+
+    //----------------
+
+    String3.Value = "    Mohammed Abu-Hahdoud     ";
+    String3.Trim();
+    cout << "\nTrim       = " << String3.Value;
+
+    //----------------
+
+    //Joins
+    vector<string> vString1 = { "Mohammed","Faid","Ali","Maher" };
+
+    cout << "\n\nJoin String From Vector: \n";
+    cout << clsString::JoinString(vString1, " ");
+
+
+    string arrString[] = { "Mohammed","Faid","Ali","Maher" };
+
+    cout << "\n\nJoin String From array: \n";
+    cout << clsString::JoinString(arrString, 4, " ");
+
+    //----------------
+
+    String3.Value = "Mohammed Saqer Abu-Hahdoud";
+    cout << "\n\nString     = " << String3.Value;
+
+    String3.ReverseWordsInString();
+    cout << "\nReverse Words : " << String3.Value
+        << endl;
+
+    //---------------
+
+    String3.Value = "Mohammed Saqer Abu-Hahdoud";
+    String3.ReplaceWord("Mohammed", "Sari");
+        
+    cout << "\nReplace : " << String3.Value << endl;
+
+    //---------------
+
+    String3.Value = "This is: a sample text, with punctuations.";
+    cout << "\n\nString     = " << String3.Value;
+
+    String3.RemovePunctuations();
+    cout << "\nRemove Punctuations : " << String3.Value
+        << endl;
+
+    //---------------
+    system("pause>0");
+    return 0;
+};
 

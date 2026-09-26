@@ -26,7 +26,7 @@ namespace OperationsOnChar
     char InvertLetterCase(char Char);
 }
 
-short OperationsOnString::CountLetters(const string& S,enWhatToCount WhatToCount)
+short OperationsOnString::CountLetters(const string& S,enWhatToCount WhatToCount = enWhatToCount::All)
 {
     short Count = 0;
 

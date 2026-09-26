@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-struct stDate
+struct clsDate
 {
 	short Year;
 	short Month;
@@ -21,7 +21,7 @@ short NumberOfDaysInAMonth(short Month, short Year)
 	return (Month == 2) ? (isLeapYear(Year) ? 29 : 28) :days[Month - 1];
 }
 
-bool IsLastDayInMonth(stDate Date)
+bool IsLastDayInMonth(clsDate Date)
 {
 	return (Date.Day == NumberOfDaysInAMonth(Date.Month,Date.Year));
 }
@@ -31,7 +31,7 @@ bool IsLastMonthInYear(short Month)
 	return (Month == 12);
 }
 
-stDate DecreaseDateByOneDay(stDate Date)
+clsDate DecreaseDateByOneDay(clsDate Date)
 {
 	if (IsLastDayInMonth(Date))
 	{
@@ -54,7 +54,7 @@ stDate DecreaseDateByOneDay(stDate Date)
 	return Date;
 }
 
-stDate DecreaseDateByOneWeek(stDate Date)
+clsDate DecreaseDateByOneWeek(clsDate Date)
 {
 	for (int i = 1; i <= 7; i++)
 	{
@@ -63,7 +63,7 @@ stDate DecreaseDateByOneWeek(stDate Date)
 	return Date;
 }
 
-stDate DecreaseDateByXWeeks(short Weeks, stDate Date)
+clsDate DecreaseDateByXWeeks(short Weeks, clsDate Date)
 {
 	for (short i = 1; i <= Weeks; i++)
 	{
@@ -72,7 +72,7 @@ stDate DecreaseDateByXWeeks(short Weeks, stDate Date)
 	return Date;
 }
 
-stDate DecreaseDateByOneMonth(stDate Date)
+clsDate DecreaseDateByOneMonth(clsDate Date)
 {
 	if (Date.Month == 12)
 	{
@@ -95,7 +95,7 @@ stDate DecreaseDateByOneMonth(stDate Date)
 	return Date;
 }
 
-stDate DecreaseDateByXDays(short Days, stDate Date)
+clsDate DecreaseDateByXDays(short Days, clsDate Date)
 {
 	for (short i = 1; i <= Days; i++)
 	{
@@ -104,7 +104,7 @@ stDate DecreaseDateByXDays(short Days, stDate Date)
 	return Date;
 }
 
-stDate DecreaseDateByXMonths(short Months, stDate Date)
+clsDate DecreaseDateByXMonths(short Months, clsDate Date)
 {
 	for (short i = 1; i <= Months; i++)
 	{
@@ -113,13 +113,13 @@ stDate DecreaseDateByXMonths(short Months, stDate Date)
 	return Date;
 }
 
-stDate DecreaseDateByOneYear(stDate Date)
+clsDate DecreaseDateByOneYear(clsDate Date)
 {
 	Date.Year++;
 	return Date;
 }
 
-stDate DecreaseDateByXYears(short Years, stDate Date)
+clsDate DecreaseDateByXYears(short Years, clsDate Date)
 {
 	for (short i = 1; i <= Years; i++)
 	{
@@ -128,20 +128,20 @@ stDate DecreaseDateByXYears(short Years, stDate Date)
 	return Date;
 }
 
-stDate DecreaseDateByXYearsFaster(short Years, stDate Date)
+clsDate DecreaseDateByXYearsFaster(short Years, clsDate Date)
 {
 	Date.Year += Years;
 	return Date;
 }
 
-stDate DecreaseDateByOneDecade(stDate Date)
+clsDate DecreaseDateByOneDecade(clsDate Date)
 {
 	//Period of 10 years
 	Date.Year += 10;
 	return Date;
 }
 
-stDate DecreaseDateByXDecades(short Decade, stDate Date)
+clsDate DecreaseDateByXDecades(short Decade, clsDate Date)
 {
 	for (short i = 1; i <= Decade * 10; i++)
 	{
@@ -150,20 +150,20 @@ stDate DecreaseDateByXDecades(short Decade, stDate Date)
 	return Date;
 }
 
-stDate DecreaseDateByXDecadesFaster(short Decade, stDate Date)
+clsDate DecreaseDateByXDecadesFaster(short Decade, clsDate Date)
 {
 	Date.Year += Decade * 10;
 	return Date;
 }
 
-stDate DecreaseDateByOneCentury(stDate Date)
+clsDate DecreaseDateByOneCentury(clsDate Date)
 {
 	//Period of 100 years
 	Date.Year += 100;
 	return Date;
 }
 
-stDate DecreaseDateByOneMillennium(stDate Date)
+clsDate DecreaseDateByOneMillennium(clsDate Date)
 {
 	//Period of 1000 years
 	Date.Year += 1000;
@@ -194,9 +194,9 @@ short ReadYear()
 	return Year;
 }
 
-stDate ReadFullDate()
+clsDate ReadFullDate()
 {
-	stDate Date;
+	clsDate Date;
 	Date.Day = ReadDay();
 	Date.Month = ReadMonth();
 	Date.Year = ReadYear();
@@ -205,7 +205,7 @@ stDate ReadFullDate()
 
 int main()
 {
-	stDate Date1 = ReadFullDate();
+	clsDate Date1 = ReadFullDate();
 	cout << "\nDate After: \n";
 	Date1 = DecreaseDateByOneDay(Date1);
 	cout << "\n01-Substracting one day is: "
