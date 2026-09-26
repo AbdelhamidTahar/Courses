@@ -4,15 +4,19 @@ using namespace std;
 
 int main()
 {
-    clsDate D1;
-    clsDate D2("77/99/2025");
-    clsDate D3(44, 33, 2024);
-    clsDate D4(78968, 2023);
+	clsDate Date1;
+	Date1.Print();
+	clsDate Date2("31/1/2022");
+	Date2.Print();
+	clsDate Date3(20, 12, 2022);
+	Date3.Print();
+	clsDate Date4(250, 2022);
+	Date4.Print();
+	Date1.IncreaseDateByOneMonth();
+	Date1.Print();
 
-    D1.Print();
-    D2.Print();
-    D3.Print();
-    D4.Print();
+	system("pause>0");
+	return 0;
 
 
 }
