@@ -78,6 +78,7 @@ public:
 		while (IsError)
 		{
 			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << Message << endl;
 			cin >> Number;
 		    IsError = cin.fail(); // is input error?.
@@ -94,6 +95,7 @@ public:
 		while (IsError)
 		{
 			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << Message << endl;
 			cin >> Number;
 			IsError = cin.fail(); // is input error?.
@@ -110,6 +112,7 @@ public:
 		while (IsError)
 		{
 			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			cout << Message << endl;
 			cin >> Number;
 			IsError = cin.fail(); // is input error?.
