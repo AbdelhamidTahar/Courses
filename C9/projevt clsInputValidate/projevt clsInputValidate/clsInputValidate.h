@@ -1,26 +1,25 @@
 #pragma once
 #include <iostream>
-#include <string>
 #include "clsDate.h"
 
 using namespace std;
 
 class clsInputValidate
 {
-	bool IsNumberBetween(int Number, int From, int To)
+public:
+	static bool IsNumberBetween(int Number, int From, int To)
 	{
 		return (Number >= From && Number <= To);
 	}
-	bool IsNumberBetween(float Number, float From, float To)
+	static bool IsNumberBetween(float Number, float From, float To)
 	{
 		return (Number >= From && Number <= To);
 	}
-	bool IsNumberBetween(double Number, double From, double To)
+	static bool IsNumberBetween(double Number, double From, double To)
 	{
 		return (Number >= From && Number <= To);
 	}
-
-	bool IsDateBetween(clsDate Date, clsDate FromDate, clsDate ToDate)
+	static bool IsDateBetween(clsDate Date, clsDate FromDate, clsDate ToDate)
 	{
 		if (clsDate::CompareDates(FromDate, ToDate) == clsDate::After)
 			clsDate::SwapDates(FromDate, ToDate);
@@ -29,8 +28,48 @@ class clsInputValidate
 				||
 				clsDate::CompareDates(Date, ToDate) == clsDate::After);
 	}
+	static bool IsValidDate(clsDate Date)
+	{
 
-	int ReadIntNumber(string Message= "Invalid input. Please try again by entering a valid input.")
+		if (Date.Month < 1 || Date.Month > 12)
+			return false;
+		int NumberOfDaysInAMonth = clsDate::NumberOfDaysInAMonth(Date.Month, Date.Year);
+		if (Date.Day <1 || Date.Day >NumberOfDaysInAMonth)
+			return false;
+
+		return true;
+	}
+	static bool IsHasPunctuation(const string& Input)
+	{
+		for (const char& Character : Input)
+		{
+			if (ispunct(Character))
+				return true;
+		}
+		return false;
+
+	}
+	static bool IsHasDigit(const string& Input)
+	{
+		for (const char& Character : Input)
+		{
+			if (isdigit(Character))
+				return true;
+		}
+		return false;
+
+	}
+	static bool IsHasChar(const string& Input)
+	{
+		for (const char& Character : Input)
+		{
+			if (isalpha(Character))
+				return true;
+		}
+		return false;
+
+	}
+	static int ReadIntNumber(string Message= "Invalid input. Please try again by entering a valid input.")
 	{
 		int Number = 0;
 		cin >> Number;
@@ -46,7 +85,7 @@ class clsInputValidate
 
 		return Number;
 	}
-	double ReadDoubleNumber(string Message= "Invalid input. Please try again by entering a valid input.")
+	static double ReadDoubleNumber(string Message= "Invalid input. Please try again by entering a valid input.")
 	{
 		double Number = 0;
 		cin >> Number;
@@ -62,7 +101,7 @@ class clsInputValidate
 
 		return Number;
 	}
-	float ReadFloatNumber(string Message= "Invalid input. Please try again by entering a valid input.")
+	static float ReadFloatNumber(string Message= "Invalid input. Please try again by entering a valid input.")
 	{
 		float Number = 0;
 		cin >> Number;
@@ -78,8 +117,7 @@ class clsInputValidate
 
 		return Number;
 	}
-
-	int ReadIntNumberBetween(string Message, int From, int To)
+	static int ReadIntNumberBetween(string Message, int From, int To)
 	{
 		int Number = ReadIntNumber();
 
@@ -91,7 +129,7 @@ class clsInputValidate
 
 		return Number;
 	}
-	double ReaddoubleNumberBetween(string Message, double From, double To)
+	static double ReaddoubleNumberBetween(string Message, double From, double To)
 	{
 		double Number = ReadDoubleNumber();
 
@@ -103,7 +141,7 @@ class clsInputValidate
 
 		return Number;
 	}
-	float ReadfloatNumberBetween(string Message, float From, float To)
+	static float ReadfloatNumberBetween(string Message, float From, float To)
 	{
 		float Number = ReadFloatNumber();
 
@@ -115,19 +153,23 @@ class clsInputValidate
 
 		return Number;
 	}
-
-
-	bool IsValidDate(clsDate Date)
+	string ReadAlphaString(const string& InputMessage, const string& ErrorMessage)
 	{
+		string AlphaString = "";
+		cout << InputMessage << endl;
+		getline(cin >> ws, AlphaString);
 
-		if (Date.Month < 1 || Date.Month > 12)
-			return false;
-		int NumberOfDaysInAMonth = clsDate::NumberOfDaysInAMonth(Date.Month, Date.Year);
-		if (Date.Day <1 || Date.Day >NumberOfDaysInAMonth)
-			return false;
+		while (IsHasPunctuation(AlphaString) || IsHasDigit(AlphaString))
+		{
+			cout << ErrorMessage << endl << endl;
 
-		return true;
+			cout << InputMessage << endl;
+			getline(cin >> ws, AlphaString);
+		}
+		return AlphaString;
 	}
+
+
 
 
 };
