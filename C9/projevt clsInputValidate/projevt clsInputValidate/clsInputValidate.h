@@ -1,12 +1,21 @@
 #pragma once
 #include <iostream>
+#include <string>
 #include "clsDate.h"
+#include "clsString.h"
 
 using namespace std;
 
 class clsInputValidate
 {
 public:
+	static bool IsNumberBetween(short Number, short From, short To)
+	{
+		if (Number >= From && Number <= To)
+			return true;
+		else
+			return false;
+	}
 	static bool IsNumberBetween(int Number, int From, int To)
 	{
 		return (Number >= From && Number <= To);
@@ -19,25 +28,31 @@ public:
 	{
 		return (Number >= From && Number <= To);
 	}
-	static bool IsDateBetween(clsDate Date, clsDate FromDate, clsDate ToDate)
+	static bool IsDateBetween(clsDate Date, clsDate From, clsDate To)
 	{
-		if (clsDate::CompareDates(FromDate, ToDate) == clsDate::After)
-			clsDate::SwapDates(FromDate, ToDate);
+		//Date>=From && Date<=To
+		if ((clsDate::IsDate1AfterDate2(Date, From) || clsDate::IsDate1EqualDate2(Date, From))
+			&&
+			(clsDate::IsDate1BeforeDate2(Date, To) || clsDate::IsDate1EqualDate2(Date, To))
+			)
+		{
+			return true;
+		}
 
-		return!(clsDate::CompareDates(Date, FromDate) == clsDate::Before
-				||
-				clsDate::CompareDates(Date, ToDate) == clsDate::After);
+		//Date>=To && Date<=From
+		if ((clsDate::IsDate1AfterDate2(Date, To) || clsDate::IsDate1EqualDate2(Date, To))
+			&&
+			(clsDate::IsDate1BeforeDate2(Date, From) || clsDate::IsDate1EqualDate2(Date, From))
+			)
+		{
+			return true;
+		}
+
+		return false;
 	}
-	static bool IsValidDate(clsDate Date)
+	static bool IsValideDate(clsDate Date)
 	{
-
-		if (Date.Month < 1 || Date.Month > 12)
-			return false;
-		int NumberOfDaysInAMonth = clsDate::NumberOfDaysInAMonth(Date.Month, Date.Year);
-		if (Date.Day <1 || Date.Day >NumberOfDaysInAMonth)
-			return false;
-
-		return true;
+		return clsDate::IsValidDate(Date);
 	}
 	static bool IsHasPunctuation(const string& Input)
 	{
@@ -69,94 +84,84 @@ public:
 		return false;
 
 	}
-	static int ReadIntNumber(string Message= "Invalid input. Please try again by entering a valid input.")
+	static int ReadIntNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
-		int Number = 0;
-		cin >> Number;
-		bool IsError = cin.fail(); // is input error?.
+		int Number ;
 
-		while (IsError)
+		while (!(cin >> Number))
 		{
 			cin.clear();// clear error
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << Message << endl;
-			cin >> Number;
-		    IsError = cin.fail(); // is input error?.
+			cout << ErrorMessage << endl;
 		}
 
 		return Number;
 	}
-	static double ReadDoubleNumber(string Message= "Invalid input. Please try again by entering a valid input.")
+	static double ReadDblNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
-		double Number = 0;
-		cin >> Number;
-		bool IsError = cin.fail(); // is input error?.
+		double Number;
 
-		while (IsError)
+
+		while (!(cin >> Number))
 		{
 			cin.clear();// clear error
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << Message << endl;
-			cin >> Number;
-			IsError = cin.fail(); // is input error?.
+			cout << ErrorMessage << endl;
 		}
 
 		return Number;
 	}
-	static float ReadFloatNumber(string Message= "Invalid input. Please try again by entering a valid input.")
+	static float ReadFlNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
-		float Number = 0;
-		cin >> Number;
-		bool IsError = cin.fail(); // is input error?.
+		float Number;
 
-		while (IsError)
+
+		while (!(cin >> Number))
 		{
 			cin.clear();// clear error
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << Message << endl;
-			cin >> Number;
-			IsError = cin.fail(); // is input error?.
+			cout << ErrorMessage << endl;
 		}
 
 		return Number;
 	}
-	static int ReadIntNumberBetween(string Message, int From, int To)
+	static int ReadIntNumberBetween(int From, int To, string ErrorMessage = "Number is not within range, Enter again:\n")
 	{
 		int Number = ReadIntNumber();
 
-		while ((Number < From) || (Number > To))
+		while (!IsNumberBetween(Number, From, To))
 		{
-			cout << Message << endl;
+			cout << ErrorMessage << endl;
 			Number = ReadIntNumber();
 		}
 
 		return Number;
 	}
-	static double ReaddoubleNumberBetween(string Message, double From, double To)
+	static double ReadDblNumberBetween(double From, double To, string ErrorMessage = "Number is not within range, Enter again:\n")
 	{
-		double Number = ReadDoubleNumber();
+		double Number = ReadDblNumber();
 
-		while ((Number < From) || (Number > To))
+		while (!IsNumberBetween(Number,From,To))
 		{
-			cout << Message << endl;
-			Number = ReadDoubleNumber();
+			cout << ErrorMessage << endl;
+			Number = ReadDblNumber();
 		}
 
 		return Number;
 	}
 	static float ReadfloatNumberBetween(string Message, float From, float To)
 	{
-		float Number = ReadFloatNumber();
+		float Number = ReadFlNumber();
 
-		while ((Number < From) || (Number > To))
+		while (!IsNumberBetween(Number, From, To))
 		{
 			cout << Message << endl;
-			Number = ReadFloatNumber();
+			Number = ReadFlNumber();
 		}
 
 		return Number;
 	}
-	string ReadAlphaString(const string& InputMessage, const string& ErrorMessage)
+	static string ReadAlphaString(const string& InputMessage, const string& ErrorMessage)
 	{
 		string AlphaString = "";
 		cout << InputMessage << endl;
@@ -171,8 +176,59 @@ public:
 		}
 		return AlphaString;
 	}
+	static string ReadString(const string& Message)
+	{
+		string String;
+		cout << Message;
+		getline(cin >> ws, String);
+		return String;
+	}
+	static char ReadLetter(const string &ErrorMessage = "Invalid Letter, Enter again\n")
+	{
+		char Letter;
 
+		cin >> Letter;
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
+		while (!isalpha(Letter))
+		{
+			cout << ErrorMessage;
+			cin >> Letter;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+		}
+
+		return Letter;
+	}
+	static short ReadDigit(const string& ErrorMessage = "Invalid Digit, Enter again\n")
+	{
+		char Digit;
+		cin >> Digit;
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+		while (!isdigit(Digit))
+		{
+			cout << ErrorMessage;
+			cin >> Digit;
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+
+		switch (short(Digit)) // Convert From ASCII to DICIMAL Digit.
+		{
+		case 48:return 0;
+		case 49:return 1;
+		case 50:return 2;
+		case 51:return 3;
+		case 52:return 4;
+		case 53:return 5;
+		case 54:return 6;
+		case 55:return 7;
+		case 56:return 8;
+		case 57:return 9;
+		}
+
+		
+	}
 
 
 };
