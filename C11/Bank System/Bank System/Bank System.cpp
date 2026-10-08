@@ -2,62 +2,75 @@
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
 
-using namespace std;
-
 void ReadClientInfo(clsBankClient& Client)
 {
-	cout << "Please Enter FirstName: ";
-	Client.FirstName = clsInputValidate::ReadString();
+    cout << "\nEnter FirstName: ";
+    Client.FirstName = clsInputValidate::ReadString();
 
-	cout << "Please Enter LastName: ";
-	Client.LastName = clsInputValidate::ReadString();
+    cout << "\nEnter LastName: ";
+    Client.LastName = clsInputValidate::ReadString();
 
-	cout << "Please Enter Email: ";
-	Client.Email = clsInputValidate::ReadString();
+    cout << "\nEnter Email: ";
+    Client.Email = clsInputValidate::ReadString();
 
-	cout << "Please Enter Phone: ";
-	Client.Phone = clsInputValidate::ReadString();
+    cout << "\nEnter Phone: ";
+    Client.Phone = clsInputValidate::ReadString();
 
-	cout << "Please Enter PinCode: ";
-	Client.PinCode = clsInputValidate::ReadString();
+    cout << "\nEnter PinCode: ";
+    Client.PinCode = clsInputValidate::ReadString();
 
-	cout << "Please Enter Account Balance: ";
-	Client.AccountBalance = clsInputValidate::ReadFloatNumber();
+    cout << "\nEnter Account Balance: ";
+    Client.AccountBalance = clsInputValidate::ReadFloatNumber();
 }
+
 void UpdateClient()
 {
-	cout << "Please Enter Account Number: ";
-	string AccountNumber = clsInputValidate::ReadString();
-	while (!clsBankClient::IsClientExist(AccountNumber))
-	{
-		cout << "Sorry, This Client Is Not Excite, Try Another One: ";
-		AccountNumber = clsInputValidate::ReadString();
-	}
+    string AccountNumber = "";
+
+    cout << "\nPlease Enter client Account Number: ";
+    AccountNumber = clsInputValidate::ReadString();
+
+    while (!clsBankClient::IsClientExist(AccountNumber))
+    {
+        cout << "\nAccount number is not found, choose another one: ";
+        AccountNumber = clsInputValidate::ReadString();
+    }
+
+    clsBankClient Client1 = clsBankClient::Find(AccountNumber);
+    Client1.Print();
+
+    cout << "\n\nUpdate Client Info:";
+    cout << "\n____________________\n";
 
 
-	clsBankClient Clinet = clsBankClient::Find(AccountNumber);
-	Clinet.Print();
+    ReadClientInfo(Client1);
 
-	ReadClientInfo(Clinet);
+    clsBankClient::enSaveResults SaveResult;
 
-	clsBankClient::enReturnSaveMode SaveMode;
-	SaveMode = Clinet.Save();
+    SaveResult = Client1.Save();
 
-	if (SaveMode == clsBankClient::enReturnSaveMode::enErrorEmptySave)
-	{
-		cout << "Soory This Object Is Empty Can't Save Empty Object." << endl;
-	}
-	else if (SaveMode == clsBankClient::enReturnSaveMode::enUpdateSecsusfly)
-	{
-		Clinet.Print();
-		cout << "Update Succsusfly" << endl;
-	}
+    switch (SaveResult)
+    {
+    case  clsBankClient::enSaveResults::svSucceeded:
+    {
+        cout << "\nAccount Updated Successfully :-)\n";
+        Client1.Print();
+        break;
+    }
+    case clsBankClient::enSaveResults::svFaildEmptyObject:
+    {
+        cout << "\nError account was not saved because it's Empty";
+        break;
+
+    }
+
+    }
 }
 
 int main()
-{
-	
-	UpdateClient();
 
-	return 0;
+{
+    UpdateClient();
+    system("pause>0");
+    return 0;
 }
