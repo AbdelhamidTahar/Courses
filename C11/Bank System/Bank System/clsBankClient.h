@@ -11,11 +11,12 @@ class clsBankClient : public clsPerson
 {
 private:
 
-     enum enMode { EmptyMode = 0, UpdateMode = 1, AddMode = 2 };
+    enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
     enMode _Mode;
     string _AccountNumber;
     string _PinCode;
     float _AccountBalance;
+
 
     static clsBankClient _ConvertLinetoClientObject(string Line, string Seperator = "#//#")
     {
@@ -116,6 +117,26 @@ private:
 
     }
 
+    void _AddNew()
+    {
+
+        _AddDataLineToFile(_ConverClientObjectToLine(*this));
+    }
+
+    void _AddDataLineToFile(string  stDataLine)
+    {
+        fstream MyFile;
+        MyFile.open("Clients.txt", ios::out | ios::app);
+
+        if (MyFile.is_open())
+        {
+
+            MyFile << stDataLine << endl;
+
+            MyFile.close();
+        }
+
+    }
 
     static clsBankClient _GetEmptyClientObject()
     {
@@ -218,8 +239,6 @@ public:
     static clsBankClient Find(string AccountNumber, string PinCode)
     {
 
-
-
         fstream MyFile;
         MyFile.open("Clients.txt", ios::in);//read Mode
 
@@ -243,25 +262,8 @@ public:
         return _GetEmptyClientObject();
     }
 
-    enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1 ,svClientIsOrydyExsite};
+    enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFaildAccountNumberExists = 2 };
 
-    void _AddCilentToFile(string ClientDataLine)
-    {
-        fstream MyFile;
-
-        MyFile.open("Clinets.txt", ios::out | ios::app);
-
-       if( MyFile.is_open())
-        {
-           MyFile << ClientDataLine << endl;
-        }
-
-    }
-
-    void _AddNew()
-    {
-        _AddCilentToFile(_ConverClientObjectToLine(*this));
-    }
 
     enSaveResults Save()
     {
@@ -270,38 +272,44 @@ public:
         {
         case enMode::EmptyMode:
         {
+            if (IsEmpty())
+            {
 
-            return enSaveResults::svFaildEmptyObject;
+                return enSaveResults::svFaildEmptyObject;
+
+            }
+
         }
 
         case enMode::UpdateMode:
         {
 
-
             _Update();
 
             return enSaveResults::svSucceeded;
+
             break;
         }
 
-        case enMode::AddMode:
+        case enMode::AddNewMode:
         {
-
-            if (IsClientExist(_AccountNumber))
+            //This will add new record to file or database
+            if (clsBankClient::IsClientExist(_AccountNumber))
             {
-                return svClientIsOrydyExsite;
+                return enSaveResults::svFaildAccountNumberExists;
             }
-            _AddNew();
-            _Mode = enMode::UpdateMode;
+            else
+            {
+                _AddNew();
 
-            return enSaveResults::svSucceeded;
+                //We need to set the mode to update after add new
+                _Mode = enMode::UpdateMode;
+                return enSaveResults::svSucceeded;
+            }
+
             break;
         }
-
-
         }
-
-
 
     }
 
@@ -312,9 +320,10 @@ public:
         return (!Client1.IsEmpty());
     }
 
-    static clsBankClient GenerateNewClient(string AccountNumber)
+    static clsBankClient GetAddNewClientObject(string AccountNumber)
     {
-        return clsBankClient(enMode::AddMode, "", "", "", "", AccountNumber, "", 0);
+        return clsBankClient(enMode::AddNewMode, "", "", "", "", AccountNumber, "", 0);
     }
+
 };
 
