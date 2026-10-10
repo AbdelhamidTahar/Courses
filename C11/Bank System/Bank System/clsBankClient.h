@@ -13,9 +13,11 @@ private:
 
     enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
     enMode _Mode;
+
     string _AccountNumber;
     string _PinCode;
     float _AccountBalance;
+    bool _MarkedForDelete = false;
 
 
     static clsBankClient _ConvertLinetoClientObject(string Line, string Seperator = "#//#")
@@ -87,8 +89,11 @@ private:
 
             for (clsBankClient C : vClients)
             {
-                DataLine = _ConverClientObjectToLine(C);
-                MyFile << DataLine << endl;
+                if (C._MarkedForDelete == false)
+                {
+                    DataLine = _ConverClientObjectToLine(C);
+                    MyFile << DataLine << endl;
+                }
 
             }
 
@@ -325,5 +330,27 @@ public:
         return clsBankClient(enMode::AddNewMode, "", "", "", "", AccountNumber, "", 0);
     }
 
+    bool Delete()
+    {
+        vector <clsBankClient> _vClients;
+        _vClients = _LoadClientsDataFromFile();
+
+        for (clsBankClient& C : _vClients)
+        {
+            if (C.AccountNumber() == _AccountNumber)
+            {
+                C._MarkedForDelete = true;
+                break;
+            }
+
+        }
+
+        _SaveCleintsDataToFile(_vClients);
+
+        *this = _GetEmptyClientObject();
+
+        return true;
+
+    }
 };
 
