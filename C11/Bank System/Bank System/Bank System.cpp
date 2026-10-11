@@ -196,54 +196,49 @@ void ShowClientsList()
 
 }
 
-void PrintClientBalanceRecord(clsBankClient Client)
+void PrintClientRecordBalanceLine(clsBankClient Client)
 {
-    cout << "| " << left << setw(15) << Client.AccountNumber();
-    cout << "| " << left << setw(40) << Client.FullName();
-    cout << "| " << left << setw(12) << Client.AccountBalance;
-    cout << "| ";
-    cout << endl;
-}
 
+    cout << "| " << setw(15) << left << Client.AccountNumber();
+    cout << "| " << setw(40) << left << Client.FullName();
+    cout << "| " << setw(34) << left << Client.AccountBalance << "|";
+
+}
 
 
 void ShowTotalBalances()
 {
-    vector< clsBankClient> vClients = clsBankClient::GetClientsList();
 
+    vector <clsBankClient> vClients = clsBankClient::GetClientsList();
 
-    cout << "\t\t\t\t Balances List ( " << vClients.size() << " ) Clients.\n";
-
+    cout << "\n\t\t\t\t\tBalances List (" << vClients.size() << ") Client(s).";
     cout << "\n_______________________________________________________";
     cout << "_________________________________________\n" << endl;
+
     cout << "| " << left << setw(15) << "Accout Number";
     cout << "| " << left << setw(40) << "Client Name";
-    cout << "| " << left << setw(12) << "Balance";
-    cout << "| ";
+    cout << "| " << left << setw(34) << "Balance";
+    cout << "|";
+
     cout << "\n_______________________________________________________";
     cout << "_________________________________________\n" << endl;
+
+    double TotalBalances = clsBankClient::GetTotalBalances();
 
     if (vClients.size() == 0)
-    {
-       cout << "\t\t\t\t Not Client Excesy In System.\n";
-    }
+        cout << "\t\t\t\tNo Clients Available In the System!";
     else
-    {
-        for (clsBankClient& Client : vClients)
+
+        for (clsBankClient Client : vClients)
         {
-            PrintClientBalanceRecord(Client);
+            PrintClientRecordBalanceLine(Client);
+            cout << endl;
         }
-    }
-
-
 
     cout << "\n_______________________________________________________";
     cout << "_________________________________________\n" << endl;
-
-    cout << "\t\t\t\t Total Balances List ( " << clsBankClient::GetTotalBalanceClients() << " ) Clients.\n";
-    cout << "\t\t Total Balances List With Word ( " 
-        << clsUtil::NumberToText(clsBankClient::GetTotalBalanceClients())<< " ).\n";
-    
+    cout << "\t\t\t\t\t   Total Balances = " << TotalBalances << endl;
+    cout << "\t\t\t\t\t   ( " << clsUtil::NumberToText(TotalBalances) << ")";
 }
 
 int main()

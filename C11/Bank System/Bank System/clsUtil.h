@@ -7,7 +7,7 @@
 using namespace std;
 
 
-class UtilityLibrary
+class clsUtil
 {
 public:
 
