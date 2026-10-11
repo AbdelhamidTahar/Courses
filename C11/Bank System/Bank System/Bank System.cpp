@@ -205,7 +205,6 @@ void PrintClientRecordBalanceLine(clsBankClient Client)
 
 }
 
-
 void ShowTotalBalances()
 {
 
