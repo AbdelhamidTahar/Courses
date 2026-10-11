@@ -32,5 +32,8 @@
     <ClInclude Include="clsInputValidate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clsUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

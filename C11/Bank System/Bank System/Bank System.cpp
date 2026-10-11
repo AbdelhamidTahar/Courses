@@ -1,6 +1,7 @@
 #include <iostream>
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
+#include "clsUtil.h"
 #include <iomanip>
 
 void ReadClientInfo(clsBankClient& Client)
@@ -195,11 +196,60 @@ void ShowClientsList()
 
 }
 
+void PrintClientBalanceRecord(clsBankClient Client)
+{
+    cout << "| " << left << setw(15) << Client.AccountNumber();
+    cout << "| " << left << setw(40) << Client.FullName();
+    cout << "| " << left << setw(12) << Client.AccountBalance;
+    cout << "| ";
+    cout << endl;
+}
+
+
+
+void ShowTotalBalances()
+{
+    vector< clsBankClient> vClients = clsBankClient::GetClientsList();
+
+
+    cout << "\t\t\t\t Balances List ( " << vClients.size() << " ) Clients.\n";
+
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
+    cout << "| " << left << setw(15) << "Accout Number";
+    cout << "| " << left << setw(40) << "Client Name";
+    cout << "| " << left << setw(12) << "Balance";
+    cout << "| ";
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
+
+    if (vClients.size() == 0)
+    {
+       cout << "\t\t\t\t Not Client Excesy In System.\n";
+    }
+    else
+    {
+        for (clsBankClient& Client : vClients)
+        {
+            PrintClientBalanceRecord(Client);
+        }
+    }
+
+
+
+    cout << "\n_______________________________________________________";
+    cout << "_________________________________________\n" << endl;
+
+    cout << "\t\t\t\t Total Balances List ( " << clsBankClient::GetTotalBalanceClients() << " ) Clients.\n";
+    cout << "\t\t Total Balances List With Word ( " 
+        << clsUtil::NumberToText(clsBankClient::GetTotalBalanceClients())<< " ).\n";
+    
+}
 
 int main()
 
 {
-    ShowClientsList();
+    ShowTotalBalances();
     system("pause>0");
     return 0;
 }
