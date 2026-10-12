@@ -2,7 +2,7 @@
 #include <iostream>
 #include "clsScreen.h"
 #include "clsInputValidate.h"
-#include <iomanip>
+#include "clsClientListScreen.h"
 
 
 using namespace std;
@@ -35,7 +35,8 @@ private:
 
     static void _ShowAllClientsScreen()
     {
-        cout << "\nClient List Screen Will be here...\n";
+        //  cout << "\nClient List Screen Will be here...\n";
+        clsClientListScreen::ShowClientsList();
 
 
     }
@@ -94,53 +95,45 @@ private:
             break;
         }
         case enMainMenueOptions::eAddNewClient:
-        {
             system("cls");
             _ShowAddNewClientsScreen();
             _GoBackToMainMenue();
             break;
-        }
+
         case enMainMenueOptions::eDeleteClient:
-        {
             system("cls");
             _ShowDeleteClientScreen();
             _GoBackToMainMenue();
             break;
-        }
+
         case enMainMenueOptions::eUpdateClient:
-        {
             system("cls");
             _ShowUpdateClientScreen();
             _GoBackToMainMenue();
             break;
-        }
+
         case enMainMenueOptions::eFindClient:
-        {
             system("cls");
             _ShowFindClientScreen();
             _GoBackToMainMenue();
             break;
-        }
+
         case enMainMenueOptions::eShowTransactionsMenue:
-        {
             system("cls");
             _ShowTransactionsMenue();
             break;
-        }
+
         case enMainMenueOptions::eManageUsers:
-        {
             system("cls");
             _ShowManageUsersMenue();
             break;
-        }
+
         case enMainMenueOptions::eExit:
-        {
             system("cls");
             _ShowEndScreen();
-
+            //Login();
 
             break;
-        }
         }
 
     }
