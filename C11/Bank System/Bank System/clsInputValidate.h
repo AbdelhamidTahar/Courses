@@ -168,16 +168,15 @@ public:
 
 		return Number;
 	}
-	static short ReadShortNumberBetween(string Message, short From, short To)
+	static short ReadShortNumberBetween(short From, short To, string ErrorMessage = "Number is not within range, Enter again:\n")
 	{
 		short Number = ReadShortNumber();
 
 		while (!IsNumberBetween(Number, From, To))
 		{
-			cout << Message << endl;
+			cout << ErrorMessage;
 			Number = ReadShortNumber();
 		}
-
 		return Number;
 	}
 
