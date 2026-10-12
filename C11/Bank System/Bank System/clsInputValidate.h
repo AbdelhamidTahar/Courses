@@ -111,8 +111,7 @@ public:
 
 		return Number;
 	}
-
-	static double ReadFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	static float ReadFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		float Number;
 		while (!(cin >> Number)) {
@@ -122,6 +121,17 @@ public:
 		}
 		return Number;
 	}
+	static short ReadShortNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		short Number;
+		while (!(cin >> Number)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage;
+		}
+		return Number;
+	}
+
 	static int ReadIntNumberBetween(int From, int To, string ErrorMessage = "Number is not within range, Enter again:\n")
 	{
 		int Number = ReadIntNumber();
@@ -158,6 +168,19 @@ public:
 
 		return Number;
 	}
+	static short ReadShortNumberBetween(string Message, short From, short To)
+	{
+		short Number = ReadShortNumber();
+
+		while (!IsNumberBetween(Number, From, To))
+		{
+			cout << Message << endl;
+			Number = ReadShortNumber();
+		}
+
+		return Number;
+	}
+
 	static string ReadAlphaString(const string& InputMessage, const string& ErrorMessage)
 	{
 		string AlphaString = "";
