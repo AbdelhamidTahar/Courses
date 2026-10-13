@@ -6,6 +6,7 @@
 #include "clsAddNewClientScreen.h"
 #include "clsDeleteClientScreen.h"
 
+
 using namespace std;
 
 class clsMainScreen :protected clsScreen
@@ -104,6 +105,7 @@ private:
             _GoBackToMainMenue();
             break;
         }
+
         case enMainMenueOptions::eDeleteClient:
         {
             system("cls");

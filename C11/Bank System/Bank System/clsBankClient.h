@@ -293,7 +293,7 @@ public:
                 return enSaveResults::svFaildEmptyObject;
 
             }
-
+            
         }
 
         case enMode::UpdateMode:
