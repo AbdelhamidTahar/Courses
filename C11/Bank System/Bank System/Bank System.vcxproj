@@ -148,6 +148,7 @@
     <ClInclude Include="clsMainScreen.h" />
     <ClInclude Include="clsPerson.h" />
     <ClInclude Include="clsScreen.h" />
+    <ClInclude Include="clsAddNewClientScreen.h" />
     <ClInclude Include="clsString.h" />
     <ClInclude Include="clsUtil.h" />
   </ItemGroup>
