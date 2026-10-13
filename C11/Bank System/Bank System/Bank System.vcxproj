@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="clsBankClient.h" />
     <ClInclude Include="clsClientListScreen.h" />
+    <ClInclude Include="clsDeleteClientScreen.h" />
     <ClInclude Include="clsInputValidate.h" />
     <ClInclude Include="clsMainScreen.h" />
     <ClInclude Include="clsPerson.h" />
