@@ -29,7 +29,7 @@ private:
 public:
 	static void ShowDeleteClientScreen()
 	{
-
+        clsScreen::_DrawScreenHeader("\tDelete Client Screen");
 
     string AccountNumber = "";
 
