@@ -5,7 +5,7 @@
 #include "clsClientListScreen.h"
 #include "clsAddNewClientScreen.h"
 #include "clsDeleteClientScreen.h"
-
+#include "clsUpdateClientScreen.h"
 
 using namespace std;
 
@@ -59,7 +59,9 @@ private:
 
     static void _ShowUpdateClientScreen()
     {
-        cout << "\nUpdate Client Screen Will be here...\n";
+        //cout << "\nUpdate Client Screen Will be here...\n";
+        clsUpdateClientScreen::ShowUpdateClientScreen();
+
 
     }
 
@@ -99,20 +101,16 @@ private:
             break;
         }
         case enMainMenueOptions::eAddNewClient:
-        {
             system("cls");
             _ShowAddNewClientsScreen();
             _GoBackToMainMenue();
             break;
-        }
 
         case enMainMenueOptions::eDeleteClient:
-        {
             system("cls");
             _ShowDeleteClientScreen();
             _GoBackToMainMenue();
             break;
-        }
 
         case enMainMenueOptions::eUpdateClient:
             system("cls");
