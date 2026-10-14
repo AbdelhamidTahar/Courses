@@ -76,7 +76,7 @@ private:
     static void _ShowTransactionsMenue()
     {
         //cout << "\nTransactions Menue Will be here...\n";
-        clsTransactionsMenueScreen::ShowTransactionsMenueScreen();
+        clsTransactionsScreen::ShowTransactionsMenue();
     }
 
     static void _ShowManageUsersMenue()

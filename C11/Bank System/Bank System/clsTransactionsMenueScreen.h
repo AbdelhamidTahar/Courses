@@ -1,80 +1,99 @@
 #pragma once
-#include<iostream>
+#include <iostream>
 #include "clsScreen.h"
 #include "clsInputValidate.h"
+#include <iomanip>
+
 using namespace std;
 
-class clsTransactionsMenueScreen :protected clsScreen
+class clsTransactionsScreen :protected clsScreen
 {
+
+
 private:
-    enum _enTransactionsChoice { enDeposit = 1, enWithdraw = 2, enTotalBalances = 3, enMainMenue = 4 };
+    enum enTransactionsMenueOptions {
+        eDeposit = 1, eWithdraw = 2,
+        eShowTotalBalance = 3, eShowMainMenue = 4
+    };
+
+    static short ReadTransactionsMenueOption()
+    {
+        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 4]? ";
+        short Choice = clsInputValidate::ReadShortNumberBetween(1, 4, "Enter Number between 1 to 4? ");
+        return Choice;
+    }
+
 
     static void _ShowDepositScreen()
     {
-        cout << "Deposit Screen Well Be Here\n";
+        cout << "\n Deposit Screen will be here.\n";
     }
 
     static void _ShowWithdrawScreen()
     {
-        cout << "Withdraw Screen Well Be Here\n";
+        cout << "\n Withdraw Screen will be here.\n";
     }
 
     static void _ShowTotalBalancesScreen()
     {
-        cout << "Total Balances Screen Well Be Here\n";
+        cout << "\n Balances Screen will be here.\n";
     }
 
-    static void _GoBackToTransactionsMenu()
+    static void _GoBackToTransactionsMenue()
     {
-        cout << setw(37) << left << "" << "\n\tPress any key to go back to Transactions Menue...\n";
-
+        cout << "\n\nPress any key to go back to Transactions Menue...";
         system("pause>0");
-        ShowTransactionsMenueScreen();
+        ShowTransactionsMenue();
+
     }
 
-    static void _PerfurmTransactionsChoice(_enTransactionsChoice TransactionsChoice)
+    static void _PerformTransactionsMenueOption(enTransactionsMenueOptions TransactionsMenueOption)
     {
-        switch (TransactionsChoice)
+        switch (TransactionsMenueOption)
         {
-        case _enTransactionsChoice::enDeposit:
+        case enTransactionsMenueOptions::eDeposit:
         {
             system("cls");
             _ShowDepositScreen();
-            _GoBackToTransactionsMenu();
+            _GoBackToTransactionsMenue();
             break;
         }
-        case _enTransactionsChoice::enWithdraw:
+
+        case enTransactionsMenueOptions::eWithdraw:
         {
             system("cls");
             _ShowWithdrawScreen();
-            _GoBackToTransactionsMenu();
+            _GoBackToTransactionsMenue();
             break;
         }
-        case _enTransactionsChoice::enTotalBalances:
+
+        case enTransactionsMenueOptions::eShowTotalBalance:
         {
             system("cls");
             _ShowTotalBalancesScreen();
-            _GoBackToTransactionsMenu();
+            _GoBackToTransactionsMenue();
             break;
         }
-        case _enTransactionsChoice::enMainMenue:
+
+
+        case enTransactionsMenueOptions::eShowMainMenue:
         {
-
+            //do nothing here the main screen will handle it :-) ;
         }
         }
-    }
-   
-    static short _ReadTransactionsChoice()
-    {
-        cout << "Please Enter Your Choice From [1-4]: ";
-        short Choice = clsInputValidate::ReadShortNumberBetween(1, 4);
 
-        return Choice;
+
     }
+
+
 
 public:
-	static void ShowTransactionsMenueScreen()
-	{
+
+
+    static void ShowTransactionsMenue()
+    {
+
+
         system("cls");
         _DrawScreenHeader("\t  Transactions Screen");
 
@@ -87,7 +106,8 @@ public:
         cout << setw(37) << left << "" << "\t[4] Main Menue.\n";
         cout << setw(37) << left << "" << "===========================================\n";
 
-        _PerfurmTransactionsChoice((_enTransactionsChoice)_ReadTransactionsChoice());
-	}
+        _PerformTransactionsMenueOption((enTransactionsMenueOptions)ReadTransactionsMenueOption());
+    }
+
 };
 
