@@ -387,6 +387,10 @@ public:
 
     }
 
-
+    void Deposet(double Amount)
+    {
+        _AccountBalance += Amount;
+        Save();
+    }
 };
 

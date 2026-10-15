@@ -24,7 +24,10 @@ private:
 
     }
 
-    enum _enDepositMode{enDoneDeposit,enErrorDeposit};
+    static string _ReadAccountNumber()
+    {
+        return clsInputValidate::ReadString();
+    }
 
 
 public:
@@ -36,14 +39,14 @@ public:
 
 
         cout << "Please Enter Account Number: ";
-        string AccountNumber = clsInputValidate::ReadString();
+        string AccountNumber = _ReadAccountNumber();
 
 
         while (!clsBankClient::IsClientExist(AccountNumber))
         {
             cout << "\nClient with [" << AccountNumber << "] does not exist.\n";
             cout << "Please Enter Account Number: ";
-            AccountNumber = clsInputValidate::ReadString();
+            AccountNumber = _ReadAccountNumber();
         }
 
         clsBankClient Client = clsBankClient::Find(AccountNumber);
@@ -58,14 +61,16 @@ public:
         cout << "\n\nAre you sure you want perfrom this transaction? y/n ? ";
         cin >> Answer;
         if (Answer == 'n' || Answer == 'N')
-            return;
-
-        Client.AccountBalance += Amount;
-
-        if (Client.Save() == clsBankClient::enSaveResults::svSucceeded)
-             cout << "Done Deposit\n";
+            cout << "Your Deposet Is Cancel\n";
         else
-            cout << "Error Deposit\n";
+        {
+            Client.Deposet(Amount);
+            Client.Save();
+            cout << "Done Deposit\n";
+        }
+
+        
+
     }
 
 
