@@ -180,17 +180,17 @@ public:
 		return Number;
 	}
 
-	static string ReadAlphaString(const string& InputMessage, const string& ErrorMessage)
+	static string ReadAlphaString(const string& InputMessage, const string& ErrorMessage = "Invalid input. Numbers or punctuation not allowed.\n")
 	{
 		string AlphaString = "";
-		cout << InputMessage << endl;
+		cout << InputMessage;
 		getline(cin >> ws, AlphaString);
 
 		while (IsHasPunctuation(AlphaString) || IsHasDigit(AlphaString))
 		{
-			cout << ErrorMessage << endl << endl;
+			cout << ErrorMessage;
 
-			cout << InputMessage << endl;
+			cout << InputMessage;
 			getline(cin >> ws, AlphaString);
 		}
 		return AlphaString;
@@ -201,6 +201,11 @@ public:
 		// Usage of std::ws will extract allthe whitespace character
 		getline(cin >> ws, S1);
 		return S1;
+	}
+	static string ReadAccountNumber()
+	{
+		cout << "\nPlease enter AccountNumber? ";
+		return ReadString();
 	}
 	static char ReadLetter(const string &ErrorMessage = "Invalid Letter, Enter again\n")
 	{

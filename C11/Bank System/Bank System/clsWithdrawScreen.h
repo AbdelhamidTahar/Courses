@@ -1,12 +1,11 @@
 #pragma once
-#include<iostream>
+
+#include <iostream>
 #include "clsScreen.h"
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
-using namespace std;
 
-
-class clsWithdrawScreen:protected clsScreen
+class clsWithdrawScreen : protected clsScreen
 {
 private:
 
@@ -26,32 +25,32 @@ private:
 
     }
 
-
     static string _ReadAccountNumber()
     {
-        return clsInputValidate::ReadString();
+        string AccountNumber = "";
+        cout << "\nPlease enter AccountNumber? ";
+        cin >> AccountNumber;
+        return AccountNumber;
     }
+
 public:
 
+    static void ShowWithdrawScreen()
+    {
+        _DrawScreenHeader("\t   Withdraw Screen");
 
-	static void ShowWithdrawScreen()
-	{
-        _DrawScreenHeader("\t   Deposit Screen");
-
-
-        cout << "Please Enter Account Number: ";
         string AccountNumber = _ReadAccountNumber();
 
 
         while (!clsBankClient::IsClientExist(AccountNumber))
         {
             cout << "\nClient with [" << AccountNumber << "] does not exist.\n";
-            cout << "Please Enter Account Number: ";
             AccountNumber = _ReadAccountNumber();
         }
 
         clsBankClient Client1 = clsBankClient::Find(AccountNumber);
         _PrintClient(Client1);
+
 
         double Amount = 0;
         cout << "\nPlease enter Withdraw amount? ";
@@ -65,21 +64,23 @@ public:
         {
             if (Client1.Withdraw(Amount))
             {
-                cout << "\nAmount Withdraw Successfully.\n";
+                cout << "\nAmount Withdrew Successfully.\n";
                 cout << "\nNew Balance Is: " << Client1.AccountBalance;
             }
             else
             {
-                cout << "\nError Amount Withdraw Not Successfully.\n";
-                cout << "\nYour Balance Is: " << Client1.AccountBalance;
-                cout << "\nYou Want Withdraw: " << Amount;
-            }
+                cout << "\nCannot withdraw, Insuffecient Balance!\n";
+                cout << "\nAmout to withdraw is: " << Amount;
+                cout << "\nYour Balance is: " << Client1.AccountBalance;
 
+            }
         }
         else
         {
             cout << "\nOperation was cancelled.\n";
         }
-	}
+
+    }
+
 };
 
