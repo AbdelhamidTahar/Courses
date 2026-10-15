@@ -63,9 +63,17 @@ public:
 
         if (Answer == 'Y' || Answer == 'y')
         {
-            Client1.Withdraw(Amount);
-            cout << "\nAmount Withdraw Successfully.\n";
-            cout << "\nNew Balance Is: " << Client1.AccountBalance;
+            if (Client1.Withdraw(Amount))
+            {
+                cout << "\nAmount Withdraw Successfully.\n";
+                cout << "\nNew Balance Is: " << Client1.AccountBalance;
+            }
+            else
+            {
+                cout << "\nError Amount Withdraw Not Successfully.\n";
+                cout << "\nYour Balance Is: " << Client1.AccountBalance;
+                cout << "\nYou Want Withdraw: " << Amount;
+            }
 
         }
         else
