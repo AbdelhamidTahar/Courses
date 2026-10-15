@@ -2,8 +2,8 @@
 #include <iostream>
 #include "clsScreen.h"
 #include "clsInputValidate.h"
-#include "clsDepositScreen.h"
 #include <iomanip>
+#include "clsDepositScreen.h"
 
 using namespace std;
 
@@ -69,6 +69,7 @@ private:
             break;
         }
 
+
         case enTransactionsMenueOptions::eShowTotalBalance:
         {
             system("cls");
@@ -80,7 +81,10 @@ private:
 
         case enTransactionsMenueOptions::eShowMainMenue:
         {
+
             //do nothing here the main screen will handle it :-) ;
+
+
         }
         }
 
@@ -97,7 +101,7 @@ public:
 
 
         system("cls");
-        _DrawScreenHeader("\t  Transactions Screen");
+        _DrawScreenHeader("\tTransactions Screen");
 
         cout << setw(37) << left << "" << "===========================================\n";
         cout << setw(37) << left << "" << "\t\t  Transactions Menue\n";

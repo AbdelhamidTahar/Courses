@@ -1,13 +1,15 @@
 #pragma once
+
 #include <iostream>
 #include "clsScreen.h"
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
-using namespace std;
 
-class clsDepositScreen:protected clsScreen
+class clsDepositScreen : protected clsScreen
 {
+
 private:
+
     static void _PrintClient(clsBankClient Client)
     {
         cout << "\nClient Card:";
@@ -26,53 +28,52 @@ private:
 
     static string _ReadAccountNumber()
     {
-        return clsInputValidate::ReadString();
+        string AccountNumber = "";
+        cout << "\nPlease enter AccountNumber? ";
+        cin >> AccountNumber;
+        return AccountNumber;
     }
 
 
 public:
+
     static void ShowDepositScreen()
     {
-        cout << "\n-----------------------------------\n";
-        cout << "\tDeposit Screen";
-        cout << "\n-----------------------------------\n";
+        _DrawScreenHeader("\t   Deposit Screen");
 
-
-        cout << "Please Enter Account Number: ";
         string AccountNumber = _ReadAccountNumber();
 
 
         while (!clsBankClient::IsClientExist(AccountNumber))
         {
             cout << "\nClient with [" << AccountNumber << "] does not exist.\n";
-            cout << "Please Enter Account Number: ";
             AccountNumber = _ReadAccountNumber();
         }
 
-        clsBankClient Client = clsBankClient::Find(AccountNumber);
-        _PrintClient(Client);
+        clsBankClient Client1 = clsBankClient::Find(AccountNumber);
+        _PrintClient(Client1);
 
+        double Amount = 0;
         cout << "\nPlease enter deposit amount? ";
-        double Amount = clsInputValidate::ReadDblNumber();
+        Amount = clsInputValidate::ReadDblNumber();
 
+        cout << "\nAre you sure you want to perform this transaction? ";
         char Answer = 'n';
-
-
-        cout << "\n\nAre you sure you want perfrom this transaction? y/n ? ";
         cin >> Answer;
-        if (Answer == 'n' || Answer == 'N')
-            cout << "Your Deposet Is Cancel\n";
+
+        if (Answer == 'Y' || Answer == 'y')
+        {
+            Client1.Deposit(Amount);
+            cout << "\nAmount Deposited Successfully.\n";
+            cout << "\nNew Balance Is: " << Client1.AccountBalance;
+
+        }
         else
         {
-            Client.Deposet(Amount);
-            Client.Save();
-            cout << "Done Deposit\n";
+            cout << "\nOperation was cancelled.\n";
         }
 
-        
-
     }
-
 
 };
 

@@ -14,13 +14,10 @@ private:
     enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
     enMode _Mode;
 
-
     string _AccountNumber;
     string _PinCode;
     float _AccountBalance;
     bool _MarkedForDelete = false;
-
-
 
     static clsBankClient _ConvertLinetoClientObject(string Line, string Seperator = "#//#")
     {
@@ -205,23 +202,6 @@ public:
     }
     __declspec(property(get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
 
-    /*
-       No UI Related code iside object.
-     void Print()
-     {
-         cout << "\nClient Card:";
-         cout << "\n___________________";
-         cout << "\nFirstName   : " << FirstName;
-         cout << "\nLastName    : " << LastName;
-         cout << "\nFull Name   : " << FullName();
-         cout << "\nEmail       : " << Email;
-         cout << "\nPhone       : " << Phone;
-         cout << "\nAcc. Number : " << _AccountNumber;
-         cout << "\nPassword    : " << _PinCode;
-         cout << "\nBalance     : " << _AccountBalance;
-         cout << "\n___________________\n";
-
-     }*/
 
     static clsBankClient Find(string AccountNumber)
     {
@@ -293,7 +273,7 @@ public:
                 return enSaveResults::svFaildEmptyObject;
 
             }
-            
+
         }
 
         case enMode::UpdateMode:
@@ -371,26 +351,19 @@ public:
         return _LoadClientsDataFromFile();
     }
 
-    static double GetTotalBalances()
-    {
-        vector <clsBankClient> vClients = clsBankClient::GetClientsList();
 
-        double TotalBalances = 0;
-
-        for (clsBankClient Client : vClients)
-        {
-
-            TotalBalances += Client.AccountBalance;
-        }
-
-        return TotalBalances;
-
-    }
-
-    void Deposet(double Amount)
+    void Deposit(double Amount)
     {
         _AccountBalance += Amount;
         Save();
     }
+
+    void Withdraw(double Amount)
+    {
+        _AccountBalance -= Amount;
+        Save();
+    }
+
+
 };
 
