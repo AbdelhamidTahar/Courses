@@ -202,11 +202,17 @@ public:
 		getline(cin >> ws, S1);
 		return S1;
 	}
+	static string ReadAlphaNumericString()
+	{
+
+
+	}
 	static string ReadAccountNumber()
 	{
 		cout << "\nPlease enter AccountNumber? ";
 		return ReadString();
 	}
+
 	static char ReadLetter(const string &ErrorMessage = "Invalid Letter, Enter again\n")
 	{
 		char Letter;
