@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
 #include "clsScreen.h"
+#include "clsPerson.h"
 #include "clsUser.h"
-
 #include "clsInputValidate.h"
 
 class clsDeleteUserScreen :protected clsScreen
@@ -33,11 +33,11 @@ public:
 
         string UserName = "";
 
-        cout << "\nPlease Enter Account Number: ";
+        cout << "\nPlease Enter UserName: ";
         UserName = clsInputValidate::ReadString();
         while (!clsUser::IsUserExist(UserName))
         {
-            cout << "\nUserName is not found, choose another one: ";
+            cout << "\nUser is not found, choose another one: ";
             UserName = clsInputValidate::ReadString();
         }
 
@@ -51,7 +51,6 @@ public:
 
         if (Answer == 'y' || Answer == 'Y')
         {
-
 
             if (User1.Delete())
             {
