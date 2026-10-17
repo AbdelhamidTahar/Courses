@@ -224,6 +224,19 @@ public:
 
 		return Letter;
 	}
+	static char ReadChar()
+	{
+		char C;
+		cin >> C;
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		return C;
+	}
+	static bool ReadAnswer(string const& Message)
+	{
+		cout << Message;
+		char Answer = ReadChar();
+		return (Answer == 'y' || Answer == 'Y');
+	}
 	static short ReadDigit(const string& ErrorMessage = "Invalid Digit, Enter again\n")
 	{
 		char Digit;
