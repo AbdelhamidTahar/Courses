@@ -54,7 +54,7 @@ public:
 	{
 		return clsDate::IsValidDate(Date);
 	}
-	static bool IsHasPunctuation(const string& Input)
+	static bool IsStringHasPunctuation(const string& Input)
 	{
 		for (const char& Character : Input)
 		{
@@ -64,7 +64,7 @@ public:
 		return false;
 
 	}
-	static bool IsHasDigit(const string& Input)
+	static bool IsStringHasDigit(const string& Input)
 	{
 		for (const char& Character : Input)
 		{
@@ -74,7 +74,7 @@ public:
 		return false;
 
 	}
-	static bool IsHasChar(const string& Input)
+	static bool IsStringHasLetter(const string& Input)
 	{
 		for (const char& Character : Input)
 		{
@@ -83,6 +83,16 @@ public:
 		}
 		return false;
 
+	}
+	static bool IsStringHasSpace(const string& Input)
+	{
+		int length = Input.length();
+		for (char C : Input)
+		{
+			if (C == ' ')
+				return true;
+		}
+		return false;
 	}
 	static int ReadIntNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
@@ -186,7 +196,11 @@ public:
 		cout << InputMessage;
 		getline(cin >> ws, AlphaString);
 
-		while (IsHasPunctuation(AlphaString) || IsHasDigit(AlphaString))
+		while (IsStringHasPunctuation(AlphaString)
+			          ||
+			IsStringHasDigit(AlphaString)
+			          ||
+			IsStringHasSpace(AlphaString))
 		{
 			cout << ErrorMessage;
 
@@ -202,15 +216,26 @@ public:
 		getline(cin >> ws, S1);
 		return S1;
 	}
-	static string ReadAlphaNumericString()
+	static string ReadAlphaNumericString(const string& InputMessage, const string& ErrorMessage = "Invalid input. Numbers or punctuation or space are not allowed.\n")
 	{
+		string S1 = "";
+		cout << InputMessage;
+		S1 = ReadString();
 
+		while (IsStringHasPunctuation(S1) || IsStringHasSpace(S1))
+		{
+			cout << ErrorMessage;
 
+			cout << InputMessage;
+			S1 = ReadString();
+		}
+
+		return S1;
 	}
 	static string ReadAccountNumber()
 	{
-		cout << "\nPlease enter AccountNumber? ";
-		return ReadString();
+		string Message =  "\nPlease enter AccountNumber? ";
+		return ReadAlphaNumericString(Message);
 	}
 
 	static char ReadLetter(const string &ErrorMessage = "Invalid Letter, Enter again\n")
