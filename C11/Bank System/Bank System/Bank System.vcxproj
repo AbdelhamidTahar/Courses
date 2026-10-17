@@ -142,6 +142,7 @@
     <ClCompile Include="Bank System.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="clsAddNewUserScreen.h" />
     <ClInclude Include="clsBankClient.h" />
     <ClInclude Include="clsClientListScreen.h" />
     <ClInclude Include="clsDeleteClientScreen.h" />
