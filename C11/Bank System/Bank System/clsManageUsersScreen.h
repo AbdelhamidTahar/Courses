@@ -33,7 +33,7 @@ private:
     static void _ShowListUsersScreen()
     {
        // cout << "\nList Users Screen Will Be Here.\n";
-        clsListUsersScreen::ShowListUsers();
+        clsListUsersScreen::ShowUsersList();
     }
 
     static void _ShowAddNewUserScreen()
