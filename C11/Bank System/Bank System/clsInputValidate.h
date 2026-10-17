@@ -231,7 +231,7 @@ public:
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		return C;
 	}
-	static bool ReadAnswer(string const& Message)
+	static bool ReadYesNoAnswer(string const& Message)
 	{
 		cout << Message;
 		char Answer = ReadChar();
