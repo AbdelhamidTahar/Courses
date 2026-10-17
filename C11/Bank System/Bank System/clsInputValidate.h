@@ -86,7 +86,6 @@ public:
 	}
 	static bool IsStringHasSpace(const string& Input)
 	{
-		int length = Input.length();
 		for (char C : Input)
 		{
 			if (C == ' ')
@@ -216,7 +215,7 @@ public:
 		getline(cin >> ws, S1);
 		return S1;
 	}
-	static string ReadAlphaNumericString(const string& InputMessage, const string& ErrorMessage = "Invalid input. Numbers or punctuation or space are not allowed.\n")
+	static string ReadAlphaNumericString(const string& InputMessage, const string& ErrorMessage = "Invalid input. punctuation or space are not allowed.\n")
 	{
 		string S1 = "";
 		cout << InputMessage;
