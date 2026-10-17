@@ -119,48 +119,66 @@ private:
 
     }
 
-    public:
-        static void ShowUpdateUserScreen()
+public:
+
+    static void ShowUpdateUserScreen()
+    {
+
+        _DrawScreenHeader("\tUpdate User Screen");
+
+        string UserName = "";
+
+        cout << "\nPlease Enter User UserName: ";
+        UserName = clsInputValidate::ReadString();
+
+        while (!clsUser::IsUserExist(UserName))
+        {
+            cout << "\nAccount number is not found, choose another one: ";
+            UserName = clsInputValidate::ReadString();
+        }
+
+        clsUser User1 = clsUser::Find(UserName);
+
+        _PrintUser(User1);
+
+        cout << "\nAre you sure you want to update this User y/n? ";
+
+        char Answer = 'n';
+        cin >> Answer;
+
+        if (Answer == 'y' || Answer == 'Y')
         {
 
-            clsScreen::_DrawScreenHeader("\tUpdate User Screen");
+            cout << "\n\nUpdate User Info:";
+            cout << "\n____________________\n";
 
-            cout << "Please Enter UserName: ";
-            string UserName = clsInputValidate::ReadString();
 
-            while (!clsUser::IsUserExist(UserName))
-            {
-                cout << "User Not Found Try Again\n";
-                cout << "Please Enter UserName: ";
-                string UserName = clsInputValidate::ReadString();
-            }
+            _ReadUserInfo(User1);
 
-            clsUser User = clsUser::Find(UserName);
+            clsUser::enSaveResults SaveResult;
 
-            _PrintUser(User);
-            _ReadUserInfo(User);
-            clsUser::enSaveResults SaveResult = User.Save();
+            SaveResult = User1.Save();
 
             switch (SaveResult)
             {
+            case  clsUser::enSaveResults::svSucceeded:
+            {
+                cout << "\nUser Updated Successfully :-)\n";
+
+                _PrintUser(User1);
+                break;
+            }
             case clsUser::enSaveResults::svFaildEmptyObject:
             {
-                cout << "Error Save This Is Empty Object\n";
+                cout << "\nError User was not saved because it's Empty";
                 break;
-            }
-            case clsUser::enSaveResults::svFaildUserExists:
-            {
-                cout << "Error This User Is Aloerdy Excit\n";
-                break;
-            }
-            case clsUser::enSaveResults::svSucceeded:
-            {
-                cout << "Done Save \n";
-                break;
-            }
+
             }
 
+            }
 
         }
+
+    }
 };
 
