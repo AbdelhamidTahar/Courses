@@ -1,40 +1,56 @@
 #pragma once
+
 #include <iostream>
 #include "clsScreen.h"
-#include "clsInputValidate.h"
 #include "clsUser.h"
-#include "Global.h"
+#include <iomanip>
 #include "clsMainScreen.h"
-using namespace std;
+#include "Global.h"
 
 class clsLoginScreen :protected clsScreen
 {
+
 private:
-	static void _Login()
-	{
-		string UserName, Password;
 
-		UserName = clsInputValidate::ReadAlphaNumericString("Enter UserName : ");
-		Password = clsInputValidate::ReadAlphaNumericString("Enter Password : ");
+    static  void _Login()
+    {
+        bool LoginFaild = false;
 
-		while (!clsUser::IsUserExist(UserName, Password))
-		{
-			cout << "\nInvalid User Name/Password\n";
-			UserName = clsInputValidate::ReadAlphaNumericString("Enter UserName : ");
-			Password = clsInputValidate::ReadAlphaNumericString("Enter Password : ");
-		}
+        string Username, Password;
+        do
+        {
 
-		CurrentUser = clsUser::Find(UserName, Password);
-		clsMainScreen::ShowMainMenue();
+            if (LoginFaild)
+            {
+                cout << "\nInvlaid Username/Password!\n\n";
+            }
 
-	}
+            cout << "Enter Username? ";
+            cin >> Username;
+
+            cout << "Enter Password? ";
+            cin >> Password;
+
+            CurrentUser = clsUser::Find(Username, Password);
+
+            LoginFaild = CurrentUser.IsEmpty();
+
+        } while (LoginFaild);
+
+        clsMainScreen::ShowMainMenue();
+
+    }
+
 public:
-	static void ShowLoginScreen()
-	{
-		clsScreen::_DrawScreenHeader("\tLogin Screen");
-		_Login();
-	}
-	
+
+
+    static void ShowLoginScreen()
+    {
+        system("cls");
+        _DrawScreenHeader("\t  Login Screen");
+        _Login();
+
+    }
 
 };
 
