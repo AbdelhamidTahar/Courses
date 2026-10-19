@@ -314,6 +314,13 @@ public:
         return (!User.IsEmpty());
     }
 
+    static bool IsUserExist(string UserName, string Password)
+    {
+
+        clsUser User = clsUser::Find(UserName, Password);
+        return (!User.IsEmpty());
+    }
+
     bool Delete()
     {
         vector <clsUser> _vUsers;
