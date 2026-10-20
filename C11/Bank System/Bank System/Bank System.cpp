@@ -8,7 +8,7 @@ using namespace std;
 int main()
 
 {
-    while (true)
+    while (NumberOfLoginFaild)
     {
         clsLoginScreen::ShowLoginScreen();
     }

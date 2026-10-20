@@ -2,7 +2,7 @@
 #include <iostream>
 #include "clsUser.h"
 #include "clsDate.h"
-
+#include "Global.h"
 using namespace std;
 
 class clsScreen

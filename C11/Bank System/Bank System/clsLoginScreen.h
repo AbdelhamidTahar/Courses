@@ -11,18 +11,28 @@ class clsLoginScreen :protected clsScreen
 {
 
 private:
+     
 
     static  void _Login()
     {
         bool LoginFaild = false;
-
         string Username, Password;
+
         do
         {
-
+           
             if (LoginFaild)
             {
-                cout << "\nInvlaid Username/Password!\n\n";
+                NumberOfLoginFaild--;
+
+                cout << "\nInvlaid Username/Password!\n";
+                cout << "You Have ["<< NumberOfLoginFaild << "] Trials To Login.\n\n";
+            }
+            if (NumberOfLoginFaild == 0)
+            {
+                cout << "System Locked\n";
+                return;
+                
             }
 
             cout << "Enter Username? ";
@@ -36,7 +46,7 @@ private:
             LoginFaild = CurrentUser.IsEmpty();
 
         } while (LoginFaild);
-
+        NumberOfLoginFaild = 3;
         clsMainScreen::ShowMainMenue();
 
     }
