@@ -5,4 +5,3 @@
 using namespace std;
 
 clsUser CurrentUser = clsUser::Find("", "");
-int NumberOfLoginFaild = 3;
