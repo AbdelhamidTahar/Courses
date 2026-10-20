@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include "clsUser.h"
-#include "Global.h"
 #include "clsDate.h"
 
 using namespace std;
