@@ -48,7 +48,7 @@ public:
     {
         system("cls");
         _DrawScreenHeader("\t  Login Screen");
-        _DrawLogidUserHeadar();
+       
 
         _Login();
 
