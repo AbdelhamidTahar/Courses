@@ -4,6 +4,7 @@
 #include "clsScreen.h"
 #include "clsBankClient.h"
 #include <iomanip>
+#include "Global.h"
 
 class clsClientListScreen:protected clsScreen
 {
@@ -26,7 +27,11 @@ public:
 
    static void ShowClientsList()
     {
-
+       if (!CurrentUser.CheckAccessPermission(clsUser::enPermissions::pAddNewClient))
+       {
+           clsScreen::_DrawScreenHeader("Access Denied! Contact your Admin.");
+           return;
+       }
         
         vector <clsBankClient> vClients = clsBankClient::GetClientsList();
         string Title = "\t  Client List Screen";

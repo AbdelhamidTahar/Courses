@@ -4,6 +4,7 @@
 #include "clsPerson.h"
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
+#include "Global.h"
 
 class clsUpdateClientScreen :protected clsScreen
 
@@ -51,7 +52,11 @@ public:
 
     static void ShowUpdateClientScreen()
     {
-
+        if (!CurrentUser.CheckAccessPermission(clsUser::enPermissions::pAddNewClient))
+        {
+            clsScreen::_DrawScreenHeader("Access Denied! Contact your Admin.");
+            return;
+        }
         _DrawScreenHeader("\tUpdate Client Screen");
 
         string AccountNumber = "";

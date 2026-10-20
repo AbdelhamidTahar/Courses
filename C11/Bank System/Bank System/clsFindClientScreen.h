@@ -4,6 +4,7 @@
 #include "clsPerson.h"
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
+#include "Global.h"
 
 class clsFindClientScreen :protected clsScreen
 {
@@ -29,7 +30,11 @@ public:
 
     static void ShowFindClientScreen()
     {
-
+        if (!CurrentUser.CheckAccessPermission(clsUser::enPermissions::pAddNewClient))
+        {
+            clsScreen::_DrawScreenHeader("Access Denied! Contact your Admin.");
+            return;
+        }
         _DrawScreenHeader("\tFind Client Screen");
 
         string AccountNumber;

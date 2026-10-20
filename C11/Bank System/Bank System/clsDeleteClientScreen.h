@@ -4,6 +4,7 @@
 #include "clsPerson.h"
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
+#include "Global.h"
 
 class clsDeleteClientScreen :protected clsScreen
 {
@@ -28,7 +29,11 @@ private:
 public:
     static void ShowDeleteClientScreen()
     {
-
+        if (!CurrentUser.CheckAccessPermission(clsUser::enPermissions::pAddNewClient))
+        {
+            clsScreen::_DrawScreenHeader("Access Denied! Contact your Admin.");
+            return;
+        }
         _DrawScreenHeader("\tDelete Client Screen");
 
         string AccountNumber = "";

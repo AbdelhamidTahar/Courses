@@ -8,6 +8,7 @@
 #include "clsDeleteUserScreen.h"
 #include "clsUpdateUserScreen.h"
 #include "clsFindUserScreen.h"
+#include "Global.h"
 using namespace std;
 
 class clsManageUsersScreen :protected clsScreen
@@ -124,7 +125,11 @@ public:
 
     static void ShowManageUsersMenue()
     {
-
+        if (!CurrentUser.CheckAccessPermission(clsUser::enPermissions::pAddNewClient))
+        {
+            clsScreen::_DrawScreenHeader("Access Denied! Contact your Admin.");
+            return;
+        }
         system("cls");
         _DrawScreenHeader("\t Manage Users Screen");
 

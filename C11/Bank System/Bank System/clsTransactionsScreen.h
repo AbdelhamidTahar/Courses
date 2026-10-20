@@ -6,6 +6,7 @@
 #include "clsDepositScreen.h"
 #include "clsWithdrawScreen.h"
 #include "clsTotalBalancesScreen.h"
+#include "Global.h"
 
 using namespace std;
 
@@ -103,7 +104,11 @@ public:
     static void ShowTransactionsMenue()
     {
 
-
+        if (!CurrentUser.CheckAccessPermission(clsUser::enPermissions::pAddNewClient))
+        {
+            clsScreen::_DrawScreenHeader("Access Denied! Contact your Admin.");
+            return;
+        }
         system("cls");
         _DrawScreenHeader("\tTransactions Screen");
 
