@@ -51,10 +51,9 @@ public:
 
     static void ShowAddNewClientScreen()
     {
-        if (!CurrentUser.CheckAccessPermission(clsUser::enPermissions::pAddNewClient))
+        if (!CheckAccessRights(clsUser::enPermissions::pListClients))
         {
-            clsScreen::_DrawScreenHeader("Access Denied! Contact your Admin.");
-            return;
+            return;// this will exit the function and it will not continue
         }
 
         _DrawScreenHeader("\t  Add New Client Screen");
