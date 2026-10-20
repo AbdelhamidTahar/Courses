@@ -124,6 +124,7 @@ public:
     {
 
         _DrawScreenHeader("\t  Add New User Screen");
+        _DrawLogidUserHeadar();
 
         string UserName = "";
 

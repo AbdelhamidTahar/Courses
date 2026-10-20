@@ -38,6 +38,7 @@ public:
     static void ShowWithdrawScreen()
     {
         _DrawScreenHeader("\t   Withdraw Screen");
+        _DrawLogidUserHeadar();
 
         string AccountNumber = _ReadAccountNumber();
 

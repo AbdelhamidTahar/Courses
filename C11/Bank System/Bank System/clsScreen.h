@@ -2,6 +2,7 @@
 #include <iostream>
 #include "clsUser.h"
 #include "Global.h"
+#include "clsDate.h".h"
 
 using namespace std;
 
@@ -36,6 +37,15 @@ protected:
         }
 
     }
+
+
+    static void _DrawLogidUserHeadar()
+    {
+        cout << "\t\t\t\t\t  User:" << CurrentUser.UserName;
+        cout << "\n\t\t\t\t\t  Date:" << clsDate::DateToString( clsDate::GetSystemDate()) << endl;
+
+    }
+
 
 };
 

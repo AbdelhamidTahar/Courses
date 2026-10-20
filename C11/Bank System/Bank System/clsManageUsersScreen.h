@@ -131,6 +131,7 @@ public:
         }
         system("cls");
         _DrawScreenHeader("\t Manage Users Screen");
+        _DrawLogidUserHeadar();
 
         cout << setw(37) << left << "" << "===========================================\n";
         cout << setw(37) << left << "" << "\t\t  Manage Users Menue\n";

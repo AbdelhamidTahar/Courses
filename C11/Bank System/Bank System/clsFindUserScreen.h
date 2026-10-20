@@ -31,6 +31,7 @@ public:
     {
 
         _DrawScreenHeader("\t  Find User Screen");
+        _DrawLogidUserHeadar();
 
         string UserName;
         cout << "\nPlease Enter UserName: ";

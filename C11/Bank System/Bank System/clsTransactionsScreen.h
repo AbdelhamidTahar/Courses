@@ -110,6 +110,7 @@ public:
         }
         system("cls");
         _DrawScreenHeader("\tTransactions Screen");
+        _DrawLogidUserHeadar();
 
         cout << setw(37) << left << "" << "===========================================\n";
         cout << setw(37) << left << "" << "\t\t  Transactions Menue\n";
