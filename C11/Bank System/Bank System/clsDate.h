@@ -19,15 +19,21 @@ private:
 	short _Month = 1;
 	short _Year = 1900;
 
+	short _Sec;
+	short _Min;
+	short _Hou;
+
 public:
 
 	clsDate()
 	{
 		time_t t = time(0);
 		tm* now = localtime(&t);
+
 		_Day = now->tm_mday;
 		_Month = now->tm_mon + 1;
 		_Year = now->tm_year + 1900;
+
 	}
 
 	clsDate(string sDate)
