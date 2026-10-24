@@ -98,11 +98,5 @@
     <ClInclude Include="Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="clsLogsFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="clsTime.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,9 +6,8 @@
 #include <iomanip>
 #include "clsMainScreen.h"
 #include "Global.h"
-#include "clsLogsFile.h"
 
-class clsLoginScreen :protected clsScreen, clsLogsFile
+class clsLoginScreen :protected clsScreen
 {
 
 private:
@@ -48,9 +47,15 @@ private:
             LoginFaild = CurrentUser.IsEmpty();
 
         } while (LoginFaild);
-        clsLogsFile::SaveLoginUserDataToFile();
+
+        CurrentUser.RegisterLogIn();
         clsMainScreen::ShowMainMenue();
         return true;
+    }
+
+    void _Log()
+    {
+
     }
 
 public:

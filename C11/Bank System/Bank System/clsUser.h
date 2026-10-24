@@ -5,6 +5,7 @@
 #include "clsString.h"
 #include <vector>
 #include <fstream>
+#include "clsDate.h"
 
 using namespace std;
 class clsUser : public clsPerson
@@ -18,6 +19,16 @@ private:
     int _Permissions;
 
     bool _MarkedForDelete = false;
+
+    string _PrepareLogInRecord(string Seperator = "#//#")
+    {
+        string LoginRecord = "";
+        LoginRecord += clsDate::GetSystemDateTimeString() + Seperator;
+        LoginRecord += UserName + Seperator;
+        LoginRecord += Password + Seperator;
+        LoginRecord += to_string(Permissions);
+        return LoginRecord;
+    }
 
     static clsUser _ConvertLinetoUserObject(string Line, string Seperator = "#//#")
     {
@@ -314,13 +325,6 @@ public:
         return (!User.IsEmpty());
     }
 
-    static bool IsUserExist(string UserName, string Password)
-    {
-
-        clsUser User = clsUser::Find(UserName, Password);
-        return (!User.IsEmpty());
-    }
-
     bool Delete()
     {
         vector <clsUser> _vUsers;
@@ -354,16 +358,38 @@ public:
         return _LoadUsersDataFromFile();
     }
 
-    bool CheckAccessPermission(enPermissions Permissions)
+    bool CheckAccessPermission(enPermissions Permission)
     {
         if (this->Permissions == enPermissions::eAll)
             return true;
 
-        if ((this->Permissions & Permissions) == Permissions)
+        if ((Permission & this->Permissions) == Permission)
             return true;
+        else
+            return false;
 
-        return false;
+    }
+
+
+    void RegisterLogIn()
+    {
+
+        string stDataLine = _PrepareLogInRecord();
+
+        fstream MyFile;
+        MyFile.open("LoginRegister.txt", ios::out | ios::app);
+
+        if (MyFile.is_open())
+        {
+
+            MyFile << stDataLine << endl;
+
+            MyFile.close();
+        }
+
     }
 
 };
+
+
 
