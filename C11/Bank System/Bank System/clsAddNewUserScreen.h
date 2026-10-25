@@ -114,6 +114,13 @@ private:
             Permissions += clsUser::enPermissions::pManageUsers;
         }
 
+        cout << "\nLog Register? y/n? ";
+        cin >> Answer;
+        if (Answer == 'y' || Answer == 'Y')
+        {
+            Permissions += clsUser::enPermissions::pLogRegister;
+        }
+
         return Permissions;
 
     }
