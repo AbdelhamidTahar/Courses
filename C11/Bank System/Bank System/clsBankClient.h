@@ -389,5 +389,16 @@ public:
         return TotalBalances;
     }
 
+    void Transfar(clsBankClient &Client,double Amount)
+    {
+        Client.Deposit(Amount);
+        this->Withdraw(Amount);
+    }
+
+    bool IsAccountBalanceEngthf(double Amount)
+    {
+        return _AccountBalance >= Amount;
+    }
+
 };
 
