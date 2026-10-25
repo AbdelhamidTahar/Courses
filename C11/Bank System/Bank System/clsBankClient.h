@@ -369,7 +369,6 @@ public:
         {
             _AccountBalance -= Amount;
             Save();
-            return true;
         }
 
     }
@@ -389,20 +388,16 @@ public:
         return TotalBalances;
     }
 
-    bool Transfar(clsBankClient &Client,double Amount)
+    bool Transfer(float Amount, clsBankClient& DestinationClient)
     {
-        if (!this->IsAccountBalanceEngthf(Amount))
+        if (Amount > AccountBalance)
+        {
             return false;
+        }
 
-        Client.Deposit(Amount);
-        this->Withdraw(Amount);
+        Withdraw(Amount);
+        DestinationClient.Deposit(Amount);
         return true;
     }
-
-    bool IsAccountBalanceEngthf(double Amount)
-    {
-        return _AccountBalance >= Amount;
-    }
-
 };
 
