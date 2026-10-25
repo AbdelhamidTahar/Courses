@@ -114,11 +114,11 @@ private:
             Permissions += clsUser::enPermissions::pManageUsers;
         }
 
-        cout << "\nLog Register? y/n? ";
+        cout << "\nShow LogIn Register? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-            Permissions += clsUser::enPermissions::pLogRegister;
+            Permissions += clsUser::enPermissions::pLogInRegister;
         }
 
         return Permissions;
