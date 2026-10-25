@@ -389,10 +389,14 @@ public:
         return TotalBalances;
     }
 
-    void Transfar(clsBankClient &Client,double Amount)
+    bool Transfar(clsBankClient &Client,double Amount)
     {
+        if (!this->IsAccountBalanceEngthf(Amount))
+            return false;
+
         Client.Deposit(Amount);
         this->Withdraw(Amount);
+        return true;
     }
 
     bool IsAccountBalanceEngthf(double Amount)
