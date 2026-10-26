@@ -10,6 +10,7 @@ using namespace std;
 class clsBankClient : public clsPerson
 {
 private:
+    struct _stTransferLog;
 
     enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
     enMode _Mode;
@@ -180,6 +181,43 @@ private:
         }
 
     }
+
+
+    static _stTransferLog _ConvertTransfersLogDataLintToStruct(string Line)
+    {
+        vector<string> vString = clsString::Split(Line, "#//#");
+        _stTransferLog stTransferLog;
+
+        stTransferLog.DateAndTime = vString[0];
+        stTransferLog.AccountNumberSourceClient = vString[1];
+        stTransferLog.AccountNumberDestinationClient = vString[2];
+        stTransferLog.Amount = stof(vString[3]);
+        stTransferLog.SourceClientAmount = stof(vString[4]);
+        stTransferLog.DestinationClientAmount = stof(vString[5]);
+        stTransferLog.UserName = vString[6];
+
+        return stTransferLog;
+    }
+    static vector< _stTransferLog> _LoadTransfersLog()
+    {
+        vector< _stTransferLog> vTransferLog;
+        fstream MyFile;
+        MyFile.open("TransferLog.txt", ios::in);
+        if (MyFile.is_open())
+        {
+            string DataLogLine = "";
+            _stTransferLog stTransferLog;
+            while (getline(MyFile, DataLogLine))
+            {
+                stTransferLog = _ConvertTransfersLogDataLintToStruct(DataLogLine);
+                vTransferLog.push_back(stTransferLog);
+            }
+            MyFile.close();
+        }
+
+        return vTransferLog;
+    }
+
 
 public:
 
@@ -434,6 +472,21 @@ public:
         return true;
     }
 
+    struct _stTransferLog
+    {
+        string DateAndTime;
+        string  AccountNumberSourceClient;
+        string AccountNumberDestinationClient;
+        float Amount;
+        float SourceClientAmount;
+        float DestinationClientAmount;
+        string UserName;
 
+    };
+
+    static vector< _stTransferLog> GetTransfersLogList()
+    {
+        return _LoadTransfersLog();
+    }
 };
 
