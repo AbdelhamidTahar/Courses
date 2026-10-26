@@ -44,7 +44,7 @@ private:
         while (Amount > SourceClient.AccountBalance)
         {
             cout << "\nAmount Exceeds the available Balance, Enter another Amount ? ";
-            Amount = clsInputValidate::ReadDblNumber();
+            Amount = clsInputValidate::ReadPositiveFloatNumber();
         }
         return Amount;
     }

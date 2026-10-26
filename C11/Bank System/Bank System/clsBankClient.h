@@ -149,36 +149,36 @@ private:
         return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
-    string _ConvertLogTransferDataToLine
-    (clsBankClient DestinationClient, float Amount, string Seperator = "#//#")
+    string _PrepareTransferLogRecord(float Amount, clsBankClient DestinationClient,
+        string UserName, string Seperator = "#//#")
     {
-        string LineData = "";
-        LineData += clsDate::GetSystemDateTimeString() + Seperator;
-        LineData += _AccountNumber + Seperator;
-        LineData += DestinationClient.AccountNumber() + Seperator;
-        LineData += to_string(Amount) + Seperator;
-        LineData += to_string(_AccountBalance) + Seperator;
-        LineData += to_string(DestinationClient.AccountBalance) + Seperator;
-        LineData += CurrentUser.UserName;
-
-        return LineData;
+        string TransferLogRecord = "";
+        TransferLogRecord += clsDate::GetSystemDateTimeString() + Seperator;
+        TransferLogRecord += AccountNumber() + Seperator;
+        TransferLogRecord += DestinationClient.AccountNumber() + Seperator;
+        TransferLogRecord += to_string(Amount) + Seperator;
+        TransferLogRecord += to_string(AccountBalance) + Seperator;
+        TransferLogRecord += to_string(DestinationClient.AccountBalance) + Seperator;
+        TransferLogRecord += UserName;
+        return TransferLogRecord;
     }
 
-    void _SaveLogTransferDataLineToFile(string DataLine)
+    void _RegisterTransferLog(float Amount, clsBankClient DestinationClient, string UserName)
     {
+
+        string stDataLine = _PrepareTransferLogRecord(Amount, DestinationClient, UserName);
+
         fstream MyFile;
+        MyFile.open("TransferLog.txt", ios::out | ios::app);
 
-        MyFile.open("TransferLog.txt", ios::app);
-        if(MyFile.is_open())
+        if (MyFile.is_open())
         {
-            MyFile << DataLine << endl;
-        }
-        MyFile.close();
-    }
 
-    void _LogTransfer(clsBankClient DestinationClient, double Amount)
-    {
-        _SaveLogTransferDataLineToFile(_ConvertLogTransferDataToLine(DestinationClient, Amount));
+            MyFile << stDataLine << endl;
+
+            MyFile.close();
+        }
+
     }
 
 public:
@@ -420,7 +420,7 @@ public:
         return TotalBalances;
     }
 
-    bool Transfer(float Amount, clsBankClient& DestinationClient)
+    bool Transfer(float Amount, clsBankClient& DestinationClient, string UserName)
     {
         if (Amount > AccountBalance)
         {
@@ -429,8 +429,11 @@ public:
 
         Withdraw(Amount);
         DestinationClient.Deposit(Amount);
-        _LogTransfer(DestinationClient, Amount);
+        _RegisterTransferLog(Amount, DestinationClient, UserName);
+
         return true;
     }
+
+
 };
 

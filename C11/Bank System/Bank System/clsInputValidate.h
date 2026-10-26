@@ -175,7 +175,7 @@ public:
 		while (!(cin >> Number)) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << ErrorMessage;
+			cout << ErrorMessage << endl;
 		}
 		return Number;
 	}
@@ -212,7 +212,7 @@ public:
 		while (!(cin >> Number)) {
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << ErrorMessage;
+			cout << ErrorMessage << endl;
 		}
 		return Number;
 	}
