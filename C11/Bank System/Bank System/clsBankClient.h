@@ -149,6 +149,38 @@ private:
         return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
+    string _ConvertLogTransferDataToLine
+    (clsBankClient DestinationClient, float Amount, string Seperator = "#//#")
+    {
+        string LineData = "";
+        LineData += clsDate::GetSystemDateTimeString() + Seperator;
+        LineData += _AccountNumber + Seperator;
+        LineData += DestinationClient.AccountNumber() + Seperator;
+        LineData += to_string(Amount) + Seperator;
+        LineData += to_string(_AccountBalance) + Seperator;
+        LineData += to_string(DestinationClient.AccountBalance) + Seperator;
+        LineData += CurrentUser.UserName;
+
+        return LineData;
+    }
+
+    void _SaveLogTransferDataLineToFile(string DataLine)
+    {
+        fstream MyFile;
+
+        MyFile.open("TransferLog.txt", ios::app);
+        if(MyFile.is_open())
+        {
+            MyFile << DataLine << endl;
+        }
+        MyFile.close();
+    }
+
+    void _LogTransfer(clsBankClient DestinationClient, double Amount)
+    {
+        _SaveLogTransferDataLineToFile(_ConvertLogTransferDataToLine(DestinationClient, Amount));
+    }
+
 public:
 
 
@@ -397,6 +429,7 @@ public:
 
         Withdraw(Amount);
         DestinationClient.Deposit(Amount);
+        _LogTransfer(DestinationClient, Amount);
         return true;
     }
 };
