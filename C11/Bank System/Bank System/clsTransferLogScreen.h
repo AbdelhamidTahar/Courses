@@ -1,61 +1,73 @@
 #pragma once
-#include <iostream > 
-#include <vector >
-#include <iomanip >
+
+#include <iostream>
 #include "clsScreen.h"
-#include "clsString.h"
+#include <iomanip>
+#include <fstream>
 #include "clsBankClient.h"
-using namespace std;
+
 
 class clsTransferLogScreen :protected clsScreen
 {
+
 private:
 
-	static void _PrintTransfersLogrecord(clsBankClient::_stTransferLog TransferLogrecord)
-	{
-		cout << setw(8) << left << "" << "| " << setw(25) << left << TransferLogrecord.DateAndTime;
-		cout << "| " << setw(12) << left << TransferLogrecord.AccountNumberSourceClient;
-		cout << "| " << setw(12) << left << TransferLogrecord.AccountNumberDestinationClient;
-		cout << "| " << setw(12) << left << TransferLogrecord.Amount;
-		cout << "| " << setw(12) << left << TransferLogrecord.SourceClientAmount;
-		cout << "| " << setw(12) << left << TransferLogrecord.DestinationClientAmount;
-		cout << "| " << setw(12) << left << TransferLogrecord.UserName;
-	}
+    static void PrintTransferLogRecordLine(clsBankClient::stTrnsferLogRecord TransferLogRecord)
+    {
+
+        cout << setw(8) << left << "" << "| " << setw(23) << left << TransferLogRecord.DateTime;
+        cout << "| " << setw(8) << left << TransferLogRecord.SourceAccountNumber;
+        cout << "| " << setw(8) << left << TransferLogRecord.DestinationAccountNumber;
+        cout << "| " << setw(8) << left << TransferLogRecord.Amount;
+        cout << "| " << setw(10) << left << TransferLogRecord.srcBalanceAfter;
+        cout << "| " << setw(10) << left << TransferLogRecord.destBalanceAfter;
+        cout << "| " << setw(8) << left << TransferLogRecord.UserName;
+
+
+    }
+
 public:
-	static void ShowTransferLogScreen()
-	{
-		vector< clsBankClient::_stTransferLog>TransfersLogList = clsBankClient::GetTransfersLogList();
-		string Titel = "\tTransfers Log List";
-		string SubTitle = "\t(" + to_string(TransfersLogList.size()) + "Record(s)";
 
-		_DrawScreenHeader(Titel,SubTitle);
+    static void ShowTransferLogScreen()
+    {
 
-		cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-		cout << "______________________________________________\n" << endl;
 
-		cout << setw(8) << left << "" << "| " << left << setw(25) << "Date/Time";
-		cout << "| " << left << setw(12) << "s.Acct";
-		cout << "| " << left << setw(12) << "d.Acct";
-		cout << "| " << left << setw(12) << "Amount";
-		cout << "| " << left << setw(12) << "s. Balance";
-		cout << "| " << left << setw(12) << "d. Balance";
-		cout << "| " << left << setw(12) << "User";
-		cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-		cout << "______________________________________________\n" << endl;
+        vector <clsBankClient::stTrnsferLogRecord> vTransferLogRecord = clsBankClient::GetTransfersLogList();
 
-		if (TransfersLogList.size() == 0)
-			cout << "\t\t\tNot Found\n";
-		else
-		{
-			for (clsBankClient::_stTransferLog& stTransferLog : TransfersLogList)
-			{
-				_PrintTransfersLogrecord(stTransferLog);
-				cout << endl;
-			}
-		}
-		cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-		cout << "______________________________________________\n" << endl;
+        string Title = "\tTransfer Log List Screen";
+        string SubTitle = "\t    (" + to_string(vTransferLogRecord.size()) + ") Record(s).";
 
-	}
+        _DrawScreenHeader(Title, SubTitle);
+
+        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
+        cout << "_________________________________________\n" << endl;
+
+        cout << setw(8) << left << "" << "| " << left << setw(23) << "Date/Time";
+        cout << "| " << left << setw(8) << "s.Acct";
+        cout << "| " << left << setw(8) << "d.Acct";
+        cout << "| " << left << setw(8) << "Amount";
+        cout << "| " << left << setw(10) << "s.Balance";
+        cout << "| " << left << setw(10) << "d.Balance";
+        cout << "| " << left << setw(8) << "User";
+
+        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
+        cout << "_________________________________________\n" << endl;
+
+        if (vTransferLogRecord.size() == 0)
+            cout << "\t\t\t\tNo Transfers Available In the System!";
+        else
+
+            for (clsBankClient::stTrnsferLogRecord Record : vTransferLogRecord)
+            {
+
+                PrintTransferLogRecordLine(Record);
+                cout << endl;
+            }
+
+        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
+        cout << "_________________________________________\n" << endl;
+
+    }
+
 };
 

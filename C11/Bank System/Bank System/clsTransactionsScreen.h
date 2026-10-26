@@ -8,6 +8,7 @@
 #include "clsTotalBalancesScreen.h"
 #include "clsTransferScreen.h"
 #include "clsTransferLogScreen.h"
+
 using namespace std;
 
 class clsTransactionsScreen :protected clsScreen
@@ -17,8 +18,8 @@ class clsTransactionsScreen :protected clsScreen
 private:
     enum enTransactionsMenueOptions {
         eDeposit = 1, eWithdraw = 2,
-        eShowTotalBalance = 3, eTransfer = 4,
-        eTransferLog = 5, eShowMainMenue = 6
+        eShowTotalBalance = 3, eTransfer = 4, eTransferLog = 5,
+        eShowMainMenue = 6
 
     };
 
@@ -59,8 +60,9 @@ private:
 
     static void _ShowTransferLogScreen()
     {
-        //cout << "Show Transfer LogS creen well be here\n";
-        clsTransferLogScreen:: ShowTransferLogScreen();
+        //cout << "\n Transfer Screen will be here.\n";
+        clsTransferLogScreen::ShowTransferLogScreen();
+
     }
 
     static void _GoBackToTransactionsMenue()
@@ -107,6 +109,7 @@ private:
             _GoBackToTransactionsMenue();
             break;
         }
+
 
         case enTransactionsMenueOptions::eTransferLog:
         {
