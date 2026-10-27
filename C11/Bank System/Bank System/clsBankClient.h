@@ -5,6 +5,7 @@
 #include "clsString.h"
 #include <vector>
 #include <fstream>
+#include "clsUtil.h"
 
 using namespace std;
 class clsBankClient : public clsPerson
@@ -25,7 +26,7 @@ private:
         vClientData = clsString::Split(Line, Seperator);
 
         return clsBankClient(enMode::UpdateMode, vClientData[0], vClientData[1], vClientData[2],
-            vClientData[3], vClientData[4], vClientData[5], stod(vClientData[6]));
+            vClientData[3], vClientData[4], clsUtil::DecryptionText(vClientData[5]), stod(vClientData[6]));
 
     }
 
@@ -38,7 +39,7 @@ private:
         stClientRecord += Client.Email + Seperator;
         stClientRecord += Client.Phone + Seperator;
         stClientRecord += Client.AccountNumber() + Seperator;
-        stClientRecord += Client.PinCode + Seperator;
+        stClientRecord += clsUtil::EncryptText(Client.PinCode) + Seperator;
         stClientRecord += to_string(Client.AccountBalance);
 
         return stClientRecord;
