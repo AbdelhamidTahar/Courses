@@ -50,6 +50,41 @@ public:
 
 		return false;
 	}
+
+	static bool IsPositiveNumber(int Number)
+	{
+		return (Number > 0);
+	}
+	static bool IsPositiveNumber(short Number)
+	{
+		return (Number > 0);
+	}
+	static bool IsPositiveNumber(float Number)
+	{
+		return (Number > 0);
+	}
+	static bool IsPositiveNumber(double Number)
+	{
+		return (Number > 0);
+	}
+
+	static bool IsNegativeNumber(int Number)
+	{
+		return (Number < 0);
+	}
+	static bool IsNegativeNumber(short Number)
+	{
+		return (Number < 0);
+	}
+	static bool IsNegativeNumber(float Number)
+	{
+		return (Number < 0);
+	}
+	static bool IsNegativeNumber(double Number)
+	{
+		return (Number < 0);
+	}
+
 	static bool IsValideDate(clsDate Date)
 	{
 		return clsDate::IsValidDate(Date);
@@ -93,6 +128,7 @@ public:
 		}
 		return false;
 	}
+
 	static int ReadIntNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		int Number ;
@@ -106,6 +142,107 @@ public:
 
 		return Number;
 	}
+	static int ReadPositiveIntNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		int Number;
+
+		while (!(cin >> Number)|| IsNegativeNumber(Number))
+		{
+			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage << endl;
+		}
+
+		return Number;
+	}
+	static int ReadNegativeIntNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		int Number;
+
+		while (!(cin >> Number) || IsPositiveNumber(Number))
+		{
+			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage << endl;
+		}
+
+		return Number;
+	}
+
+	static short ReadShortNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		short Number;
+		while (!(cin >> Number)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage << endl;
+		}
+		return Number;
+	}
+	static short ReadPositiveShortNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		short Number;
+
+		while (!(cin >> Number) || IsNegativeNumber(Number))
+		{
+			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage << endl;
+		}
+
+		return Number;
+	}
+	static short ReadNegativeShortNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		short Number;
+
+		while (!(cin >> Number) || IsPositiveNumber(Number))
+		{
+			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage << endl;
+		}
+
+		return Number;
+	}
+
+	static float ReadFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		float Number;
+		while (!(cin >> Number)) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage << endl;
+		}
+		return Number;
+	}
+	static float ReadPositiveFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		float Number;
+
+		while (!(cin >> Number) || IsNegativeNumber(Number))
+		{
+			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage << endl;
+		}
+
+		return Number;
+	}
+	static float ReadNegativeFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		float Number;
+
+		while (!(cin >> Number) || IsPositiveNumber(Number))
+		{
+			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage << endl;
+		}
+
+		return Number;
+	}
+
 	static double ReadDblNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		double Number;
@@ -120,26 +257,34 @@ public:
 
 		return Number;
 	}
-	static float ReadFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	static double ReadPositiveDbNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
-		float Number;
-		while (!(cin >> Number)) {
-			cin.clear();
+		double Number;
+
+		while (!(cin >> Number) || IsNegativeNumber(Number))
+		{
+			cin.clear();// clear error
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << ErrorMessage;
+			cout << ErrorMessage << endl;
 		}
+
 		return Number;
 	}
-	static short ReadShortNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	static double ReadNegativeDbNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
-		short Number;
-		while (!(cin >> Number)) {
-			cin.clear();
+		double Number;
+
+		while (!(cin >> Number) || IsPositiveNumber(Number))
+		{
+			cin.clear();// clear error
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << ErrorMessage;
+			cout << ErrorMessage << endl;
 		}
+
 		return Number;
 	}
+
+
 
 	static int ReadIntNumberBetween(int From, int To, string ErrorMessage = "Number is not within range, Enter again:\n")
 	{
@@ -231,10 +376,10 @@ public:
 
 		return S1;
 	}
-	static string ReadAccountNumber()
+	static string ReadAccountNumber(const string& InputMessage)
 	{
-		string Message =  "\nPlease enter AccountNumber? ";
-		return ReadAlphaNumericString(Message);
+		
+		return ReadAlphaNumericString(InputMessage);
 	}
 
 	static char ReadLetter(const string &ErrorMessage = "Invalid Letter, Enter again\n")

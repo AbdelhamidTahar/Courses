@@ -5,6 +5,7 @@
 #include "clsString.h"
 #include <vector>
 #include <fstream>
+#include "clsUtil.h"
 
 using namespace std;
 class clsBankClient : public clsPerson
@@ -25,7 +26,7 @@ private:
         vClientData = clsString::Split(Line, Seperator);
 
         return clsBankClient(enMode::UpdateMode, vClientData[0], vClientData[1], vClientData[2],
-            vClientData[3], vClientData[4], vClientData[5], stod(vClientData[6]));
+            vClientData[3], vClientData[4], clsUtil::DecryptionText(vClientData[5]), stod(vClientData[6]));
 
     }
 
@@ -38,7 +39,7 @@ private:
         stClientRecord += Client.Email + Seperator;
         stClientRecord += Client.Phone + Seperator;
         stClientRecord += Client.AccountNumber() + Seperator;
-        stClientRecord += Client.PinCode + Seperator;
+        stClientRecord += clsUtil::EncryptText(Client.PinCode) + Seperator;
         stClientRecord += to_string(Client.AccountBalance);
 
         return stClientRecord;
@@ -149,7 +150,71 @@ private:
         return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
+    struct stTrnsferLogRecord;
+
+    static stTrnsferLogRecord _ConvertTransferLogLineToRecord(string Line, string Seperator = "#//#")
+    {
+        stTrnsferLogRecord TrnsferLogRecord;
+
+        vector <string> vTrnsferLogRecordLine = clsString::Split(Line, Seperator);
+        TrnsferLogRecord.DateTime = vTrnsferLogRecordLine[0];
+        TrnsferLogRecord.SourceAccountNumber = vTrnsferLogRecordLine[1];
+        TrnsferLogRecord.DestinationAccountNumber = vTrnsferLogRecordLine[2];
+        TrnsferLogRecord.Amount = stod(vTrnsferLogRecordLine[3]);
+        TrnsferLogRecord.srcBalanceAfter = stod(vTrnsferLogRecordLine[4]);
+        TrnsferLogRecord.destBalanceAfter = stod(vTrnsferLogRecordLine[5]);
+        TrnsferLogRecord.UserName = vTrnsferLogRecordLine[6];
+
+        return TrnsferLogRecord;
+
+    }
+
+
+    string _PrepareTransferLogRecord(float Amount, clsBankClient DestinationClient,
+        string UserName, string Seperator = "#//#")
+    {
+        string TransferLogRecord = "";
+        TransferLogRecord += clsDate::GetSystemDateTimeString() + Seperator;
+        TransferLogRecord += AccountNumber() + Seperator;
+        TransferLogRecord += DestinationClient.AccountNumber() + Seperator;
+        TransferLogRecord += to_string(Amount) + Seperator;
+        TransferLogRecord += to_string(AccountBalance) + Seperator;
+        TransferLogRecord += to_string(DestinationClient.AccountBalance) + Seperator;
+        TransferLogRecord += UserName;
+        return TransferLogRecord;
+    }
+
+    void _RegisterTransferLog(float Amount, clsBankClient DestinationClient, string UserName)
+    {
+
+        string stDataLine = _PrepareTransferLogRecord(Amount, DestinationClient, UserName);
+
+        fstream MyFile;
+        MyFile.open("TransfersLog.txt", ios::out | ios::app);
+
+        if (MyFile.is_open())
+        {
+
+            MyFile << stDataLine << endl;
+
+            MyFile.close();
+        }
+
+    }
+
 public:
+
+    struct stTrnsferLogRecord
+    {
+        string DateTime;
+        string SourceAccountNumber;
+        string DestinationAccountNumber;
+        float Amount;
+        float srcBalanceAfter;
+        float destBalanceAfter;
+        string UserName;
+
+    };
 
 
     clsBankClient(enMode Mode, string FirstName, string LastName,
@@ -369,7 +434,6 @@ public:
         {
             _AccountBalance -= Amount;
             Save();
-            return true;
         }
 
     }
@@ -388,6 +452,52 @@ public:
 
         return TotalBalances;
     }
+
+    bool Transfer(float Amount, clsBankClient& DestinationClient, string UserName)
+    {
+        if (Amount > AccountBalance)
+        {
+            return false;
+        }
+
+        Withdraw(Amount);
+        DestinationClient.Deposit(Amount);
+        _RegisterTransferLog(Amount, DestinationClient, UserName);
+
+        return true;
+    }
+
+    static  vector <stTrnsferLogRecord> GetTransfersLogList()
+    {
+        vector <stTrnsferLogRecord> vTransferLogRecord;
+
+        fstream MyFile;
+        MyFile.open("TransfersLog.txt", ios::in);//read Mode
+
+        if (MyFile.is_open())
+        {
+
+            string Line;
+
+            stTrnsferLogRecord TransferRecord;
+
+            while (getline(MyFile, Line))
+            {
+
+                TransferRecord = _ConvertTransferLogLineToRecord(Line);
+
+                vTransferLogRecord.push_back(TransferRecord);
+
+            }
+
+            MyFile.close();
+
+        }
+
+        return vTransferLogRecord;
+
+    }
+
 
 };
 
