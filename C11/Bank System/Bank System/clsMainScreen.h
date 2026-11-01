@@ -12,7 +12,8 @@
 #include "clsLoginScreen.h"
 #include "Global.h"
 #include "clsLoginRegisterScreen.h"
-#include "clsCurrencyExchange.h"
+#include "clsCurrencyExchangeMainScreen.h"
+
 using namespace std;
 
 class clsMainScreen :protected clsScreen
@@ -23,7 +24,7 @@ private:
     enum enMainMenueOptions {
         eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
         eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenue = 6,
-        eManageUsers = 7, eLoginRegister = 8, eCurrencyExchange = 9, eExit = 10
+        eManageUsers = 7, eLoginRegister = 8, eCurrncyExchange = 9, eExit = 10
     };
 
     static short _ReadMainMenueOption()
@@ -46,7 +47,6 @@ private:
         //  cout << "\nClient List Screen Will be here...\n";
         clsClientListScreen::ShowClientsList();
 
-
     }
 
     static void _ShowAddNewClientsScreen()
@@ -68,22 +68,18 @@ private:
         //cout << "\nUpdate Client Screen Will be here...\n";
         clsUpdateClientScreen::ShowUpdateClientScreen();
 
-
     }
 
     static void _ShowFindClientScreen()
     {
         // cout << "\nFind Client Screen Will be here...\n";
         clsFindClientScreen::ShowFindClientScreen();
-
-
     }
 
     static void _ShowTransactionsMenue()
     {
         // cout << "\nTransactions Menue Will be here...\n";
         clsTransactionsScreen::ShowTransactionsMenue();
-
     }
 
     static void _ShowManageUsersMenue()
@@ -96,19 +92,16 @@ private:
     {
         // cout << "\nLogin Register Will be here...\n";
         clsLoginRegisterScreen::ShowLoginRegisterScreen();
-
     }
 
-    static void _ShowCurrencyExchangeScreen()
+    static void _ShowCurrencyExchangeMainScreen()
     {
-        clsCurrencyExchange::ShowCurrencyExchangeMenu();
+        clsCurrencyExchangeMainScreen::ShowCurrenciesMenue();
     }
 
     static void _Logout()
     {
-
         CurrentUser = clsUser::Find("", "");
-
         //then it will go back to main function.
     }
 
@@ -165,9 +158,9 @@ private:
             _GoBackToMainMenue();
             break;
 
-        case enMainMenueOptions::eCurrencyExchange:
+        case enMainMenueOptions::eCurrncyExchange:
             system("cls");
-            _ShowCurrencyExchangeScreen();
+            _ShowCurrencyExchangeMainScreen();
             _GoBackToMainMenue();
             break;
 
