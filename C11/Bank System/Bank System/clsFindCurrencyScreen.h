@@ -1,68 +1,74 @@
 #pragma once
 #include <iostream>
-#include <string>
 #include "clsScreen.h"
+#include "clsCurrency.h"
 #include "clsInputValidate.h"
-#include "clsFindCurrencyByCodeScreen.h"
-#include "clsFindCurrencyByCountryScreen.h"
-#include <iomanip>
-using namespace std;
 
-class clsFindCurrencyScreen:protected clsScreen
+class clsFindCurrencyScreen :protected clsScreen
 {
+
 private:
-   static short ReadFindCurrencyOptions()
+    static void _PrintCurrency(clsCurrency Currency)
     {
-        short Choice = clsInputValidate::ReadShortNumberBetween(1, 2, "Enter Number between 1 to 2? ");
-        return Choice;
+        cout << "\nCurrency Card:\n";
+        cout << "_____________________________\n";
+        cout << "\nCountry    : " << Currency.Country();
+        cout << "\nCode       : " << Currency.CurrencyCode();
+        cout << "\nName       : " << Currency.CurrencyName();
+        cout << "\nRate(1$) = : " << Currency.Rate();
+
+        cout << "\n_____________________________\n";
+
     }
-   enum enFindCurrencyOptions
-   {
-       eByCode = 1,
-       eByCountry = 2
-   };
 
-   static void _ShowFindCurrencyByCodeScreen()
-   {
-       //cout << "Well Be Here\n";
-       clsFindCurrencyByCodeScreen::ShowFindCurrencyByCodeScreen();
-   }
-
-   static void _ShowFindCurrencyByCountryScreen()
-   {
-       //cout << "Well Be Here\n";
-       clsFindCurrencyByCountryScreen::ShowFindCurrencyByCountryScreen();
-   }
-
-   static void _PerformFindCurrencyOptions(enFindCurrencyOptions FindCurrencyOptions)
-   {
-       switch (FindCurrencyOptions)
-       {
-       case enFindCurrencyOptions::eByCode:
-       {
-           _ShowFindCurrencyByCodeScreen();
-           break;
-       }
-       case enFindCurrencyOptions::eByCountry:
-       {
-           _ShowFindCurrencyByCountryScreen();
-           break;
-       }
-       }
-   }
-
+    static void _ShowResults(clsCurrency Currency)
+    {
+        if (!Currency.IsEmpty())
+        {
+            cout << "\nCurrency Found :-)\n";
+            _PrintCurrency(Currency);
+        }
+        else
+        {
+            cout << "\nCurrency Was not Found :-(\n";
+        }
+    }
 
 public:
-	static void ShowFindCurrencyScreen()
-	{
-        system("cls");
-        _DrawScreenHeader("    Find Currency Screen");
+
+    static void ShowFindCurrencyScreen()
+    {
+
+        _DrawScreenHeader("\t  Find Currency Screen");
+
+        cout << "\nFind By: [1] Code or [2] Country ? ";
+        short Answer = 1;
+
+        cin >> Answer;
+
+        if (Answer == 1)
+        {
+            string CurrencyCode;
+            cout << "\nPlease Enter CurrencyCode: ";
+            CurrencyCode = clsInputValidate::ReadString();
+            clsCurrency Currency = clsCurrency::FindByCode(CurrencyCode);
+            _ShowResults(Currency);
+        }
+        else
+        {
+            string Country;
+            cout << "\nPlease Enter Country Name: ";
+            Country = clsInputValidate::ReadString();
+            clsCurrency Currency = clsCurrency::FindByCountry(Country);
+            _ShowResults(Currency);
+        }
 
 
-        cout << setw(37) << left << "" << "\t Find By [1]Code Or [2]Country? ";
 
-        _PerformFindCurrencyOptions((enFindCurrencyOptions)ReadFindCurrencyOptions());
 
-	}
+
+
+    }
+
 };
 

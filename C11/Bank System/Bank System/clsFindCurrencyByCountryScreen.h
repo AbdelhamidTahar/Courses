@@ -19,9 +19,8 @@ private:
 public:
 	static void ShowFindCurrencyByCountryScreen()
 	{
-		string CountryName = clsInputValidate::ReadAlphaNumericString("Pleas Enter Code Name: ");
 
-		clsCurrency Currency = clsCurrency::FindByCountry(CountryName);
+	
 		if (Currency.IsEmpty())
 		{
 			cout << "Not Found By this Country Name We Are SORRY\n";

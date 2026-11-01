@@ -19,9 +19,6 @@ private :
 public:
 	static void ShowFindCurrencyByCodeScreen()
 	{
-		string Code = clsInputValidate::ReadAlphaNumericString("Pleas Enter Code Name: ");
-		
-		clsCurrency Currency = clsCurrency::FindByCode(Code);
 		if (Currency.IsEmpty())
 		{
 			cout << "Not Found By this Code We Are SORRY\n";
