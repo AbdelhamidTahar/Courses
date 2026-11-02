@@ -406,9 +406,8 @@ public:
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		return C;
 	}
-	static bool ReadYesNoAnswer(string const& Message)
+	static bool ReadYesNoAnswer()
 	{
-		cout << Message;
 		char Answer = ReadChar();
 		return (Answer == 'y' || Answer == 'Y');
 	}
