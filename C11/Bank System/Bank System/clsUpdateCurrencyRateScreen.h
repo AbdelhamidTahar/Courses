@@ -1,14 +1,23 @@
 #pragma once
 #include <iostream>
 #include "clsScreen.h"
-#include "clsInputValidate.h"
 #include "clsCurrency.h"
-//#include ""
-using namespace std;
+#include "clsInputValidate.h"
 
 class clsUpdateCurrencyRateScreen :protected clsScreen
+
 {
 private:
+
+    static float _ReadRate()
+    {
+        cout << "\nEnter New Rate: ";
+        float NewRate = 0;
+
+        NewRate = clsInputValidate::ReadFloatNumber();
+        return NewRate;
+    }
+
     static void _PrintCurrency(clsCurrency Currency)
     {
         cout << "\nCurrency Card:\n";
@@ -19,39 +28,49 @@ private:
         cout << "\nRate(1$) = : " << Currency.Rate();
 
         cout << "\n_____________________________\n";
-    }
-    static float _ReadRate()
-        {
-            return clsInputValidate::ReadPositiveFloatNumber();
-        }
 
+    }
 
 public:
-	static void ShowUpdateCurrencyRateScreen()
-	{
-        _DrawScreenHeader("\t Update Currency Rate");
 
-		string Code = clsInputValidate::ReadAlphaString("Please Enter Currency Code: ");
-        while (clsCurrency::IsCurrencyExist(Code))
+    static void ShowUpdateCurrencyRateScreen()
+    {
+
+        _DrawScreenHeader("\tUpdate Currency Screen");
+
+        string CurrencyCode = "";
+
+        cout << "\nPlease Enter Currency Code: ";
+        CurrencyCode = clsInputValidate::ReadString();
+
+        while (!clsCurrency::IsCurrencyExist(CurrencyCode))
         {
-            cout << "Not Foung Try Agin\n";
-            Code = clsInputValidate::ReadAlphaString("Please Enter Currency Code: ");
+            cout << "\nCurrency is not found, choose another one: ";
+            CurrencyCode = clsInputValidate::ReadString();
         }
-		clsCurrency Currency = clsCurrency::FindByCode(Code);
+
+        clsCurrency Currency = clsCurrency::FindByCode(CurrencyCode);
         _PrintCurrency(Currency);
 
-        cout << "Are you sure you want to update the rate of this Currency y/n? :";
-        char Answer = clsInputValidate::ReadYesNoAnswer();
-        if (Answer)
+        cout << "\nAre you sure you want to update the rate of this Currency y/n? ";
+
+        char Answer = 'n';
+        cin >> Answer;
+
+        if (Answer == 'y' || Answer == 'Y')
         {
-            cout << "Update Currency Rate:\n";
-            cout << "________________________\n";
-            cout << "Enter New Rate: ";
+
+            cout << "\n\nUpdate Currency Rate:";
+            cout << "\n____________________\n";
+
             Currency.UpdateRate(_ReadRate());
-            cout << "Currency Rate Updated Successfully :- )\n";
+
+            cout << "\nCurrency Rate Updated Successfully :-)\n";
             _PrintCurrency(Currency);
+
+
         }
-        cout << "Currency Rate Updated Canseled :- (\n";
-	}
+
+    }
 };
 
