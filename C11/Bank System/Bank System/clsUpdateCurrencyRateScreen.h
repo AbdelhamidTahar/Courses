@@ -19,14 +19,24 @@ private:
         cout << "\nRate(1$) = : " << Currency.Rate();
 
         cout << "\n_____________________________\n";
-
     }
+    static float _ReadRate()
+        {
+            return clsInputValidate::ReadPositiveFloatNumber();
+        }
+
+
 public:
 	static void ShowUpdateCurrencyRateScreen()
 	{
         _DrawScreenHeader("\t Update Currency Rate");
 
 		string Code = clsInputValidate::ReadAlphaString("Please Enter Currency Code: ");
+        while (clsCurrency::IsCurrencyExist(Code))
+        {
+            cout << "Not Foung Try Agin\n";
+            Code = clsInputValidate::ReadAlphaString("Please Enter Currency Code: ");
+        }
 		clsCurrency Currency = clsCurrency::FindByCode(Code);
         _PrintCurrency(Currency);
 
@@ -37,7 +47,7 @@ public:
             cout << "Update Currency Rate:\n";
             cout << "________________________\n";
             cout << "Enter New Rate: ";
-            Currency.UpdateRate(clsInputValidate::ReadFloatNumber());
+            Currency.UpdateRate(_ReadRate());
             cout << "Currency Rate Updated Successfully :- )\n";
             _PrintCurrency(Currency);
         }
