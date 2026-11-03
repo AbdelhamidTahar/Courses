@@ -243,10 +243,6 @@ public:
         return _LoadCurrencysDataFromFile();
     }
 
-
-
-
-
      float ConvertToUSD(float Amount)
      {
          if (Amount < 0)

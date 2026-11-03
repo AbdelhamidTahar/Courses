@@ -70,7 +70,7 @@ private:
 
         _PrintCurrencyCard(Currency2, "To:");
 
-        float AmountInCurrrency2 = Currency1.ConvertToOtherCurrency(Currency2, Amount);
+        float AmountInCurrrency2 = Currency1.ConvertToOtherCurrency(Amount, Currency2);
 
         cout << Amount << " " << Currency1.CurrencyCode()
             << " = " << AmountInCurrrency2 << " " << Currency2.CurrencyCode();
