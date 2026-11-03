@@ -40,7 +40,7 @@ public:
     static void ShowDepositScreen()
     {
         _DrawScreenHeader("\t   Deposit Screen");
-        _DrawLogidUserHeadar();
+      
 
         string AccountNumber = _ReadAccountNumber();
 

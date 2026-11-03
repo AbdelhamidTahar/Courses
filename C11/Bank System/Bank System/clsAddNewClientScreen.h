@@ -57,7 +57,7 @@ public:
         }
 
         _DrawScreenHeader("\t  Add New Client Screen");
-        _DrawLogidUserHeadar();
+        
 
         string AccountNumber = "";
 
