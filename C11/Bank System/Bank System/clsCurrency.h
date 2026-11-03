@@ -244,22 +244,30 @@ public:
     }
 
 
-     float ConvertToUSD( float Amount)
-    {
-        if (Amount < 0)
-            return 0;
-        return Amount / Rate();
-    }
 
-     float ConvertToOtherCurrency(clsCurrency To, float Amount)
-    {
-        if (Amount < 0)
-            return 0;
 
-        Amount = ConvertToUSD( Amount);
-        return Amount * To.Rate();
 
-    }
+     float ConvertToUSD(float Amount)
+     {
+         if (Amount < 0)
+             return 0;
+         return (float)(Amount / Rate());
+     }
+
+     float ConvertToOtherCurrency(float Amount, clsCurrency Currency2)
+     {
+         if (Amount < 0)
+             return 0;
+         float AmountInUSD = ConvertToUSD(Amount);
+
+         if (Currency2.CurrencyCode() == "USD")
+         {
+             return AmountInUSD;
+         }
+
+         return (float)(AmountInUSD * Currency2.Rate());
+
+     }
 };
 
 
