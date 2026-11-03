@@ -120,6 +120,9 @@ private:
         return clsCurrency(enMode::EmptyMode, "", "", "", 0);
     }
 
+ 
+
+
 public:
 
     clsCurrency(enMode Mode, string Country, string CurrencyCode, string CurrencyName, float Rate)
@@ -238,6 +241,31 @@ public:
     static vector <clsCurrency> GetCurrenciesList()
     {
         return _LoadCurrencysDataFromFile();
+    }
+
+    static float ConvertCurrencyFromUSDTo(clsCurrency To, float Amount)
+    {
+        if (Amount < 0)
+            return 0;
+        return Amount * To.Rate();
+    }
+
+    static float ConvertCurrencyToUSD(clsCurrency From, float Amount)
+    {
+        if (Amount < 0)
+            return 0;
+        return Amount / From.Rate();
+    }
+
+    static float ConvertFromCurrencyToAnotherCurrency(clsCurrency From, clsCurrency To, float Amount)
+    {
+        if (Amount < 0)
+            return 0;
+
+        Amount = ConvertCurrencyToUSD(From, Amount);
+        Amount = ConvertCurrencyFromUSDTo(To, Amount);
+
+        return Amount;
     }
 };
 
