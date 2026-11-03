@@ -243,29 +243,22 @@ public:
         return _LoadCurrencysDataFromFile();
     }
 
-    static float ConvertCurrencyFromUSDTo(clsCurrency To, float Amount)
+
+     float ConvertToUSD( float Amount)
     {
         if (Amount < 0)
             return 0;
+        return Amount / Rate();
+    }
+
+     float ConvertToOtherCurrency(clsCurrency To, float Amount)
+    {
+        if (Amount < 0)
+            return 0;
+
+        Amount = ConvertToUSD( Amount);
         return Amount * To.Rate();
-    }
 
-    static float ConvertCurrencyToUSD(clsCurrency From, float Amount)
-    {
-        if (Amount < 0)
-            return 0;
-        return Amount / From.Rate();
-    }
-
-    static float ConvertFromCurrencyToAnotherCurrency(clsCurrency From, clsCurrency To, float Amount)
-    {
-        if (Amount < 0)
-            return 0;
-
-        Amount = ConvertCurrencyToUSD(From, Amount);
-        Amount = ConvertCurrencyFromUSDTo(To, Amount);
-
-        return Amount;
     }
 };
 
