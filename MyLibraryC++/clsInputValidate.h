@@ -9,25 +9,73 @@ using namespace std;
 class clsInputValidate
 {
 public:
-	static bool IsNumberBetween(short Number, short From, short To)
+	template<typename T>static bool IsNumberBetween(T Number, T From, T To)
 	{
 		if (Number >= From && Number <= To)
 			return true;
 		else
 			return false;
 	}
-	static bool IsNumberBetween(int Number, int From, int To)
+	template<typename T> static bool IsPositiveNumber(T Number)
 	{
-		return (Number >= From && Number <= To);
+		return (Number > 0);
 	}
-	static bool IsNumberBetween(float Number, float From, float To)
+	template<typename T> static bool IsNegativeNumber(T Number)
 	{
-		return (Number >= From && Number <= To);
+		return (Number < 0);
 	}
-	static bool IsNumberBetween(double Number, double From, double To)
+	template<typename T>static T ReadNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
-		return (Number >= From && Number <= To);
+		T Number;
+
+		while (!(cin >> Number))
+		{
+			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage << endl;
+		}
+
+		return Number;
 	}
+	template<typename T>static  T ReadPositiveNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		T Number;
+
+		while (!(cin >> Number) || IsNegativeNumber<T>(Number))
+		{
+			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage << endl;
+		}
+
+		return Number;
+	}
+	template<typename T>static T ReadNegativeNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		T Number;
+
+		while (!(cin >> Number) || IsPositiveNumber<T>(Number))
+		{
+			cin.clear();// clear error
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage << endl;
+		}
+
+		return Number;
+	}
+	template <typename T>static  T ReadNumberBetween(T From, T To, string ErrorMessage = "Number is not within range, Enter again:\n")
+	{
+		T Number = ReadNumber<T>();
+
+		while (!IsNumberBetween<T>(Number, From, To))
+		{
+			cout << ErrorMessage << endl;
+			Number = ReadNumber<T>();
+		}
+
+		return Number;
+	}
+
 	static bool IsDateBetween(clsDate Date, clsDate From, clsDate To)
 	{
 		//Date>=From && Date<=To
@@ -50,11 +98,12 @@ public:
 
 		return false;
 	}
+
 	static bool IsValideDate(clsDate Date)
 	{
 		return clsDate::IsValidDate(Date);
 	}
-	static bool IsHasPunctuation(const string& Input)
+	static bool IsStringHasPunctuation(const string& Input)
 	{
 		for (const char& Character : Input)
 		{
@@ -64,7 +113,7 @@ public:
 		return false;
 
 	}
-	static bool IsHasDigit(const string& Input)
+	static bool IsStringHasDigit(const string& Input)
 	{
 		for (const char& Character : Input)
 		{
@@ -74,7 +123,7 @@ public:
 		return false;
 
 	}
-	static bool IsHasChar(const string& Input)
+	static bool IsStringHasLetter(const string& Input)
 	{
 		for (const char& Character : Input)
 		{
@@ -84,105 +133,65 @@ public:
 		return false;
 
 	}
-	static int ReadIntNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	static bool IsStringHasSpace(const string& Input)
 	{
-		int Number ;
-
-		while (!(cin >> Number))
+		for (char C : Input)
 		{
-			cin.clear();// clear error
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << ErrorMessage << endl;
+			if (C == ' ')
+				return true;
 		}
-
-		return Number;
+		return false;
 	}
-	static double ReadDblNumber(string ErrorMessage = "Invalid Number, Enter again\n")
-	{
-		double Number;
 
 
-		while (!(cin >> Number))
-		{
-			cin.clear();// clear error
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << ErrorMessage << endl;
-		}
-
-		return Number;
-	}
-	static float ReadFlNumber(string ErrorMessage = "Invalid Number, Enter again\n")
-	{
-		float Number;
-
-
-		while (!(cin >> Number))
-		{
-			cin.clear();// clear error
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << ErrorMessage << endl;
-		}
-
-		return Number;
-	}
-	static int ReadIntNumberBetween(int From, int To, string ErrorMessage = "Number is not within range, Enter again:\n")
-	{
-		int Number = ReadIntNumber();
-
-		while (!IsNumberBetween(Number, From, To))
-		{
-			cout << ErrorMessage << endl;
-			Number = ReadIntNumber();
-		}
-
-		return Number;
-	}
-	static double ReadDblNumberBetween(double From, double To, string ErrorMessage = "Number is not within range, Enter again:\n")
-	{
-		double Number = ReadDblNumber();
-
-		while (!IsNumberBetween(Number,From,To))
-		{
-			cout << ErrorMessage << endl;
-			Number = ReadDblNumber();
-		}
-
-		return Number;
-	}
-	static float ReadfloatNumberBetween(string Message, float From, float To)
-	{
-		float Number = ReadFlNumber();
-
-		while (!IsNumberBetween(Number, From, To))
-		{
-			cout << Message << endl;
-			Number = ReadFlNumber();
-		}
-
-		return Number;
-	}
-	static string ReadAlphaString(const string& InputMessage, const string& ErrorMessage)
+	static string ReadAlphaString(const string& InputMessage, const string& ErrorMessage = "Invalid input. Numbers or punctuation not allowed.\n")
 	{
 		string AlphaString = "";
-		cout << InputMessage << endl;
+		cout << InputMessage;
 		getline(cin >> ws, AlphaString);
 
-		while (IsHasPunctuation(AlphaString) || IsHasDigit(AlphaString))
+		while (IsStringHasPunctuation(AlphaString)
+			          ||
+			IsStringHasDigit(AlphaString)
+			          ||
+			IsStringHasSpace(AlphaString))
 		{
-			cout << ErrorMessage << endl << endl;
+			cout << ErrorMessage;
 
-			cout << InputMessage << endl;
+			cout << InputMessage;
 			getline(cin >> ws, AlphaString);
 		}
 		return AlphaString;
 	}
-	static string ReadString(const string& Message)
+	static string ReadString()
 	{
-		string String;
-		cout << Message;
-		getline(cin >> ws, String);
-		return String;
+		string  S1 = "";
+		// Usage of std::ws will extract allthe whitespace character
+		getline(cin >> ws, S1);
+		return S1;
 	}
+	static string ReadAlphaNumericString(const string& InputMessage, const string& ErrorMessage = "Invalid input. punctuation or space are not allowed.\n")
+	{
+		string S1 = "";
+		cout << InputMessage;
+		S1 = ReadString();
+
+		while (IsStringHasPunctuation(S1) || IsStringHasSpace(S1))
+		{
+			cout << ErrorMessage;
+
+			cout << InputMessage;
+			S1 = ReadString();
+		}
+
+		return S1;
+	}
+	static string ReadAccountNumber(const string& InputMessage)
+	{
+		
+		return ReadAlphaNumericString(InputMessage);
+	}
+
 	static char ReadLetter(const string &ErrorMessage = "Invalid Letter, Enter again\n")
 	{
 		char Letter;
@@ -199,6 +208,18 @@ public:
 		}
 
 		return Letter;
+	}
+	static char ReadChar()
+	{
+		char C;
+		cin >> C;
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		return C;
+	}
+	static bool ReadYesNoAnswer()
+	{
+		char Answer = ReadChar();
+		return (Answer == 'y' || Answer == 'Y');
 	}
 	static short ReadDigit(const string& ErrorMessage = "Invalid Digit, Enter again\n")
 	{

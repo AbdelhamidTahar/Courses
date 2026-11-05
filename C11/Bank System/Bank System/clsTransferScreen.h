@@ -39,12 +39,12 @@ private:
 
         cout << "\nEnter Transfer Amount? ";
 
-        Amount = clsInputValidate::ReadPositiveFloatNumber();
+        Amount = clsInputValidate::ReadPositiveNumber<float>();
 
         while (Amount > SourceClient.AccountBalance)
         {
             cout << "\nAmount Exceeds the available Balance, Enter another Amount ? ";
-            Amount = clsInputValidate::ReadPositiveFloatNumber();
+            Amount = clsInputValidate::ReadPositiveNumber<float>();
         }
         return Amount;
     }

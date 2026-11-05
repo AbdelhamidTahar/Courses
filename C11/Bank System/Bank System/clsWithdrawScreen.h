@@ -55,7 +55,7 @@ public:
 
         double Amount = 0;
         cout << "\nPlease enter Withdraw amount? ";
-        Amount = clsInputValidate::ReadDblNumber();
+        Amount = clsInputValidate::ReadNumber<float>();
 
         cout << "\nAre you sure you want to perform this transaction? ";
         char Answer = 'n';

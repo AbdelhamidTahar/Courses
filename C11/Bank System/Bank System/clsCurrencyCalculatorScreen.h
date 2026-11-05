@@ -14,7 +14,7 @@ private:
         cout << "\nEnter Amount to Exchange: ";
         float Amount = 0;
 
-        Amount = clsInputValidate::ReadFloatNumber();
+        Amount = clsInputValidate::ReadNumber<float>();
         return Amount;
     }
 

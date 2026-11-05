@@ -1,7 +1,0 @@
-void SumOf2Arrays(int arr1[100], int arr2[100], int arrSum[100], int arrLength)
-{
-    for (int i = 0; i < arrLength; i++)
-    {
-        arrSum[i] = arr1[i] + arr2[i];
-    }
-}
