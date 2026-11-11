@@ -16,7 +16,7 @@ int main()
 	MyStack1.push(40);
 	MyStack1.push(50);
 
-
+	cout << MyStack1.emplace(9);
 
 	MyStack2.push(100);
 	MyStack2.push(200);

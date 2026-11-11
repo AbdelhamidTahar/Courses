@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Swap stack/Swap stack.vcxproj" />
+  <Project Path="Swap stack/Swap stack.vcxproj" Id="79055bfe-fa5e-4fd4-afe0-8996c341a26d" />
 </Solution>
