@@ -69,26 +69,30 @@ bool IsSameNode(Node* Node1, Node* Node2)
 	return (Node1 == Node2);
 }
 
-void InsertBefor(Node* &Head, int Before, int Value)
+void InsertBefor(Node*& Head, int Before, int Value)
 {
 	Node* TempHead = Head;
 	Node* FindNode = Find(TempHead, Before);
+
+	//We Not Find The Value.
 	if (FindNode == NULL)
 		return;
 
+	// Crat New Node And Set Valu And Adrs.
 	Node* NewNode = new Node();
-
 	NewNode->Value = Value;
 	NewNode->Next = FindNode;
 
-	// if the first Node we nedd add before?.
+
+	// we add new node before the first node?
 	if (IsSameNode(Head, FindNode))
 	{
 		Head = NewNode;
 		return;
 	}
-	
-	//Move Node By Node To Find What Is Node To Point To Node To Insert After.
+
+
+	//Move Node By Node To Find What Is Node To Point To Node To Insert Befor.
 	while (TempHead != NULL)
 	{
 		if (TempHead->Next == FindNode)
