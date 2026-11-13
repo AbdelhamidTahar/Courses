@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{649313b3-005e-4bf7-b756-12a6325fb133}</ProjectGuid>
+    <ProjectGuid>{b411b11e-e1fd-4535-a8c0-0d4f75d7b42d}</ProjectGuid>
     <RootNamespace>InsertAfter</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

@@ -38,7 +38,6 @@ void InsertAtBeginning(Node*& Head, int Value)
 	NewNode->Next = Head;
 
 	Head = NewNode;
-
 }
 
 void PrintAllNodes(Node* Head)
@@ -69,41 +68,20 @@ bool IsSameNode(Node* Node1, Node* Node2)
 	return (Node1 == Node2);
 }
 
-void InsertBefor(Node*& Head, int Before, int Value)
+void InsertAfter(Node* Head, int After, int Value)
 {
-	Node* TempHead = Head;
-	Node* FindNode = Find(TempHead, Before);
+	Node* FindNode = Find(Head, After);
 
-	//We Not Find The Value.
+	
 	if (FindNode == NULL)
 		return;
 
-	// Crat New Node And Set Valu And Adrs.
+	
 	Node* NewNode = new Node();
+
 	NewNode->Value = Value;
-	NewNode->Next = FindNode;
-
-
-	// we add new node before the first node?
-	if (IsSameNode(Head, FindNode))
-	{
-		Head = NewNode;
-		return;
-	}
-
-
-	//Move Node By Node To Find What Is Node To Point To Node To Insert Befor.
-	while (TempHead != NULL)
-	{
-		if (TempHead->Next == FindNode)
-		{
-			TempHead->Next = NewNode;
-			break;
-		}
-		TempHead = TempHead->Next;
-	}
-
-
+	NewNode->Next = FindNode->Next;
+	FindNode->Next = NewNode;
 }
 
 int main()
@@ -119,11 +97,11 @@ int main()
 	InsertAtBeginning(Head, 60);
 	InsertAtBeginning(Head, 70);
 	InsertAtBeginning(Head, 80);
-	InsertBefor(Head, 50, 80);
+	InsertAfter(Head, 50, 00);
 
 	PrintAllNodes(Head);
 
-	Node* TempHead = Find(Head, 99);
+	Node* TempHead = Find(Head, 00);
 	if (TempHead != NULL)
 		cout << "His Found \n";
 	else
