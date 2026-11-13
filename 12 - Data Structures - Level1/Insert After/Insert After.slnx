@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Insert After/Insert After.vcxproj" />
+  <Project Path="Insert After/Insert After.vcxproj" Id="b411b11e-e1fd-4535-a8c0-0d4f75d7b42d" />
 </Solution>

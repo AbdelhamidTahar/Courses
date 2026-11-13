@@ -68,20 +68,17 @@ bool IsSameNode(Node* Node1, Node* Node2)
 	return (Node1 == Node2);
 }
 
-void InsertAfter(Node* Head, int After, int Value)
-{
-	Node* FindNode = Find(Head, After);
+void InsertAfter(Node* prev_node, int Value) {
 
-	
-	if (FindNode == NULL)
+	if (prev_node == NULL) {
+		cout << "the given previous node cannot be NULL";
 		return;
+	}
 
-	
-	Node* NewNode = new Node();
-
-	NewNode->Value = Value;
-	NewNode->Next = FindNode->Next;
-	FindNode->Next = NewNode;
+	Node* new_node = new Node();
+	new_node->Value = Value;
+	new_node->Next = prev_node->Next;
+	prev_node->Next = new_node;
 }
 
 int main()
@@ -97,7 +94,9 @@ int main()
 	InsertAtBeginning(Head, 60);
 	InsertAtBeginning(Head, 70);
 	InsertAtBeginning(Head, 80);
-	InsertAfter(Head, 50, 00);
+	
+	Node* ptrNode = Find(Head,70);
+	InsertAfter(ptrNode, 00);
 
 	PrintAllNodes(Head);
 
