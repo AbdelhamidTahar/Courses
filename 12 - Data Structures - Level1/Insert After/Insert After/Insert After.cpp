@@ -64,10 +64,10 @@ Node* Find(Node* Head, int Value)
 	return NULL;
 }
 
-void InsertBefor(Node* &Head, int After, int Value)
+void InsertBefor(Node* &Head, int Before, int Value)
 {
 	Node* TempHead = Head;
-	Node* FindNode = Find(TempHead, After);
+	Node* FindNode = Find(TempHead, Before);
 	if (FindNode == NULL)
 		return;
 
