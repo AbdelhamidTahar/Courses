@@ -30,7 +30,7 @@ public:
     {
 
         _DrawScreenHeader("\tDelete User Screen");
-        _DrawLogidUserHeadar();
+      
 
         string UserName = "";
 

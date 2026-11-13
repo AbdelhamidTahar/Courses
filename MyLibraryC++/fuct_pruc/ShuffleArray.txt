@@ -1,9 +1,0 @@
-void ShuffleArray(int arr[100], int arrLength)
-{
-    for (int i = 0; i < arrLength; i++)
-    {
-        int index1 = RandomNumber(1, arrLength) - 1;
-        int index2 = RandomNumber(1, arrLength) - 1;
-        Swap(arr[index1], arr[index2]);
-    }
-}

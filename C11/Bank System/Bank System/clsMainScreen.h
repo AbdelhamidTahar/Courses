@@ -11,6 +11,8 @@
 #include "clsManageUsersScreen.h"
 #include "clsLoginScreen.h"
 #include "Global.h"
+#include "clsLoginRegisterScreen.h"
+#include "clsCurrencyExchangeMainScreen.h"
 
 using namespace std;
 
@@ -22,13 +24,13 @@ private:
     enum enMainMenueOptions {
         eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
         eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenue = 6,
-        eManageUsers = 7, eExit = 8
+        eManageUsers = 7, eLoginRegister = 8, eCurrncyExchange = 9, eExit = 10
     };
 
     static short _ReadMainMenueOption()
     {
-        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 8]? ";
-        short Choice = clsInputValidate::ReadShortNumberBetween(1, 8, "Enter Number between 1 to 8? ");
+        cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 10]? ";
+        short Choice = clsInputValidate::ReadNumberBetween<short>(1, 10, "Enter Number between 1 to 10? ");
         return Choice;
     }
 
@@ -44,7 +46,6 @@ private:
     {
         //  cout << "\nClient List Screen Will be here...\n";
         clsClientListScreen::ShowClientsList();
-
 
     }
 
@@ -67,22 +68,18 @@ private:
         //cout << "\nUpdate Client Screen Will be here...\n";
         clsUpdateClientScreen::ShowUpdateClientScreen();
 
-
     }
 
     static void _ShowFindClientScreen()
     {
         // cout << "\nFind Client Screen Will be here...\n";
         clsFindClientScreen::ShowFindClientScreen();
-
-
     }
 
     static void _ShowTransactionsMenue()
     {
         // cout << "\nTransactions Menue Will be here...\n";
         clsTransactionsScreen::ShowTransactionsMenue();
-
     }
 
     static void _ShowManageUsersMenue()
@@ -91,19 +88,22 @@ private:
         clsManageUsersScreen::ShowManageUsersMenue();
     }
 
-    /*  static void _ShowEndScreen()
-      {
-          cout << "\nEnd Screen Will be here...\n";
+    static void _ShowLoginRegisterScreen()
+    {
+        // cout << "\nLogin Register Will be here...\n";
+        clsLoginRegisterScreen::ShowLoginRegisterScreen();
+    }
 
-      }*/
+    static void _ShowCurrencyExchangeMainScreen()
+    {
+        clsCurrencyExchangeMainScreen::ShowCurrenciesMenue();
+    }
 
     static void _Logout()
     {
-
         CurrentUser = clsUser::Find("", "");
         //then it will go back to main function.
     }
-
 
     static void _PerfromMainMenueOption(enMainMenueOptions MainMenueOption)
     {
@@ -152,6 +152,18 @@ private:
             _GoBackToMainMenue();
             break;
 
+        case enMainMenueOptions::eLoginRegister:
+            system("cls");
+            _ShowLoginRegisterScreen();
+            _GoBackToMainMenue();
+            break;
+
+        case enMainMenueOptions::eCurrncyExchange:
+            system("cls");
+            _ShowCurrencyExchangeMainScreen();
+            _GoBackToMainMenue();
+            break;
+
         case enMainMenueOptions::eExit:
             system("cls");
             _Logout();
@@ -170,7 +182,6 @@ public:
 
         system("cls");
         _DrawScreenHeader("\t\tMain Screen");
-        _DrawLogidUserHeadar();
 
         cout << setw(37) << left << "" << "===========================================\n";
         cout << setw(37) << left << "" << "\t\t\tMain Menue\n";
@@ -182,7 +193,9 @@ public:
         cout << setw(37) << left << "" << "\t[5] Find Client.\n";
         cout << setw(37) << left << "" << "\t[6] Transactions.\n";
         cout << setw(37) << left << "" << "\t[7] Manage Users.\n";
-        cout << setw(37) << left << "" << "\t[8] Logout.\n";
+        cout << setw(37) << left << "" << "\t[8] Login Register.\n";
+        cout << setw(37) << left << "" << "\t[9] Currency Exchange.\n";
+        cout << setw(37) << left << "" << "\t[10] Logout.\n";
         cout << setw(37) << left << "" << "===========================================\n";
 
         _PerfromMainMenueOption((enMainMenueOptions)_ReadMainMenueOption());

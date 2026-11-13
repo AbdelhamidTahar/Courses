@@ -186,7 +186,7 @@ public:
 	}
 
 
-	static string EncryptText(string Text, short EncryptionKey)
+	static string EncryptText(string Text, short EncryptionKey = 2)
 	{
 
 		for (int i = 0; i <= Text.length(); i++)
@@ -195,7 +195,7 @@ public:
 		}
 		return Text; // Ucggf
 	}
-	static string DecryptionText(string Text, short EncryptionKey)
+	static string DecryptionText(string Text, short EncryptionKey = 2)
 	{
 		for (int i = 0; i <= Text.length(); i++)
 		{

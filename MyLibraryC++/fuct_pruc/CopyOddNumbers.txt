@@ -1,9 +1,0 @@
-
-void CopyOddNumbers(int arrSource[100], int arrDestination[100], int arrLength, int& arrDestinationLength)
-{
-    for (int i = 0; i < arrLength; i++)
-    {
-        if(arrSource[i] % 2 != 0)
-        AddArrayElement(arrSource[i], arrDestination, arrDestinationLength);
-    }
-}

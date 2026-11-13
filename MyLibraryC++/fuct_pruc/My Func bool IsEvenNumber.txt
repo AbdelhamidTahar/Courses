@@ -1,6 +1,0 @@
-bool IsEvenNumber(int Number)
-{
-
-    return (Number % 2 = 0);
-
-}

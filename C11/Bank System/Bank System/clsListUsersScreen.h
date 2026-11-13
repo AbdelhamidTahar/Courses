@@ -31,7 +31,7 @@ public:
         string SubTitle = "\t    (" + to_string(vUsers.size()) + ") User(s).";
 
         _DrawScreenHeader(Title, SubTitle);
-        _DrawLogidUserHeadar();
+        
 
         cout << setw(8) << left << "" << "\n\t_______________________________________________________";
         cout << "______________________________________________\n" << endl;

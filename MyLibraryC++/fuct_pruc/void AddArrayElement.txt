@@ -1,7 +1,0 @@
-
-void AddArrayElement(int Number, int arr[100], int& arrLength)
-{
-    arrLength++;
-    arr[arrLength - 1] = Number;
-}
-

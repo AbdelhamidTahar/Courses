@@ -40,7 +40,7 @@ public:
     static void ShowDepositScreen()
     {
         _DrawScreenHeader("\t   Deposit Screen");
-        _DrawLogidUserHeadar();
+      
 
         string AccountNumber = _ReadAccountNumber();
 
@@ -56,7 +56,7 @@ public:
 
         double Amount = 0;
         cout << "\nPlease enter deposit amount? ";
-        Amount = clsInputValidate::ReadDblNumber();
+        Amount = clsInputValidate::ReadNumber<float>();
 
         cout << "\nAre you sure you want to perform this transaction? ";
         char Answer = 'n';

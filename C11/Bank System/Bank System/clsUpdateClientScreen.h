@@ -45,7 +45,7 @@ private:
         Client.PinCode = clsInputValidate::ReadString();
 
         cout << "\nEnter Account Balance: ";
-        Client.AccountBalance = clsInputValidate::ReadFloatNumber();
+        Client.AccountBalance = clsInputValidate::ReadNumber<float>();
     }
 
 public:
@@ -57,7 +57,7 @@ public:
             return;// this will exit the function and it will not continue
         }
         _DrawScreenHeader("\tUpdate Client Screen");
-        _DrawLogidUserHeadar();
+     
 
         string AccountNumber = "";
 
