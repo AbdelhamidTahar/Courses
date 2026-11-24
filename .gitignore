@@ -1,0 +1,20 @@
+# Build outputs & Visual Studio temporary files
+.vs/
+.vscode/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+*.tlog
+*.lastbuildstate
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.user
+*.suo
+*.log
+
+# OS files
+Thumbs.db
+Desktop.ini
