@@ -14,15 +14,3 @@ This repository serves as a centralized, long-term archive for coursework, hands
 
 ---
 
-## 🗂️ Repository Structure
-
-The repository follows a modular, hierarchical layout grouped by **platform or domain**, followed by individual **courses** and their respective **lessons/exercises**:
-
-```text
-Courses/
-├── <Platform-or-Domain>/          # e.g., ProgrammingAdvices, Udemy, Management
-│   ├── README.md                  # Track-specific syllabus, progress, and notes
-│   └── <Course-Name>/             # Individual course directory
-│       ├── Lesson-XX/             # Lesson exercises and implementations
-│       └── Notes/                 # Supporting documentation and references
-└── README.md                      # General repository overview (this file)
