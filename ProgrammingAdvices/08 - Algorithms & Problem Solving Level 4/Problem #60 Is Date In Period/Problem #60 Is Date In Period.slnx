@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Problem #60 Is Date In Period/Problem #60 Is Date In Period.vcxproj" />
+</Solution>

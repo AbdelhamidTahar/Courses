@@ -1,0 +1,4 @@
+float ArrayAverage(int arr[100], int arrLength)
+{
+    return (float)  SumArray(arr, arrLength) / arrLength;
+}

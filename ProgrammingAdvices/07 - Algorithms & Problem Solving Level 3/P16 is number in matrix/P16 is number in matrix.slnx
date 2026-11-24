@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P16 is number in matrix/P16 is number in matrix.vcxproj" />
+</Solution>

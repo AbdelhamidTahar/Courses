@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Double LinkedList DeleteNode/Double LinkedList DeleteNode.vcxproj" />
+</Solution>

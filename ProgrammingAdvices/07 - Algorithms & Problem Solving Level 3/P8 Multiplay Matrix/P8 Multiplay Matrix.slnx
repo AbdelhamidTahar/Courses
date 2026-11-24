@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P8 Multiplay Matrix/P8 Multiplay Matrix.vcxproj" />
+</Solution>

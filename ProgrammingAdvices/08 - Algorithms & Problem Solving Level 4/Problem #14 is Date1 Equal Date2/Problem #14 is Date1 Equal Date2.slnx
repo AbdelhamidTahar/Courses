@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Problem #14 is Date1 Equal Date2/Problem #14 is Date1 Equal Date2.vcxproj" />
+</Solution>

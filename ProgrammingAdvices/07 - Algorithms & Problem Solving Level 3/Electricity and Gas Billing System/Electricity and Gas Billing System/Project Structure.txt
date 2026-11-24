@@ -1,0 +1,47 @@
+Project Structure
+
+To simplify the implementation of the electricity and gas billing system, the project was divided into separate logical components.
+
+The system is structured as follows:
+
+1. Electricity Calculation Module
+- Handles electricity consumption calculation
+- Applies tier-based electricity pricing
+- Calculates electricity costs independently
+
+2. Gas Calculation Module
+- Handles gas consumption calculation
+- Applies tier-based gas pricing
+- Calculates gas costs independently
+
+3. Taxes and Fees Module
+- Handles all taxes and additional charges
+- Includes VAT, fixed charges, and other applicable fees
+
+4. Final Billing Module
+- Combines electricity and gas results
+- Adds taxes and additional fees
+- Produces the final invoice
+
+------------------------------------------------------------
+
+Important Design Principle:
+
+Electricity calculations are completely independent from gas calculations.
+Gas calculations are also independent from electricity and taxes.
+
+However, in the final stage, all components are merged to produce a single unified invoice.
+
+This design reflects the real billing system used by Sonelgaz in Algeria, where electricity and gas are not treated as separate bills, but rather combined into one unified statement.
+
+------------------------------------------------------------
+
+Conclusion:
+
+The system is divided into:
+- Electricity bill module
+- Gas bill module
+- Taxes module
+- Final combined bill
+
+This modular structure ensures clarity, scalability, and easier maintenance while accurately simulating a real-world billing system.

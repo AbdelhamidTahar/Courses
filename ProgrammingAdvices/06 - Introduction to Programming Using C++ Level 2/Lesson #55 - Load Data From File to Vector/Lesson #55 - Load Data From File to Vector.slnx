@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Lesson #55 - Load Data From File to Vector/Lesson #55 - Load Data From File to Vector.vcxproj" />
+</Solution>

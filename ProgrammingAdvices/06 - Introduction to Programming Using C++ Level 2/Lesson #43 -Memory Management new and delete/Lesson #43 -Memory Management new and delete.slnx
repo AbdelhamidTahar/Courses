@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Lesson #43 -Memory Management new and delete/Lesson #43 -Memory Management new and delete.vcxproj" />
+</Solution>

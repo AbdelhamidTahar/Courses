@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P42 Replace words in string/P42 Replace words in string.vcxproj" />
+</Solution>

@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P29 How many capital and small letter in string/P29 How many capital and small letter in string.vcxproj" />
+</Solution>

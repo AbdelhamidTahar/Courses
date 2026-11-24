@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P31 Count char lower or uuper/P31 Count char lower or uuper.vcxproj" />
+</Solution>

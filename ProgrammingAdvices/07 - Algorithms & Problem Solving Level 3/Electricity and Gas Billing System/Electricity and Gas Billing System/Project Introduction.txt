@@ -1,0 +1,1 @@
+This project is an educational initiative designed to learn programming, apply programming concepts, reinforce them, and achieve mastery over them. It focuses on an electricity and gas billing system inspired by the Algerian company Sonelgaz. The billing calculations follow Sonelgaz’s official methodology for computing electricity and gas invoices.

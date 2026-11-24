@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Lesson #39Call by Reference Using pointers/Lesson #39Call by Reference Using pointers.vcxproj" />
+</Solution>

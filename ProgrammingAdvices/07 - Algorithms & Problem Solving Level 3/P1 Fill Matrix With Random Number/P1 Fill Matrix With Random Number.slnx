@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P1 Fill Matrix With Random Number/P1 Fill Matrix With Random Number.vcxproj" />
+</Solution>

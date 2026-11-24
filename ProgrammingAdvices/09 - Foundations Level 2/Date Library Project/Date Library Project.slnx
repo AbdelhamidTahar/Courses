@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Date Library Project/Date Library Project.vcxproj" Id="428d0d19-471e-49b2-9096-fc2408f973f3" />
+</Solution>

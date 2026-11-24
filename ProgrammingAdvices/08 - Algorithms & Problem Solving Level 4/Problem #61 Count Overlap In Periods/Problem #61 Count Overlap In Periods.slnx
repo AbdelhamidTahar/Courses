@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Problem #61 Count Overlap In Periods/Problem #61 Count Overlap In Periods.vcxproj" />
+</Solution>

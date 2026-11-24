@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P6 Fill matrix With ordred Numbers/P6 Fill matrix With ordred Numbers.vcxproj" />
+</Solution>

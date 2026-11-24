@@ -1,0 +1,122 @@
+Billing Rules – Electricity and Gas Calculation System
+
+This system is an educational project inspired by the Algerian company Sonelgaz. It simulates electricity and gas billing based on consumption measured between an old meter index and a new meter index, using a multi-tier tariff structure.
+
+------------------------------------------------------------
+⚡ ELECTRICITY BILL CALCULATION
+------------------------------------------------------------
+
+1. Consumption Calculation:
+- Old meter index is read
+- New meter index is read
+- Consumption = New Index - Old Index
+- The result is multiplied by a coefficient (if applicable) to obtain the billable consumption.
+
+------------------------------------------------------------
+
+2. Consumption Distribution into Tiers:
+The total consumption is divided into four tiers:
+
+- Tier 1: up to 125 kWh
+- Tier 2: up to 125 kWh
+- Tier 3: up to 750 kWh
+- Tier 4: remaining consumption after the first three tiers
+
+------------------------------------------------------------
+
+3. Electricity Cost Calculation:
+- Each tier has a specific unit price (tariff)
+- Cost of each tier = consumption in tier × unit price
+
+Then:
+- Tier 1 + Tier 2 costs are grouped together
+- Tier 3 + Tier 4 costs are grouped together
+- Final electricity cost = sum of both groups
+
+------------------------------------------------------------
+🔥 GAS BILL CALCULATION
+------------------------------------------------------------
+
+1. Consumption Calculation:
+- Old meter index is read
+- New meter index is read
+- Consumption = New Index - Old Index
+
+------------------------------------------------------------
+
+2. Consumption Distribution into Tiers:
+
+- Tier 1: up to 1125.00 TH
+- Tier 2: up to 1375.00 TH
+- Tier 3: up to 5000 TH
+- Tier 4: remaining consumption after the first three tiers
+
+------------------------------------------------------------
+
+3. Gas Cost Calculation:
+- Each tier has a specific unit price
+- Cost of each tier = consumption in tier × unit price
+
+Then:
+- Tier 1 + Tier 2 costs are grouped together
+- Tier 3 + Tier 4 costs are grouped together
+- Final gas cost = sum of both groups
+
+------------------------------------------------------------
+💰 TAXES AND ADDITIONAL FEES
+------------------------------------------------------------
+
+The following are read and included in the calculation:
+- Fixed Consumption Charges
+- Service Tax
+- Housing Tax
+- Contribution
+- REPE
+- RGPE
+
+------------------------------------------------------------
+
+1. VAT 9% Calculation:
+Applied on:
+- Electricity (Tier 1 + Tier 2)
+- Gas (Tier 1 + Tier 2)
+- Fixed Consumption Charges
+- Service Tax
+
+VAT 9% = Total × 0.09
+
+------------------------------------------------------------
+
+2. VAT 19% Calculation:
+Applied on:
+- Electricity (Tier 3 + Tier 4)
+- Gas (Tier 3 + Tier 4)
+
+VAT 19% = Total × 0.19
+
+------------------------------------------------------------
+
+3. Total VAT:
+VAT Total = VAT 9% + VAT 19%
+
+------------------------------------------------------------
+🧾 FINAL BILL CALCULATION
+------------------------------------------------------------
+
+1. Net Payment (Before Final Adjustment):
+Includes:
+- Electricity total cost
+- Gas total cost
+- All fixed charges and taxes
+
+Net Payment = Base Total + VAT Total
+
+------------------------------------------------------------
+
+2. Final Amount to Pay:
+Final Amount = Net Payment + (Fixed Consumption Charges × 0.01)
+
+------------------------------------------------------------
+
+📌 RESULT:
+The final amount represents the total payment due by the customer, including all taxes, tiers, and additional charges.

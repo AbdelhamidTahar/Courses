@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P43 replace word in string custom/P43 replace word in string custom.vcxproj" />
+</Solution>

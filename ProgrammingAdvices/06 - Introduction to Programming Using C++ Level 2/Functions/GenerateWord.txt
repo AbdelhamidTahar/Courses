@@ -1,0 +1,10 @@
+string GenerateWord(enCharType CharType, short Length)
+{
+    string Word;  // Initialize an empty string to build the word.
+
+    for (int i = 1; i <= Length; i++)
+    {
+        Word = Word + GetRandomCharacter(CharType);
+    }
+    return Word;
+}

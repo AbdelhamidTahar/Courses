@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P44 Remove All Punctuations from string/P44 Remove All Punctuations from string.vcxproj" />
+</Solution>

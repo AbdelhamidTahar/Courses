@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Pass Object By Value and By Reference/Pass Object By Value and By Reference.vcxproj" />
+</Solution>

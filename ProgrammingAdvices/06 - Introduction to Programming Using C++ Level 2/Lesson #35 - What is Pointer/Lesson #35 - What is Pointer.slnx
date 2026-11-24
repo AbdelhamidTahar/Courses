@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Lesson #35 - What is Pointer/Lesson #35 - What is Pointer.vcxproj" />
+</Solution>

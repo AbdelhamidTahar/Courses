@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Ovirriding/Ovirriding.vcxproj" Id="92abe344-0ab3-4d83-bf11-a5d5de41d534" />
+</Solution>

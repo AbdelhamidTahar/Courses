@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P19 Find The Minimum And max Naumber In Matrix/P19 Find The Minimum And max Naumber In Matrix.vcxproj" />
+</Solution>

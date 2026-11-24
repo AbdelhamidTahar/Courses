@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Lesson #44 - Dynamic Arrays new and delete/Lesson #44 - Dynamic Arrays new and delete.vcxproj" />
+</Solution>

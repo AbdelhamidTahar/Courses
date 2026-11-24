@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P40 Join String Over Loding/P40 Join String Over Loding.vcxproj" />
+</Solution>

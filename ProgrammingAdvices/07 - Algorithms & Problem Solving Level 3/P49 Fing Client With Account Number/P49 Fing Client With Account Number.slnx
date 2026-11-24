@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P49 Fing Client With Account Number/P49 Fing Client With Account Number.vcxproj" />
+</Solution>

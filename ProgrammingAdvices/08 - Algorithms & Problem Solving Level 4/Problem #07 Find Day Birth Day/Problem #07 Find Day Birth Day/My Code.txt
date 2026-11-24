@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+short ReadYear()
+{
+	short Year;
+	cout << "\nPlease enter a year to check? ";
+	cin >> Year;
+	return Year;
+}
+
+short ReadMonth()
+{
+	short Month;
+	cout << "\nPlease enter a Month to check? ";
+	cin >> Month;
+	return (Month < 1 || Month >12) ? 0 : Month;
+	
+}
+
+short ReadDay()
+{
+	short Day;
+	cout << "\nPlease enter a day? ";
+	cin >> Day;
+	return (Day < 1 || Day >31) ? 0 : Day;
+
+}
+
+short GetDayOrder(short Day, short Month, short Year)
+{
+	if (Day == 0 || Month == 0)
+		return -1;
+	int a = floor((14 - Month) / 12);
+	int y = Year - a;
+	int m = Month + (12 * a) - 2;
+
+	int d =(int) (Day + y + floor(y / 4) - floor(y / 100) + floor(y / 400) + floor((31 * m) / 12)) % 7;
+	return d;
+}
+
+string GetDayName(short Index)
+{
+
+	string Days [7] = { "Sun","Mon","Tue","Wed","Thu","Fri","Sat" };
+	return (Index == -1) ? "Not Foind" : Days[Index];
+}
+
+
+
+
+int main()
+{
+	short Year = ReadYear();
+	short Month = ReadMonth();
+	short Day = ReadDay();
+	short DayOrder;
+	DayOrder = GetDayOrder(Day, Month, Year);
+
+	cout << "\nDate      :" << Day << "/" << Month << "/" << Year;
+	cout << "\nDay Order :"<< DayOrder;
+	cout << "\nDay Name  :" << GetDayName(DayOrder);
+	system("pause>0");
+
+
+	return 0;
+}

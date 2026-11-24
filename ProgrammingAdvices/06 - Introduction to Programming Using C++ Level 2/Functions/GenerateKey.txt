@@ -1,0 +1,12 @@
+string GenerateKey()
+{
+    string Key = "";  // Initialize an empty key string.
+
+    // Concatenate four groups of 4 random uppercase letters, separated by hyphens.
+    Key = GenerateWord(enCharType::CapitalLetter, 4) + "-";
+    Key = Key + GenerateWord(enCharType::CapitalLetter, 4) + "-";
+    Key = Key + GenerateWord(enCharType::CapitalLetter, 4) + "-";
+    Key = Key + GenerateWord(enCharType::CapitalLetter, 4);
+    
+    return Key;
+}

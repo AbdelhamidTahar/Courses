@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Problem #19 Calculate difference two dates/Problem #19 Calculate difference two dates.vcxproj" />
+</Solution>

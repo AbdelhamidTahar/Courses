@@ -1,0 +1,13 @@
+int NegativerCount(int arr[100], int arrLength)
+{
+    int Counter = 0;
+
+    for (int i = 0; i < arrLength; i++)
+    {
+        if (arr[i] < 0)
+        {
+            Counter++;
+        }
+    }
+    return Counter;
+}

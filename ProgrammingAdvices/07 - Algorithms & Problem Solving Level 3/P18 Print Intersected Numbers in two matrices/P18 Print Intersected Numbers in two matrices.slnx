@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P18 Print Intersected Numbers in two matrices/P18 Print Intersected Numbers in two matrices.vcxproj" />
+</Solution>

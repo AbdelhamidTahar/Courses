@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="P22 Print Fibonacci Using Recurssion/P22 Print Fibonacci Using Recurssion.vcxproj" />
+</Solution>

@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Double LinkedList Circular LinkedList/Double LinkedList Circular LinkedList.vcxproj" />
+</Solution>

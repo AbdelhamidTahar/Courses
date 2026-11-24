@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Problem #59 Calculate length day in period/Problem #59 Calculate length day in period.vcxproj" />
+</Solution>
