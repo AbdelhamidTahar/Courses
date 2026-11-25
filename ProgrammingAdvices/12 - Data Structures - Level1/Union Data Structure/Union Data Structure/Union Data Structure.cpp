@@ -12,6 +12,15 @@ int main()
 
 	MyUnion FirstUnion, SecondUnion;
 
+	cout << "_______________________________________________\n";
+	cout << "\t\tAdrress Members in Union one:\n";
+	cout << "Adrs Union One:" << &FirstUnion << endl;
+	cout << "Adrs Union One Char:" <<(void*) & FirstUnion.charvalue << endl;
+	cout << "Adrs Union One Int:" << &FirstUnion.intValue << endl;
+	cout << "Adrs Union One Float:" << &FirstUnion.floatvalue << endl;
+	cout << "_______________________________________________\n\n";
+
+
 	FirstUnion.charvalue = 'q';
 	cout << "The Char Value In First Union Is: " << FirstUnion.charvalue << endl;
 
@@ -23,16 +32,6 @@ int main()
 
 
 	cout << "_______________________________________________\n";
-
-
-	SecondUnion.charvalue = 'Z';
-	cout << "The Char Value In Second Union Is: " << SecondUnion.charvalue << endl;
-
-	SecondUnion.floatvalue = 5.34f;
-	cout << "The Float Value In Second Union Is: " << SecondUnion.floatvalue << endl;
-
-	SecondUnion.intValue = 6547;
-	cout << "The Int Value In Second Union Is: " << SecondUnion.intValue << endl;
 
 
 	return 0;

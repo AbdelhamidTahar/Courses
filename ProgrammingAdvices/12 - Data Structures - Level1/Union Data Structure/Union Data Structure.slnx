@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Union Data Structure/Union Data Structure.vcxproj" />
+  <Project Path="Union Data Structure/Union Data Structure.vcxproj" Id="5d40e681-228c-4444-b170-9de52da350fe" />
 </Solution>
