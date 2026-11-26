@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Review Template func/Review Template func.vcxproj" />
+  <Project Path="Review Template func/Review Template func.vcxproj" Id="c5ce8b10-fd73-4240-b22c-09db1c5883f9" />
 </Solution>

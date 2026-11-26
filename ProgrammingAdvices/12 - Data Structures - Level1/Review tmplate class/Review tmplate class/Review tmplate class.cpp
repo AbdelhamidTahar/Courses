@@ -1,20 +1,63 @@
-// Review tmplate class.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+using namespace std;
 
+
+template <class t1, class t2>
+class Calculator
+{
+private:
+	t1 _First;
+	t2 _Second;
+public:
+	void SetFirst(t1 FirstValue)
+	{
+		_First = FirstValue;
+	}
+	t1 GetFirst()
+	{
+		return _First;
+	}
+	__declspec(property(put = SetFirst, get = GetFirst)) t1 First;
+
+	void SetSecond(t2 SecondValue)
+	{
+		_Second = SecondValue;
+	}
+	t2 GetSecond()
+	{
+		return _Second;
+	}
+	__declspec(property(put = SetSecond, get = GetSecond)) t2 Second;
+
+	double Sum ()
+	{
+		return _First + _Second;
+	}
+	double Subs()
+	{
+		return _First - _Second;
+	}
+	double Mult()
+	{
+		return _First * _Second;
+	}
+	double Div ()
+	{
+		return _First / _Second;
+	}
+
+};
 int main()
 {
-    std::cout << "Hello World!\n";
+	Calculator<int, float> C1;
+
+	 C1.First = 15;
+	 C1.Second = 20;
+
+	 cout << C1.Sum() << endl;
+	 cout << C1.Subs() << endl;
+	 cout << C1.Mult() << endl;
+	 cout << C1.Div() << endl;
+
+	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
